@@ -38,18 +38,19 @@ CREATE TABLE Department(
 );
 
 CREATE TABLE Ticket(
-    idTicket INTEGER PRIMARY KEY AUTOINCREMENT,
+    idTicket INTEGER AUTOINCREMENT,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     priority INTEGER NOT NULL,
     stage TEXT NOT NULL,
     create_date DATE,
-    version INTEGER,
-    current_version BIT(1),
-    UUID INTEGER NOT NULL,
+    version INTEGER NOT NULL,
+    current_version BOOLEAN NOT NULL,
+    UUID char(36) PRIMARY KEY,
     cria REFERENCES User,
     resolve REFERENCES User,
     idDepartment REFERENCES Department
+    CONSTRAINT CHECK_Ticket_createdate CHECK (create_date >= 2023-01-01)
 );
 
 CREATE TABLE Hashtag(
@@ -62,8 +63,8 @@ CREATE TABLE Reply(
     idReply INTEGER PRIMARY KEY AUTOINCREMENT,
     message TEXT NOT NULL,
     create_date DATE,
-    idTicket REFERENCES Ticket
-)
+    UUID char(36) REFERENCES Ticket
+);
 
 CREATE TABLE User_Roles(
     idUser INTEGER REFERENCES User,
@@ -73,12 +74,12 @@ CREATE TABLE User_Roles(
 
 CREATE TABLE User_Departments(
     idUser INTEGER REFERENCES User,
-    idDepartment INTEGER REFERENCES Department,
+    UUID char(36) REFERENCES Department,
     PRIMARY KEY (idUser, idDepartment)
 );
 
 CREATE TABLE Ticket_Hashtags(
-    idTicket INTEGER REFERENCES Ticket,
+    UUID char(36) REFERENCES Ticket,
     idHashtag INTEGER REFERENCES Hashtag,
     PRIMARY KEY (idTicket, idHashtag)
 );
