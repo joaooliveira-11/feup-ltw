@@ -10,10 +10,12 @@ DROP TABLE IF EXISTS Department;
 DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Reply;
+DROP TABLE IF EXISTS Status;
 
 DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
 DROP TABLE IF EXISTS Ticket_Hashtags;
+DROP TABLE IF EXISTS Ticket_Status;
 
 CREATE TABLE User (
     idUser INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,8 +29,8 @@ CREATE TABLE User (
 
 CREATE TABLE Role(
     idRole INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
-    CONSTRAINT CHECK_Role_name CHECK (name = 'ADMIN' OR name = 'CLIENT' OR name = 'AGENT'),
+    name TEXT NOT NULL,
+    CONSTRAINT CHECK_Role_name CHECK (name = 'ADMIN' OR name = 'CLIENT' OR name = 'AGENT')
 );
 
 CREATE TABLE Department(
@@ -38,18 +40,14 @@ CREATE TABLE Department(
 );
 
 CREATE TABLE Ticket(
-    idTicket INTEGER AUTOINCREMENT,
+    idTicket INTEGER AUTOINCREMENT PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     priority INTEGER NOT NULL,
-    stage TEXT NOT NULL,
     create_date DATE,
-    version INTEGER NOT NULL,
-    current_version BOOLEAN NOT NULL,
-    UUID char(36) PRIMARY KEY,
     cria REFERENCES User,
     resolve REFERENCES User,
-    idDepartment REFERENCES Department
+    idDepartment REFERENCES Department,
     CONSTRAINT CHECK_Ticket_createdate CHECK (create_date >= 2023-01-01)
 );
 
@@ -63,7 +61,15 @@ CREATE TABLE Reply(
     idReply INTEGER PRIMARY KEY AUTOINCREMENT,
     message TEXT NOT NULL,
     create_date DATE,
-    UUID char(36) REFERENCES Ticket
+    idTicket REFERENCES Ticket,
+    idUser INTEGER REFERENCES User,
+    CONSTRAINT CHECK_Reply_createdate CHECK (create_date >= 2023-01-01)
+);
+
+CREATE TABLE Status(
+    idStatus INTEGER PRIMARY KEY AUTOINCREMENT,
+    stage TEXT NOT NULL,
+    CONSTRAINT CHECK_Status_status CHECK (stage = 'OPEN' OR stage = 'SOLVED' OR stage = 'CLOSED')
 );
 
 CREATE TABLE User_Roles(
@@ -74,12 +80,23 @@ CREATE TABLE User_Roles(
 
 CREATE TABLE User_Departments(
     idUser INTEGER REFERENCES User,
-    UUID char(36) REFERENCES Department,
+    idDepartment INTEGER REFERENCES Department,
     PRIMARY KEY (idUser, idDepartment)
 );
 
 CREATE TABLE Ticket_Hashtags(
-    UUID char(36) REFERENCES Ticket,
+    idTicket INTEGER REFERENCES Ticket,
     idHashtag INTEGER REFERENCES Hashtag,
     PRIMARY KEY (idTicket, idHashtag)
 );
+
+CREATE TABLE Ticket_Status(
+    idTicket INTEGER REFERENCES Ticket,
+    idStatus REFERENCES Status,
+    date DATE,
+    PRIMARY KEY (idTicket, idStatus)
+);
+
+------------------------------------------------------------------------------------------
+
+INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');
