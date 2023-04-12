@@ -1,4 +1,4 @@
-PRAGMA foreign_keys = on;
+PRAGMA foreign_keys=on;
 
 .mode columns
 .headers on
@@ -10,10 +10,12 @@ DROP TABLE IF EXISTS Department;
 DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Reply;
+DROP TABLE IF EXISTS Status;
 
 DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
 DROP TABLE IF EXISTS Ticket_Hashtags;
+DROP TABLE IF EXISTS Ticket_Status;
 
 CREATE TABLE User (
     idUser INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,7 +30,7 @@ CREATE TABLE User (
 CREATE TABLE Role(
     idRole INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    CONSTRAINT CHECK_Role_name CHECK (name = 'ADMIN' OR name = 'CLIENT' OR name = 'AGENT'),
+    CONSTRAINT CHECK_Role_name CHECK (name = 'ADMIN' OR name = 'CLIENT' OR name = 'AGENT')
 );
 
 CREATE TABLE Department(
@@ -38,15 +40,11 @@ CREATE TABLE Department(
 );
 
 CREATE TABLE Ticket(
-    idTicket INTEGER AUTOINCREMENT,
+    idTicket INTEGER PRIMARY KEY AUTOINCREMENT, 
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     priority INTEGER NOT NULL,
-    stage TEXT NOT NULL,
     create_date DATE,
-    version INTEGER NOT NULL,
-    current_version BOOLEAN NOT NULL,
-    UUID char(36) PRIMARY KEY,
     cria REFERENCES User,
     resolve REFERENCES User,
     idDepartment REFERENCES Department,
@@ -63,7 +61,15 @@ CREATE TABLE Reply(
     idReply INTEGER PRIMARY KEY AUTOINCREMENT,
     message TEXT NOT NULL,
     create_date DATE,
-    UUID char(36) REFERENCES Ticket
+    idTicket REFERENCES Ticket,
+    idUser INTEGER REFERENCES User,
+    CONSTRAINT CHECK_Reply_createdate CHECK (create_date >= 2023-01-01)
+);
+
+CREATE TABLE Status(
+    idStatus INTEGER PRIMARY KEY AUTOINCREMENT,
+    stage TEXT NOT NULL,
+    CONSTRAINT CHECK_Status_status CHECK (stage = 'OPEN' OR stage = 'SOLVED' OR stage = 'CLOSED')
 );
 
 CREATE TABLE User_Roles(
@@ -74,7 +80,7 @@ CREATE TABLE User_Roles(
 
 CREATE TABLE User_Departments(
     idUser INTEGER REFERENCES User,
-    UUID char(36) REFERENCES Department,
+    idDepartment INTEGER REFERENCES Department,
     PRIMARY KEY (idUser, idDepartment)
 );
 
