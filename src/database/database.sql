@@ -102,7 +102,6 @@ CREATE TABLE FAQ (
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
 );
-    INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');
 ------------------------------------------------------------------------------------------
 
 INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');

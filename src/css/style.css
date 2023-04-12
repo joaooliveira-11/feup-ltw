@@ -1,0 +1,20 @@
+#footerMain{
+    display: flex;
+    background-color: steelblue;
+    padding: 10px 1em;
+}
+
+footer>section>a:hover{
+    color: whitesmoke;
+}
+
+#footerMainRight{
+    position: absolute;
+    right: 1.5em;
+    display: flex;
+
+}
+
+#footerMainRight>div, #footerMainRight>a{
+    margin: 0 0.2em;
+}

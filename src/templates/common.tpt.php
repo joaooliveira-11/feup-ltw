@@ -14,4 +14,14 @@ function drawLogin(Session $session) { ?>
     </section> <?php 
 }
 
+function drawFooterMain(){ ?>
+    <footer id="footerMain">
+        <div> ©2023 TicketEase Inc. All Rights Reserved </div>
+        <section id="footerMainRight">
+            <a src="#"> About Us </a>
+            <div> | </div>
+            <a src="#"> User Help </a>
+        </section>
+    </footer>
+<?php }
 
