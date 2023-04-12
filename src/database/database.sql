@@ -40,7 +40,7 @@ CREATE TABLE Department(
 );
 
 CREATE TABLE Ticket(
-    idTicket INTEGER AUTOINCREMENT PRIMARY KEY,
+    idTicket INTEGER PRIMARY KEY AUTOINCREMENT, 
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     priority INTEGER NOT NULL,

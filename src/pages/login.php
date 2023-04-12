@@ -1,5 +1,10 @@
 <?php
-require_once(__DIR__ . "/../templates/forms.tpt.php");
-require_once(__DIR__ . "/../database/connection.php");
+require_once(dirname(__DIR__).'/templates/common.tpt.php');
+require_once(dirname(__DIR__).'/utils/session.php');
+$session = new Session();
 
-drawLogin();
+$_SESSION['input']['username login'] = $_SESSION['input']['username login'] ?? "";
+$_SESSION['input']['password login'] = $_SESSION['input']['password login'] ?? "";
+
+
+drawLogin($session);
