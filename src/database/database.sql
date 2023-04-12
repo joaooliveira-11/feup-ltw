@@ -85,7 +85,37 @@ CREATE TABLE User_Departments(
 );
 
 CREATE TABLE Ticket_Hashtags(
-    UUID char(36) REFERENCES Ticket,
+    idTicket INTEGER REFERENCES Ticket,
     idHashtag INTEGER REFERENCES Hashtag,
     PRIMARY KEY (idTicket, idHashtag)
 );
+
+CREATE TABLE Ticket_Status(
+    idTicket INTEGER REFERENCES Ticket,
+    idStatus REFERENCES Status,
+    date DATE,
+    PRIMARY KEY (idTicket, idStatus)
+);
+
+CREATE TABLE FAQ (
+    idFAQ INTEGER PRIMARY KEY AUTOINCREMENT,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+);
+    INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');
+------------------------------------------------------------------------------------------
+
+INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');
+INSERT INTO FAQ (question, answer) VALUES
+  ('How do I reset my password?', 'To reset your password, go to the login page and click on the "Forgot Password" link. Enter your email address and follow the instructions in the email you receive to reset your password.'),
+  ('Why am I experiencing slow page load times?', 'Slow page load times can be caused by a variety of factors, including your internet connection, your device, and the website itself. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),
+  ('I am having trouble making a payment, what should I do?', 'If you are having trouble making a payment, first make sure that you have entered your payment information correctly. If that doesn''t work, try using a different payment method or contacting customer support for assistance.'),
+  ('How do I update my account information?', 'To update your account information, go to your account settings and select the information you would like to update. Make sure to save any changes you make.'),
+  ('What should I do if I have not received my order?', 'If you have not received your order, first check your order confirmation email for the estimated delivery date. If the estimated delivery date has passed, contact customer support for assistance.'),
+  ('Why am I seeing an error message?', 'Error messages can be caused by a variety of factors, including incorrect login information, server errors, and browser issues. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),
+  ('How do I cancel my subscription?', 'To cancel your subscription, go to your account settings and select the subscription you would like to cancel. Follow the instructions to cancel your subscription.'),
+  ('Why am I unable to access certain features?', 'If you are unable to access certain features, first make sure that you are logged in and that your account has the necessary permissions to access those features. If that doesn''t work, contact customer support for assistance.'),
+  ('How do I get a refund?', 'To request a refund, contact customer support and provide your order number and a description of the issue. Refunds are typically processed within a few business days.'),
+  ('Why am I receiving spam emails?', 'If you are receiving spam emails, make sure to mark them as spam and delete them. Additionally, you can adjust your email settings to filter out spam emails in the future.'),
+  ('How do I contact customer support?', 'To contact customer support, go to the "Contact Us" page on our website and fill out the form with your name, email address, and a description of your issue. We will get back to you as soon as possible.');
+
