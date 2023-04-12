@@ -1,4 +1,4 @@
-PRAGMA foreign_keys=on;
+PRAGMA foreign_keys = on;
 
 .mode columns
 .headers on
@@ -27,7 +27,7 @@ CREATE TABLE User (
 
 CREATE TABLE Role(
     idRole INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
     CONSTRAINT CHECK_Role_name CHECK (name = 'ADMIN' OR name = 'CLIENT' OR name = 'AGENT'),
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE Ticket(
     UUID char(36) PRIMARY KEY,
     cria REFERENCES User,
     resolve REFERENCES User,
-    idDepartment REFERENCES Department
+    idDepartment REFERENCES Department,
     CONSTRAINT CHECK_Ticket_createdate CHECK (create_date >= 2023-01-01)
 );
 
