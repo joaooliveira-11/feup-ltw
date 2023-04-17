@@ -7,7 +7,7 @@
         <div class="container sign_form">
             <form>
                 <h1>TicketEase</h1>
-                <p>Welcome Back! Please login to your account.</p>
+                <p>Welcome Back! Please log in to your account.</p>
                 <label>
                      <input type="text" required placeholder="Username" name="username">
                 </label>
@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="../css/forms.css">
     <img src="../docs/images/initialFooter.png" alt="">
 
+<?php }
+
 function drawFooterMain(){ ?>
     <footer id="footerMain">
         <div> ©2023 TicketEase Inc. All Rights Reserved </div>
@@ -43,9 +45,7 @@ function drawFooterMain(){ ?>
     </footer>
 <?php }
 
-<?php } ?>
-
-<?php function drawRegister()
+ function drawRegister()
 { ?>
 
     <section id="register">
@@ -76,12 +76,35 @@ function drawFooterMain(){ ?>
 
     </section>
 
-<?php } ?>
+<?php }
 
-<?php function drawHello()
-{ ?>
+function drawHeaderMain(){ ?>
+    <link rel="stylesheet" href="../css/style.css">
 
-<h1>Hello World!</h1>
+    <header id ="HeaderMain">
+        TicketEase
+    </header>
 
+<?php }
+
+function drawAside(){ ?>
+    <aside>
+        <section id="ProfileButton">
+            <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
+            <div> Profile </div>
+        </section>
+        <section id="MyTicketsButton">
+            <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
+            <div> My Tickets </div>
+        </section>
+        <section id="InquiriesButton">
+            <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
+            <div> Inquiries </div>
+        </section>
+        <button id="logout-button">
+            <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt="">
+            Log Out
+        </button>
+    </aside>
 
 <?php } ?>
