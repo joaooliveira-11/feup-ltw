@@ -22,3 +22,5 @@ unset($_SESSION['input']);
 $session->addMessage('sucess', "New user register");
 
 header('Location: ../pages/login.php');
+
+?>
