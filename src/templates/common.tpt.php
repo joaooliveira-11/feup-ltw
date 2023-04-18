@@ -38,9 +38,9 @@ function drawFooterMain(){ ?>
     <footer id="footerMain">
         <div> ©2023 TicketEase Inc. All Rights Reserved </div>
         <section id="footerMainRight">
-            <a src="#"> About Us </a>
+            <a href="../pages/aboutUs"> About Us </a>
             <div> | </div>
-            <a src="#"> User Help </a>
+            <a href="../pages/FAQ"> User Help </a>
         </section>
     </footer>
 <?php }
@@ -82,24 +82,27 @@ function drawHeaderMain(){ ?>
     <link rel="stylesheet" href="../css/style.css">
 
     <header id ="HeaderMain">
+        <div id = "headerContent"> 
         TicketEase
+        </div>
     </header>
 
 <?php }
 
 function drawAside(){ ?>
+    <link rel="stylesheet" href="../css/style.css">
     <aside>
         <section id="ProfileButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
-            <div> Profile </div>
+            <a href="../pages/profile.php">Profile</a>
         </section>
         <section id="MyTicketsButton">
             <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
-            <div> My Tickets </div>
+            <a href="../pages/myTickets.php">My Tickets</a>
         </section>
         <section id="InquiriesButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
-            <div> Inquiries </div>
+            <a href="../pages/inquires.php">Inquires</a>
         </section>
         <button id="logout-button">
             <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt="">
@@ -107,4 +110,12 @@ function drawAside(){ ?>
         </button>
     </aside>
 
+<?php } 
+
+function drawMain(){ ?>
+    <link rel="stylesheet" href="../css/style.css">
+    <main id="MainContent">
+        //TODO
+    </main>
 <?php } ?>
+

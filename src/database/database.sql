@@ -100,7 +100,7 @@ CREATE TABLE Ticket_Status(
 CREATE TABLE FAQ (
     idFAQ INTEGER PRIMARY KEY AUTOINCREMENT,
     question TEXT NOT NULL,
-    answer TEXT NOT NULL,
+    answer TEXT NOT NULL
 );
 ------------------------------------------------------------------------------------------
 
