@@ -2,10 +2,9 @@
   declare(strict_types = 1);
 
   require_once(dirname(__DIR__).'/utils/session.php');
-  $session = new Session();
-
   require_once(dirname(__DIR__).'/database/connection.php');
   require_once(dirname(__DIR__).'/classes/user.class.php');
+  $session = new Session();
 
   $db = getDatabaseConnection();
 
@@ -19,6 +18,6 @@
     $session->addMessage('error', 'Wrong password!');
   }
 
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  header('Location: ../pages/main.php');
 ?>
 

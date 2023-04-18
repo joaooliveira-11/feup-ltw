@@ -12,18 +12,16 @@
     {
       $this->idUser = $idUser;
       $this->name = $name;
+      $this->username = $idUser;
       $this->email = $email;
       $this->password = $password;
 
     }
 
     public function getName() : string {
-
-        $names = explode(" ", $this->name);
-        return count($names) > 1 ? $names[0] . " " . $names[count($names)-1] : $names[0];
+        return $this->name;
     }
    
-
     function save($db) {
       $stmt = $db->prepare('
         UPDATE User SET name = ?, username = ?, email = ?, password = ?,
@@ -36,12 +34,14 @@
     
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 
-        $stmt = $db->prepare('SELECT * FROM User WHERE username = ?');
+        $stmt = $db->prepare('
+        SELECT * FROM User WHERE username = ?
+        ');
         $stmt->execute(array(strtolower($username)));
         $user = $stmt->fetch();
 
 
-        if ($user !== false && password_verify($password, $user['password'])) {
+        if ($user != false && password_verify($password, $user['password'])) {
             return new User(
                 intval($user['idUser']),
                 $user['name'],
@@ -60,11 +60,12 @@
       ');
 
       $stmt->execute(array($id));
-      $customer = $stmt->fetch();
+      $user = $stmt->fetch();
       
       return new User(
         intval($user['idUser']),
         $user['name'],
+        $user['username'],
         $user['email'],
         $user['password'],
       );
@@ -88,7 +89,6 @@
 
         return $users;
     }
-
 
     function getPhoto() : string {
 
