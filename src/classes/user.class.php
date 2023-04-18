@@ -12,7 +12,7 @@
     {
       $this->idUser = $idUser;
       $this->name = $name;
-      $this->username = $idUser;
+      $this->username = $username;
       $this->email = $email;
       $this->password = $password;
 
@@ -20,6 +20,9 @@
 
     public function getName() : string {
         return $this->name;
+    }
+    public function getUsername() : string {  
+      return $this->username;
     }
    
     function save($db) {
