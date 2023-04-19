@@ -143,6 +143,24 @@ INSERT INTO User (name,username, email, password) VALUES ('Constança Guedes', '
 INSERT INTO User (name,username, email, password) VALUES ('Pedro Diniz', 'pedrodiniz', 'pedrodiniz@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 
 
+INSERT INTO Role (name) VALUES ('CLIENT');
+INSERT INTO Role (name) VALUES ('AGENT');
+INSERT INTO Role (name) VALUES ('ADMIN');
+
+INSERT INTO Department (name, description) VALUES
+    ('Cardiology', 'This department specializes in the diagnosis, treatment, and management of conditions related to the heart and cardiovascular system.'),
+    ('Dermatology', 'This department deals with the diagnosis and treatment of conditions related to the skin, hair, and nails.'),
+    ('Neurology', 'This department specializes in the diagnosis and treatment of conditions related to the nervous system, including the brain, spinal cord, and peripheral nerves.'),
+    ('Psychology', 'This department focuses on the assessment, diagnosis, and treatment of mental health conditions and emotional well-being.'),
+    ('Pediatrics', 'This department specializes in the medical care of infants, children, and adolescents. Pediatricians provide preventive care, diagnose and treat illnesses, and monitor the growth and development of young patients.'),
+    ('Otorhinolaryngology', 'This department deals with the diagnosis and treatment of conditions related to the ear, nose, and throat.'),
+    ('Ophthalmology', 'This department focuses on the diagnosis and treatment of conditions related to the eyes and vision.'),
+    ('General and Family Medicine', 'This department provides comprehensive primary care services for individuals of all ages, including preventive care, health screenings, and management of acute and chronic medical conditions.');
+
+INSERT INTO Status (stage) VALUES ('OPEN');
+INSERT INTO Status (stage) VALUES ('SOLVED');
+INSERT INTO Status (stage) VALUES ('CLOSED');
+
 INSERT INTO FAQ (question, answer) VALUES
   ('How do I reset my password?', 'To reset your password, go to the login page and click on the "Forgot Password" link. Enter your email address and follow the instructions in the email you receive to reset your password.'),
   ('Why am I experiencing slow page load times?', 'Slow page load times can be caused by a variety of factors, including your internet connection, your device, and the website itself. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),
@@ -156,14 +174,5 @@ INSERT INTO FAQ (question, answer) VALUES
   ('Why am I receiving spam emails?', 'If you are receiving spam emails, make sure to mark them as spam and delete them. Additionally, you can adjust your email settings to filter out spam emails in the future.'),
   ('How do I contact customer support?', 'To contact customer support, go to the "Contact Us" page on our website and fill out the form with your name, email address, and a description of your issue. We will get back to you as soon as possible.');
 
-INSERT INTO Department (name, description) VALUES
-    ('Cardiology', 'This department specializes in the diagnosis, treatment, and management of conditions related to the heart and cardiovascular system.'),
-    ('Dermatology', 'This department deals with the diagnosis and treatment of conditions related to the skin, hair, and nails.'),
-    ('Neurology', 'This department specializes in the diagnosis and treatment of conditions related to the nervous system, including the brain, spinal cord, and peripheral nerves.'),
-    ('Psychology', 'This department focuses on the assessment, diagnosis, and treatment of mental health conditions and emotional well-being.'),
-    ('Pediatrics', 'This department specializes in the medical care of infants, children, and adolescents. Pediatricians provide preventive care, diagnose and treat illnesses, and monitor the growth and development of young patients.'),
-    ('Otorhinolaryngology', 'This department deals with the diagnosis and treatment of conditions related to the ear, nose, and throat.'),
-    ('Ophthalmology', 'This department focuses on the diagnosis and treatment of conditions related to the eyes and vision.'),
-    ('General and Family Medicine', 'This department provides comprehensive primary care services for individuals of all ages, including preventive care, health screenings, and management of acute and chronic medical conditions.');
 
 
