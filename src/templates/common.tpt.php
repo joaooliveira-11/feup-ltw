@@ -105,10 +105,12 @@ function drawAside(){ ?>
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
             <div> Inquiries </div>
         </section>
-        <button id="logout-button">
-            <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt="">
-            Log Out
-        </button>
+        <form action="../actions/action_logout.php" method="post">
+            <button type="submit" id="logout-button">
+                <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt=""> 
+                Log Out
+            </button>
+        </form>
     </aside>
 
 <?php } ?>
