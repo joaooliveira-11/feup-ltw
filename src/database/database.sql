@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Reply;
 DROP TABLE IF EXISTS Status;
+DROP TABLE IF EXISTS FAQ;
 
 DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
@@ -104,7 +105,7 @@ CREATE TABLE FAQ (
 );
 ------------------------------------------------------------------------------------------
 
-INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');
+INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$12$J5mhGYOlUn/h2bExfeF.rOdQPmHOFkT1S7yLCXvQrqpOJ55VDAL42');
 INSERT INTO FAQ (question, answer) VALUES
   ('How do I reset my password?', 'To reset your password, go to the login page and click on the "Forgot Password" link. Enter your email address and follow the instructions in the email you receive to reset your password.'),
   ('Why am I experiencing slow page load times?', 'Slow page load times can be caused by a variety of factors, including your internet connection, your device, and the website itself. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),

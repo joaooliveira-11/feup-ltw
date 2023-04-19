@@ -40,7 +40,7 @@
         $stmt = $db->prepare('
         SELECT * FROM User WHERE username = ?
         ');
-        $stmt->execute(array(strtolower($username)));
+        $stmt->execute(array($username));
         $user = $stmt->fetch();
 
 

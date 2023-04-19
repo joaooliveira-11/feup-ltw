@@ -16,7 +16,7 @@ $_SESSION['input']['new_user_password'] = htmlentities($_POST['password']);
 $db = getDatabaseConnection();
 $cost = ['cost' => 12];
 $stmt = $db->prepare('INSERT INTO User (name, username, email, password) VALUES (?,?,?,?)');
-$stmt->execute(array($_POST['name'], $_POST['username'], $_POST['email'],password_hash($_POST['password'], PASSWORD_DEFAULT, $cost)));
+$stmt->execute(array($_POST['name'], strtolower($_POST['username']), strtolower($_POST['email']),password_hash($_POST['password'], PASSWORD_DEFAULT, $cost)));
 
 unset($_SESSION['input']);
 $session->addMessage('sucess', "New user register");
