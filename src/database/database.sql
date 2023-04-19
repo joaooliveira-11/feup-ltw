@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Reply;
 DROP TABLE IF EXISTS Status;
-DROP TABLE IF EXISTS Faq;
+DROP TABLE IF EXISTS FAQ;
 
 DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
@@ -133,4 +133,5 @@ INSERT INTO Department (name, description) VALUES
     ('T', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
     ('C', 'Support to issues related to your company'),
     ('Taxes issues', 'Support to questions related to taxes, such as where to pay IRS, ...');
+
 
