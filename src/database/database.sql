@@ -104,9 +104,45 @@ CREATE TABLE FAQ (
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
+
+------------------------------------------------------------------------------------------
+--------------------------------------Data Insertion--------------------------------------
 ------------------------------------------------------------------------------------------
 
-INSERT INTO User (name,username, email, password) VALUES ('João Oliveira', 'JonyP', 'jonyp@gmail.com', '$2y$10$rhAT.giqNti5VJHR8lT47eXQoUpGBAXK6kzrDC7I1ZwP7nI8nlbHO');
+INSERT INTO User (name,username, email, password) VALUES ('Bernardo Pinto', 'berna', 'Berna@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Francisca Guimaraes', 'kika', 'kika@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Jony Pierre', 'jonyp', 'jonyp@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Fabiana Oliveira', 'fabiana', 'Fabiana@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Samuel Alex', 'samu2k23', 'samu2k23@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Franklin Silva', 'franklin', 'franklin@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Luisona Neymar', 'luisa', 'luisa@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Bruna Marquezine', 'bruna', 'bruna@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Cristiano Ronaldo', 'cristiano', 'cr7@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Neymar Toupeira', 'neymito', 'neymito@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+
+INSERT INTO User (name, username, email, password) VALUES ('John Doe', 'johndoe', 'johndoe@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Jane Smith', 'janesmith', 'janesmith@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Michael Johnson', 'michaeljohnson', 'michaeljohnson@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Sarah Thompson', 'sarahthompson', 'sarahthompson@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('David Lee', 'davidlee', 'davidlee@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Emily Davis', 'emilydavis', 'emilydavis@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Matthew Harris', 'matthewharris', 'matthewharris@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Olivia Brown', 'oliviabrown', 'oliviabrown@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Daniel Martinez', 'danielmartinez', 'danielmartinez@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name, username, email, password) VALUES ('Sophia Taylor', 'sophiataylor', 'sophiataylor@example.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+
+INSERT INTO User (name,username, email, password) VALUES ('Michael Jackson', 'mjackson', 'mjackson@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Antonio Mezzero', 'antoniomezzero', 'antoniomezzero@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Martino Mezzero', 'martino', 'martino@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Miguel Margarido', 'magicmike', 'magicmike@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Mario Ferreira', 'forgett', 'forgett@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Martim Aroso', 'martimaroso', 'martimaroso@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Joao Caravela', 'caravela10', 'caravela10@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Hugo Torgo', 'preto', 'preto@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Constança Guedes', 'cguedes', 'cguedes@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User (name,username, email, password) VALUES ('Pedro Diniz', 'pedrodiniz', 'pedrodiniz@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+
+
 INSERT INTO FAQ (question, answer) VALUES
   ('How do I reset my password?', 'To reset your password, go to the login page and click on the "Forgot Password" link. Enter your email address and follow the instructions in the email you receive to reset your password.'),
   ('Why am I experiencing slow page load times?', 'Slow page load times can be caused by a variety of factors, including your internet connection, your device, and the website itself. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),
@@ -119,6 +155,7 @@ INSERT INTO FAQ (question, answer) VALUES
   ('How do I get a refund?', 'To request a refund, contact customer support and provide your order number and a description of the issue. Refunds are typically processed within a few business days.'),
   ('Why am I receiving spam emails?', 'If you are receiving spam emails, make sure to mark them as spam and delete them. Additionally, you can adjust your email settings to filter out spam emails in the future.'),
   ('How do I contact customer support?', 'To contact customer support, go to the "Contact Us" page on our website and fill out the form with your name, email address, and a description of your issue. We will get back to you as soon as possible.');
+
 INSERT INTO Department (name, description) VALUES
     ('Technologies', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
     ('Company Issues', 'Support to issues related to your company'),
