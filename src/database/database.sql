@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Reply;
 DROP TABLE IF EXISTS Status;
+DROP TABLE IF EXISTS Faq;
 
 DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
@@ -36,6 +37,7 @@ CREATE TABLE Role(
 CREATE TABLE Department(
     idDepartment INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
+    description Text,
     CONSTRAINT UNIQUE_Department_name UNIQUE (name)
 );
 
@@ -117,4 +119,18 @@ INSERT INTO FAQ (question, answer) VALUES
   ('How do I get a refund?', 'To request a refund, contact customer support and provide your order number and a description of the issue. Refunds are typically processed within a few business days.'),
   ('Why am I receiving spam emails?', 'If you are receiving spam emails, make sure to mark them as spam and delete them. Additionally, you can adjust your email settings to filter out spam emails in the future.'),
   ('How do I contact customer support?', 'To contact customer support, go to the "Contact Us" page on our website and fill out the form with your name, email address, and a description of your issue. We will get back to you as soon as possible.');
+INSERT INTO Department (name, description) VALUES
+    ('Technologies', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
+    ('Company Issues', 'Support to issues related to your company'),
+    ('Movies', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
+    ('Compan', 'Support to issues related to your company'),
+    ('Techn', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
+    ('Compa', 'Support to issues related to your company'),
+    ('Technol', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
+    ('Company I', 'Support to issues related to your company'),
+    ('Tech', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
+    ('Company Is', 'Support to issues related to your company'),
+    ('T', 'Support to any trouble related to technologies, such as problems with the computer, with the cellphone, ...'),
+    ('C', 'Support to issues related to your company'),
+    ('Taxes issues', 'Support to questions related to taxes, such as where to pay IRS, ...');
 

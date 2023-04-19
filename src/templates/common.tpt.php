@@ -38,9 +38,9 @@ function drawFooterMain(){ ?>
     <footer id="footerMain">
         <div> ©2023 TicketEase Inc. All Rights Reserved </div>
         <section id="footerMainRight">
-            <a href="../pages/aboutUs"> About Us </a>
+            <a src="#"> About Us </a>
             <div> | </div>
-            <a href="../pages/FAQ"> User Help </a>
+            <a src="#"> User Help </a>
         </section>
     </footer>
 <?php }
@@ -82,42 +82,33 @@ function drawHeaderMain(){ ?>
     <link rel="stylesheet" href="../css/style.css">
 
     <header id ="HeaderMain">
-        <div id = "headerContent"> 
         TicketEase
-        </div>
     </header>
 
 <?php }
 
 function drawAside(){ ?>
-    <link rel="stylesheet" href="../css/style.css">
     <aside>
+        <section id="HomeButton">
+            <img src="../docs/images/kisspng-website-house-home-world-wide-web-computer-icons-house-clip-art-5ab036bbf19551.9166615015214977879895.png" alt="">
+            <div> Home </div>
+        </section>
         <section id="ProfileButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
-            <a href="../pages/profile.php">Profile</a>
+            <div> Profile </div>
         </section>
         <section id="MyTicketsButton">
             <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
-            <a href="../pages/myTickets.php">My Tickets</a>
+            <div> My Tickets </div>
         </section>
         <section id="InquiriesButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
-            <a href="../pages/inquires.php">Inquires</a>
+            <div> Inquiries </div>
         </section>
-        <form action="../actions/action_logout.php" method="post">
-            <button type="submit" id="logout-button">
-                <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt=""> 
-                Log Out
-            </button>
-        </form>
+        <button id="logout-button">
+            <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt="">
+            Log Out
+        </button>
     </aside>
 
-<?php } 
-
-function drawMain(){ ?>
-    <link rel="stylesheet" href="../css/style.css">
-    <main id="MainContent">
-        //TODO
-    </main>
 <?php } ?>
-
