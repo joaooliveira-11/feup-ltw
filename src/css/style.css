@@ -9,6 +9,10 @@ body{
     overflow:hidden;
 }
 
+a{
+    cursor: pointer;
+}
+
 #footerMain{
     grid-row: 3;
     grid-column: 1 / 3;
@@ -117,11 +121,14 @@ aside > section:hover{
     padding: 1em;
     border-radius: 10px;
 }
+
 #DepartmentsMain{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    max-height: 400px;
+    max-height: 400px; /* Este max-height vai ser alterado, sendo igual ao height do #HomePageContent menos o height do 1º article, que é aquela descrição.
+                        Este 1ºarticle pode variar, dependendo do dispositivo onde tamos a ver. Penso que a única maneira de calcular isto seja através de
+                        JavaScript (pelo menos é o que o chatGPT diz) */
     overflow-y: auto;
 }
 
@@ -160,4 +167,9 @@ aside > section:hover{
 #CreateNewTicket > span {
     font-size: 1.3em;
     padding-right: 10px;
+}
+
+#CreateNewTicket:active{
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
 }
