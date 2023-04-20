@@ -80,6 +80,7 @@ function drawFooterMain(){ ?>
 
 function drawHeaderMain(){ ?>
     <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../javascript/script.js"></script>
 
     <header id ="HeaderMain">
         TicketEase
