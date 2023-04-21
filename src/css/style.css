@@ -14,7 +14,6 @@ body{
     color:#AFAFAF;
     margin: 0;
     padding: 0;
-    height: 47vw;
 }
 
 #footerMain{
@@ -56,6 +55,7 @@ aside{
     grid-row: 2;
     grid-column: 1;
     width: 250px;
+    position: relative;
     background-color: #AFAFAF;
     color:#224957;
     letter-spacing: 2px;
@@ -87,21 +87,35 @@ aside > section:hover{
     cursor: pointer;
     background-color: #dde2e4;
 }
+button{
+    cursor: pointer;
+}
 
-#logout-button {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #87CBA9;
-    margin-top: 30em;
-    margin-left: 3em;
-    margin-right: 3em;
-    padding: 10px;
+aside > form {
+    position: absolute;
+    bottom:3em;
+}
+button{
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
     transform: translateY(0);
-    transition: all 0.2s;
+    transition: all 0.1s;
+}
+
+button:active{
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}
+
+#logout-button {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #87CBA9;
+    margin-left: 3em;
+    margin-right: 3em;
+    padding: 10px;
     font-size: 1em;
 }
 
@@ -109,15 +123,11 @@ aside > section:hover{
     width: 12%;
 }
 
-#logout-button:active{
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-    transform: translateY(2px);
-}
-
-#HomePageContent{
+main{
     font-size: 1.3em;
     background-color: white;
-    margin: 1em;
+    display: block;
+    margin: 2em;
     padding: 1em;
     border-radius: 10px;
 }
@@ -155,12 +165,6 @@ aside > section:hover{
     margin: 2em 3em 0 3em;
     padding: 10px 20px;
     background-color: #20DF7F;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
-    transform: translateY(0);
-    transition: all 0.1s;
     font-size: 1em;
 }
 
@@ -169,7 +173,44 @@ aside > section:hover{
     padding-right: 10px;
 }
 
-#CreateNewTicket:active{
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-    transform: translateY(2px);
+#HeaderProfile{
+    font-size: 2.2em;
+    text-align: center;
+    border-bottom: #224957 1px solid;
+}
+
+#ProfileMain{
+    margin-bottom: 15em;
+    margin-left: 8em;
+    margin-right: 8em;
+    color:#224957;
+}
+
+#ProfileMain > section > img{
+    width: 180px;
+}
+
+#ProfileMain > section{
+    display: flex;
+    justify-content: center ;
+    align-content: flex-end;
+    padding-right: 3em;
+    padding-top: 5em;
+}
+
+#ProfileMain >section >article {
+    position: relative;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    top:3em;
+    left:1em;
+}
+
+#EditProfileButton{
+    display: block;
+    margin: 3em auto 0;
+    padding: 8px 28px;
+    font-size: 1.3em;
+    text-align: center;
+    background-color: #C0CAC5;
 }

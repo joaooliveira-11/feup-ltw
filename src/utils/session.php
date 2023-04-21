@@ -1,9 +1,11 @@
 <?php
   class Session {
     private array $messages;
+    private User $user;
 
     public function __construct() {
       session_start();
+
 
       $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
       unset($_SESSION['messages']);

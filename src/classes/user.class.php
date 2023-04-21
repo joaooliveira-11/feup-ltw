@@ -22,7 +22,10 @@
         return $this->name;
     }
     public function getUsername() : string {  
-      return $this->username;
+        return $this->username;
+    }
+    public function getEmail() : string {
+        return $this->email;
     }
    
     function save($db) {
@@ -57,7 +60,7 @@
 
     static function getSingleUser(PDO $db, int $id) : User {
       $stmt = $db->prepare('
-        SELECT idUser, name, email, password
+        SELECT idUser, name,username, email, password
         FROM User 
         WHERE idUser = ?
       ');

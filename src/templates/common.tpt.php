@@ -114,4 +114,5 @@ function drawAside(){ ?>
         </form>
     </aside>
 
-<?php } ?>
+<?php }
+

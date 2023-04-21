@@ -8,3 +8,7 @@ ProfileButton.addEventListener('click', function (){
 HomeButton.addEventListener('click', function (){
     window.location.href="http://localhost:9000/pages/main.php";
 })
+
+function addMessage(type,message){
+
+}
