@@ -12,9 +12,9 @@ $db = getDatabaseConnection();
 $user= User::getSingleUser($db,$session->getId());
 ?>
 <main id="ProfileMain">
-    <div id="HeaderProfile">
+    <header class="HeaderMain">
         Profile
-    </div>
+    </header>
     <section>
         <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png">
         <article>

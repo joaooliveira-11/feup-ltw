@@ -127,7 +127,7 @@ main{
     font-size: 1.3em;
     background-color: white;
     display: block;
-    margin: 2em;
+    margin: 2em 3em;
     padding: 1em;
     border-radius: 10px;
 }
@@ -173,7 +173,7 @@ main{
     padding-right: 10px;
 }
 
-#HeaderProfile{
+.HeaderMain{
     font-size: 2.2em;
     text-align: center;
     border-bottom: #224957 1px solid;
@@ -188,6 +188,11 @@ main{
 
 #ProfileMain > section > img{
     width: 180px;
+}
+
+#ChangePhoto > img{
+    margin-left: 2em;
+    width: 120px;
 }
 
 #ProfileMain > section{
@@ -213,4 +218,72 @@ main{
     font-size: 1.3em;
     text-align: center;
     background-color: #C0CAC5;
+}
+
+#EditProfileMain{
+    color:#224957;
+}
+#ChangePhoto{
+    display: inline;
+}
+
+#ChangePhoto > button {
+    background-color: #224957;
+    color: #FBFEFF;
+    padding: 0.6em 1em;
+    margin-left: 4em;
+    font-size: 0.75em;
+    border-radius: 15px;
+}
+
+#EditProfileMain > article {
+    padding-left: 2em;
+}
+
+#EditProfileMain > article > form{
+    padding-left: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#EditProfileMain > article > form >div{
+    margin-top: 1em;
+    margin-right: 4em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#EditProfileMain > article > form >div > label{
+    width: 80%;
+}
+
+#EditProfileMain > article > form >div > label > input{
+    font-size: 1em;
+    width: 100%;
+    background-color: #F6F6F6;
+    border: rgba(0,0,0,0.3) 1px solid;
+}
+
+#SubmitEditButtons{
+    margin: 2.5em;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#SubmitEditButtons > button{
+    font-size: 1.2em;
+    padding: 0.2em 1em;
+    border-radius: 10px;
+}
+
+#SubmitEditButtons > button:first-child{
+    background-color: #20DF7F;
+}
+
+#SubmitEditButtons >button:last-child{
+    background-color: #F0887A;
 }
