@@ -214,3 +214,99 @@ main{
     text-align: center;
     background-color: #C0CAC5;
 }
+
+#tickets {
+    color: #224957;
+}
+
+.retangulo {
+    background-color: white;
+    width: 75vw;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.blackLine {
+    border-bottom: 0.2px solid #224957;
+    margin-top: -3px;
+}
+
+#ticketText {
+    margin-left: 2vw;
+    padding-top: 10px;
+}
+
+#ticketDescription {
+    text-align: center;
+    height: 10%;
+}
+
+#inline {
+    display: inline;
+    margin-right: 10%;
+}
+
+#TicketStatus {
+    display: inline;
+    margin-right: 120px;
+}
+
+.circuloRed::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: rgb(252, 149, 105);
+    margin-right: 0.5em;
+}
+
+.circuloYellow::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: yellow;
+    margin-right: 0.5em;
+}
+
+.circuloGreen::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: rgb(200, 238, 119);
+    margin-right: 0.5em;
+}
+
+#yourTickets {
+    margin-top: 2em;
+    margin-left: 7em;
+    font-size: 18px;
+}
+
+.TicketStatusTitle {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+#tickets {
+    max-height: 95%; 
+    overflow-y: auto;
+}
+
+#tickets::-webkit-scrollbar {
+    width: 8px;
+}
+
+#tickets::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 4px;
+}
+
+#tickets::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
