@@ -65,6 +65,9 @@ function drawFooterMain(){ ?>
                     <label>
                         <input type="password" placeholder="Password" name="password" required>
                     </label>
+                    <label>
+                        <input type="password" placeholder="ConfirmPassword" name="password1" required>
+                    </label>
                     <button class="form_button" formaction="../actions/action_register.php" formmethod="post">Sign Up</button>
              
             </form>
