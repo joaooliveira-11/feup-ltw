@@ -192,3 +192,9 @@ VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 2, 4, 2);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
 VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 2, 5, 3);
+
+INSERT INTO Ticket_Status(idTicket, idStatus, date)
+VALUES (1,1,'22-04-2023');
+
+INSERT INTO Ticket_Status(idTicket, idStatus, date)
+VALUES (1,2,'22-04-2023');

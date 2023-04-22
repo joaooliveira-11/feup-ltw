@@ -13,7 +13,7 @@ drawAside();
 $db = getDatabaseConnection();
 $tickets = Ticket::getTickets($db, $session->getId());
 
-drawMyTicketPage($tickets);
+drawMyTicketPage($tickets, $db);
 drawFooterMain();
 ?>
 

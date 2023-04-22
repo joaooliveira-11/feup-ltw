@@ -1,4 +1,4 @@
-<?php function drawMyTicketPage(array $tickets) { ?>
+<?php function drawMyTicketPage(array $tickets, PDO $db) { ?>
     <section id="tickets">
         <div id="yourTickets">
             <p id="TicketStatus" class="TicketStatusTitle">Your tickets:</p>
@@ -14,8 +14,8 @@
                 <p class="blackLine"><p>
                 <h3 id="ticketDescription"><?=$ticket->getDescription()?></h3>
                 <p class="blackLine"><p>
-                <h3 id="inline">Departament: <?=$ticket->getidDepartment()?></h3>
-                <h3 id="inline">Status: <?=$ticket->getTitle()?></h3>
+                <h3 id="inline">Departament: <?=$ticket->getTicketDepartmentName($db)?></h3>
+                <h3 id="inline">Status: <?=$ticket->getLastTicketStatus($db)?></h3>
                 <h3 id="inline">Date: <?=$ticket->getCreateDate()?></h3>
                 </p>
             </div>  

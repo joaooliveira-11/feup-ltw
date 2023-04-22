@@ -73,5 +73,26 @@
         }
         return $tickets;
     }
+
+    public function getTicketDepartmentName(PDO $db): string {
+        $stmt = $db->prepare('SELECT name FROM Department WHERE idDepartment = ?');
+        $stmt->execute(array($this->idDepartment));
+        $department = $stmt->fetch();
+        return $department['name'];
+    }
+
+    public function getLastTicketStatus(PDO $db): string {
+        $stmt = $db->prepare('SELECT idStatus FROM Ticket_Status WHERE idTicket = ? ORDER BY ROWID DESC LIMIT 1');
+        $stmt->execute(array($this->idTicket));
+        $status = $stmt->fetch();
+        if ($status) {
+            $stmt = $db->prepare('SELECT stage FROM Status WHERE idStatus = ?');
+            $stmt->execute(array($status['idStatus']));
+            $statusName = $stmt->fetch();
+            return $statusName['stage'];
+        } else {
+            return '';
+        }
+    }
 }
 ?>
