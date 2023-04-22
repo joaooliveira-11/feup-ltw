@@ -7,7 +7,7 @@ require_once(dirname(__DIR__).'/templates/mytickets.tpl.php');
 
 
 $session = new Session();
-
+if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 drawHeaderMain();
 drawAside();
 $db = getDatabaseConnection();

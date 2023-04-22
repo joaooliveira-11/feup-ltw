@@ -1,5 +1,4 @@
 <?php
-// public function __construct(int $idUser, string $name, string $username, string $email, string $password)
 declare(strict_types=1);
 
 require_once(dirname(__DIR__).'/database/connection.php');
