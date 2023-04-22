@@ -47,9 +47,9 @@ CREATE TABLE Ticket(
                        description TEXT NOT NULL,
                        priority INTEGER NOT NULL,
                        create_date DATE,
-                       cria REFERENCES User,
-                       resolve REFERENCES User,
-                       idDepartment REFERENCES Department,
+                       cria INTEGER REFERENCES User,
+                       resolve INTEGER REFERENCES User,
+                       idDepartment INTEGER REFERENCES Department,
                        CONSTRAINT CHECK_Ticket_createdate CHECK (create_date >= 2023-01-01)
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE Reply(
                       idReply INTEGER PRIMARY KEY AUTOINCREMENT,
                       message TEXT NOT NULL,
                       create_date DATE,
-                      idTicket REFERENCES Ticket,
+                      idTicket INTEGER REFERENCES Ticket,
                       idUser INTEGER REFERENCES User,
                       CONSTRAINT CHECK_Reply_createdate CHECK (create_date >= 2023-01-01)
 );
@@ -94,7 +94,7 @@ CREATE TABLE Ticket_Hashtags(
 
 CREATE TABLE Ticket_Status(
                               idTicket INTEGER REFERENCES Ticket,
-                              idStatus REFERENCES Status,
+                              idStatus INTEGER REFERENCES Status,
                               date DATE,
                               PRIMARY KEY (idTicket, idStatus)
 );
@@ -173,3 +173,22 @@ INSERT INTO FAQ (question, answer) VALUES
                                        ('How do I get a refund?', 'To request a refund, contact customer support and provide your order number and a description of the issue. Refunds are typically processed within a few business days.'),
                                        ('Why am I receiving spam emails?', 'If you are receiving spam emails, make sure to mark them as spam and delete them. Additionally, you can adjust your email settings to filter out spam emails in the future.'),
                                        ('How do I contact customer support?', 'To contact customer support, go to the "Contact Us" page on our website and fill out the form with your name, email address, and a description of your issue. We will get back to you as soon as possible.');
+
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Server Down', 'Server is not responding', 1, '2023-04-20',3,1,1);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 3, 4, 2);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 3, 5, 3);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Server Down', 'Server is not responding', 1, '2023-04-20',2,1,1);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 2, 4, 2);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 2, 5, 3);
