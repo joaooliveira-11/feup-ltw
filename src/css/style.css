@@ -28,6 +28,12 @@ footer>section>a:hover{
     color: whitesmoke;
 }
 
+footer>section>a{
+    color: #AFAFAF;
+    text-decoration: none;
+    margin: 0 0.5em;
+}
+
 #footerMainRight{
     position: absolute;
     right: 1.5em;
