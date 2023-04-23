@@ -5,3 +5,4 @@ require_once(dirname(__DIR__).'/database/connection.php');
 
 drawLogin();
 drawInitialFooter();
+?>

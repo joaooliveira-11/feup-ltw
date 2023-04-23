@@ -9,5 +9,6 @@ require_once(dirname(__DIR__).'/templates/profile.tpl.php');
 drawHeaderMain();
 drawAside();
 drawEditProfileMain();
-drawFooterMain(); ?>
+drawFooterMain(); 
+?>
 

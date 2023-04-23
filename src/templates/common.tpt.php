@@ -120,3 +120,30 @@ function drawAside(){ ?>
 <?php }
 
 
+function drawMainPage(array $departments, PDO $db) { ?>
+    <main id="HomePageContent">
+    <article>
+        <p>This is where you can submit your trouble tickets.</p>
+        <p>1. Fill out the ticket form with details about the issue you are experiencing, including a clear and <br>
+            concise description of the problem.<br>
+            2. Choose the appropriate department from the dropdown list to ensure that your ticket is routed to <br>
+            the right team for prompt resolution.</p>
+        <p> Here are the different departments that can handle your issue:</p>
+    </article>
+    <article id="DepartmentsMain">
+    <?php foreach ($departments as $department) { ?>
+            <section id="ADeparmentMain">
+                <h4>
+                    <?php echo $department['name'] ?>
+                </h4>
+                <p>
+                    <?php echo $department['description'] ?>
+                </p>
+            </section>
+        <?php } ?>
+    </article>
+    <button id="CreateNewTicket"> <span>+</span> New Ticket</button>
+</main>
+
+<?php }
+
