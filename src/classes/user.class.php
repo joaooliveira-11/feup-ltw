@@ -47,7 +47,7 @@
         $this->password = password_hash($_password, PASSWORD_DEFAULT, $cost);
       }
 
-      function save($db) {
+      function save($db){
           $stmt = $db->prepare('
             UPDATE User SET name = ?, username = ?, email = ?, password = ?
             WHERE idUser = ?
@@ -55,6 +55,17 @@
 
           $stmt->execute(array($this->name, $this->username, $this->email, $this->password, $this->idUser));
       }
+
+      function getRole($db) : int{
+          $stmt = $db->prepare('
+            Select idRole From User_Roles WHERE idUser = ?
+          ');
+
+          $stmt->execute(array($this->idUser));
+          $result = $stmt->fetch();
+          return intval($result['idRole']);
+      }
+
     
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 

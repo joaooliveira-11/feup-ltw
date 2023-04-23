@@ -8,10 +8,9 @@ require_once(dirname(__DIR__).'/templates/profile.tpl.php');
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 drawHeaderMain();
-drawAside();
 $db = getDatabaseConnection();
 $user= User::getSingleUser($db,$session->getId());
-
+drawAside();
 drawProfile($user);
 drawFooterMain();
 ?>
