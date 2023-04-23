@@ -8,7 +8,10 @@ $session = new Session();
 
 $db = getDatabaseConnection();
 
+drawHeaderMain();
+drawAside();
 drawFAQ($db);
+drawFooterMain();
 
 /* if(!$session->isLoggedIn()){
     drawHeaderMain();

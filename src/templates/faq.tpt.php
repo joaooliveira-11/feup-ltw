@@ -11,7 +11,7 @@
     ?>
 
     <body>
-        <section>
+        <section id="FAQ">
             <div class = "container">
                 <div class="accordion">
                 <?php foreach ($faq as $row) { ?>
