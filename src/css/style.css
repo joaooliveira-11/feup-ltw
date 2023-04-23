@@ -342,7 +342,7 @@ main{
     padding-left: 2em;
 }
 
-#EditProfileMain > article > form{
+#EditProfileMain > form{
     padding-left: 2em;
     display: flex;
     flex-direction: column;
@@ -350,7 +350,7 @@ main{
     width: 100%;
 }
 
-#EditProfileMain > article > form >div{
+#EditProfileMain > form > article >div{
     margin-top: 1em;
     margin-right: 4em;
     display: flex;
@@ -358,11 +358,11 @@ main{
     align-items: center;
 }
 
-#EditProfileMain > article > form >div > label{
+#EditProfileMain > form > article >div > label{
     width: 80%;
 }
 
-#EditProfileMain > article > form >div > label > input{
+#EditProfileMain > form > article >div > label > input{
     font-size: 1em;
     width: 100%;
     background-color: #F6F6F6;

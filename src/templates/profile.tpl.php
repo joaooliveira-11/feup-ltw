@@ -30,34 +30,38 @@ function drawEditProfileMain(){ ?>
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png">
             <button> Change Picture</button>
         </div>
-        <article>
-            <h2>
-                Account Information
-            </h2>
-            <form>
+        <form>
+            <article>
+                <h2>
+                    Change Account Information (if you want)
+                </h2>
                 <div>
                     Name:
                     <label>
-                        <input type="text" name="newName">
+                        <input type="text" placeholder="New Name" name="newName">
+                    </label>
+                </div>
+                <div>
+                    Username:
+                    <label>
+                        <input type="text" placeholder="New Username" name="newUsername">
                     </label>
                 </div>
                 <div>
                     E-mail:
                     <label>
-                        <input type="text" name="newEmail">
+                        <input type="email" placeholder="New Email"name="newEmail">
                     </label>
                 </div>
-            </form>
-        </article>
-        <article>
-            <h2>
-                Account Information
-            </h2>
-            <form>
+            </article>
+            <article>
+                <h2>
+                    Change Password (if you want)
+                </h2>
                 <div>
                     Current Password:
                     <label>
-                        <input type="password" name="currentPassword">
+                        <input type="password" placeholder="Obrigatório preencher" name="currentPassword">
                     </label>
                 </div>
                 <div>
@@ -72,15 +76,15 @@ function drawEditProfileMain(){ ?>
                         <input type="password" name="confirmPassword">
                     </label>
                 </div>
-            </form>
-        </article>
-        <div id="SubmitEditButtons">
-            <button formaction="../actions/action_editProfile.php" formmethod="post">
-                Submit Changes
-            </button>
-            <button onclick="window.location.href='../pages/profile.php'">
-                Cancel
-            </button>
-        </div>
+            </article>
+            <div id="SubmitEditButtons">
+                <button formaction="../actions/action_editProfile.php" formmethod="post">
+                    Submit Changes
+                </button>
+                <button type="button" onclick="window.location.href='../pages/profile.php'">
+                    Cancel
+                </button>
+            </div>
+        </form>
     </main>
 <?php } ?>

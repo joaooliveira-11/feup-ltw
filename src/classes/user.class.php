@@ -27,16 +27,34 @@
     public function getEmail() : string {
         return $this->email;
     }
-   
-    function save($db) {
-      $stmt = $db->prepare('
-        UPDATE User SET name = ?, username = ?, email = ?, password = ?,
-        WHERE idUser = ?
-      ');
-
-      $stmt->execute(array($this->idUser, $this->name, $this->username, $this->email, 
-                                    $this->password));
+    public function getPassword() : string {// <-errado, acho eu
+        return $this->password;
     }
+    public function getId() : int{
+        return $this->idUser;
+    }
+      public function setName(string $_name)  {
+          $this->name = $_name;
+      }
+      public function setUsername(string $_username)  {
+          $this->username = $_username;
+      }
+      public function setEmail(string $_email)  {
+          $this->email = $_email;
+      }
+      public function setPassword(string $_password)  {
+        $cost = ['cost' => 12];
+        $this->password = password_hash($_password, PASSWORD_DEFAULT, $cost);
+      }
+
+      function save($db) {
+          $stmt = $db->prepare('
+            UPDATE User SET name = ?, username = ?, email = ?, password = ?
+            WHERE idUser = ?
+          ');
+
+          $stmt->execute(array($this->name, $this->username, $this->email, $this->password, $this->idUser));
+      }
     
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 
@@ -80,7 +98,7 @@
   
     static function getUsers(PDO $db, int $count) : array {
 
-        $stmt = $db->prepare('SELECT idUser, name, email, password, FROM User LIMIT ?');
+        $stmt = $db->prepare('SELECT idUser, name,usename, email, password, FROM User LIMIT ?');
         $stmt->execute(array($count));
 
         $users = array();
@@ -88,11 +106,11 @@
         $users[] = new User(
             intval($user['idUser']),
             $user['name'],
+            $user['usename'],
             $user['email'],
             $user['password'],
         );
         }
-
         return $users;
     }
 

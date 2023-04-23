@@ -44,7 +44,8 @@
     }
 
     public function addMessage(string $type, string $text) {
-      $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
+        //$_SESSION['messages'][] = array('type' => $type, 'text' => $text);
+        //echo "<script>alert('" . $type . " -> " . $text . "');</script>";
     }
 
     public function getMessages() {
