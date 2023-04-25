@@ -18,9 +18,12 @@
                 <h3 id="inline">Status: <?=$ticket->getLastTicketStatus($db)?></h3>
                 <h3 id="inline">Date: <?=$ticket->getCreateDate()?></h3>
                 </p>
-            </div>  
+            </div>
         <?php }?>
        
     </section>
 
-<?php } ?>
+<?php }
+
+
+

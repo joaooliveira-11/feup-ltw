@@ -18,6 +18,8 @@ DROP TABLE IF EXISTS User_Departments;
 DROP TABLE IF EXISTS Ticket_Hashtags;
 DROP TABLE IF EXISTS Ticket_Status;
 
+DROP TRIGGER IF EXISTS insert_user_roles;
+
 CREATE TABLE User (
                       idUser INTEGER PRIMARY KEY AUTOINCREMENT,
                       name TEXT NOT NULL,
@@ -104,10 +106,24 @@ CREATE TABLE FAQ (
                      question TEXT NOT NULL,
                      answer TEXT NOT NULL
 );
+------------------------------------------------------------------------------------------
+--------------------------------------Triggers--------------------------------------
+------------------------------------------------------------------------------------------
+
+CREATE TRIGGER insert_user_roles
+AFTER INSERT ON User
+FOR EACH ROW
+BEGIN
+    INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 2); --quando se regista um user, ele é um cliente.
+END;
 
 ------------------------------------------------------------------------------------------
 --------------------------------------Data Insertion--------------------------------------
 ------------------------------------------------------------------------------------------
+
+INSERT INTO Role (name) VALUES ('CLIENT');
+INSERT INTO Role (name) VALUES ('AGENT');
+INSERT INTO Role (name) VALUES ('ADMIN');
 
 INSERT INTO User (name,username, email, password) VALUES ('Bernardo Pinto', 'berna', 'Berna@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 INSERT INTO User (name,username, email, password) VALUES ('Francisca Guimaraes', 'kika', 'kika@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
@@ -142,10 +158,6 @@ INSERT INTO User (name,username, email, password) VALUES ('Hugo Torgo', 'preto',
 INSERT INTO User (name,username, email, password) VALUES ('Constança Guedes', 'cguedes', 'cguedes@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 INSERT INTO User (name,username, email, password) VALUES ('Pedro Diniz', 'pedrodiniz', 'pedrodiniz@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 
-
-INSERT INTO Role (name) VALUES ('CLIENT');
-INSERT INTO Role (name) VALUES ('AGENT');
-INSERT INTO Role (name) VALUES ('ADMIN');
 
 INSERT INTO Department (name, description) VALUES
                                                ('Cardiology', 'This department specializes in the diagnosis, treatment, and management of conditions related to the heart and cardiovascular system.'),
@@ -201,7 +213,3 @@ VALUES (1,2,'22-04-2023');
 
 
 
-
-INSERT INTO User_Roles(idUser, idRole) VALUES (1,1);
-INSERT INTO User_Roles(idUser, idRole) VALUES (2,2);
-INSERT INTO User_Roles(idUser, idRole) VALUES (3,3);

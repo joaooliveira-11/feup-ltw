@@ -94,5 +94,27 @@
             return '';
         }
     }
+    public static function getDepartmentTickets(PDO $db, array $idDepartments){
+        $tickets = array();
+        foreach($idDepartments as $id) {
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ?');
+            $stmt->execute(array($id));
+
+
+            while ($ticket = $stmt->fetch()) {
+                $tickets[] = new Ticket(
+                    intval($ticket['idTicket']),
+                    $ticket['title'],
+                    $ticket['description'],
+                    intval($ticket['priority']),
+                    $ticket['create_date'],
+                    intval($ticket['cria']),
+                    intval($ticket['resolve']),
+                    intval($ticket['idDepartment']),
+                );
+            }
+        }
+        return $tickets;
+    }
 }
 ?>

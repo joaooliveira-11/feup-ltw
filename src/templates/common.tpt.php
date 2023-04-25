@@ -134,9 +134,13 @@ function drawAside(){
 <?php }
 
 function drawAsideAgent(){ ?>
-    <section>
+    <section id="TicketsOpenButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        <div> Manage Tickets</div>
+        <div> Tickets Open to Solve</div>
+    </section id="TicketsToManageButton">
+    <section id="AssignedTicketsButton">
+        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
+        <div> Tickets Assigned to me</div>
     </section>
 
 <?php }

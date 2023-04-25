@@ -66,6 +66,21 @@
           return intval($result['idRole']);
       }
 
+      function getDepartments($db) {
+          $stmt = $db->prepare('
+            Select idDepartment From User_Departments WHERE idUser = ?
+          ');
+
+          $stmt->execute(array($this->idUser));
+          $result = array();
+
+          while ($idDepartment = $stmt->fetch()){
+              $result[] = $idDepartment['idDepartment'];
+          }
+          return $result;
+
+      }
+
     
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 
