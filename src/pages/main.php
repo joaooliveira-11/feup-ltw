@@ -12,9 +12,9 @@ drawAside();
 $db = getDatabaseConnection();
 $stmt = $db->prepare("Select * From Department");
 $stmt->execute();
-$tickets = $stmt->fetchAll();
+$departments = $stmt->fetchAll();
 
-drawMainPage($tickets, $db);
+drawMainPage($departments, $db);
 drawFooterMain();
 ?>
 

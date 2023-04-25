@@ -1,4 +1,4 @@
-<?php function drawProfile($user)
+<?php function drawProfile($user, PDO $db)
 { ?>
 <main id="ProfileMain">
     <div id="HeaderProfile">
@@ -11,7 +11,13 @@
                 name: <?php echo $user->getName();  ?>
             </div>
             <div>
+                username: <?php echo $user->getUsername();  ?>
+            </div>
+            <div>
                 email: <?php echo $user->getEmail(); ?>
+            </div>
+            <div>
+                roles: <?php echo $user->getLastUserRole($db); ?>
             </div>
         </article>
     </section>

@@ -56,14 +56,18 @@
           $stmt->execute(array($this->name, $this->username, $this->email, $this->password, $this->idUser));
       }
 
-      function getRole($db) : int{
-          $stmt = $db->prepare('
-            Select idRole From User_Roles WHERE idUser = ?
-          ');
-
+      function getLastUserRole($db) : string{
+          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ? ORDER BY ROWID DESC LIMIT 1');
           $stmt->execute(array($this->idUser));
-          $result = $stmt->fetch();
-          return intval($result['idRole']);
+          $role = $stmt->fetch();
+          if ($role) {
+            $stmt = $db->prepare('SELECT name FROM Role WHERE idRole = ?');
+            $stmt->execute(array($role['idRole']));
+            $rolename = $stmt->fetch();
+            return $rolename['name'];
+        } else {
+            return '';
+        }
       }
 
       function getDepartments($db) {
@@ -81,7 +85,7 @@
 
       }
 
-    
+
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 
         $stmt = $db->prepare('

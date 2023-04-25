@@ -102,7 +102,7 @@ function drawAside(){
 
     $user = User::getSingleUser($db, $session->getId());
 
-    $role = $user->getRole($db);
+    $role = $user->getLastUserRole($db);
     ?>
     <aside>
         <section id="HomeButton">
@@ -121,8 +121,12 @@ function drawAside(){
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
             <div> Inquiries </div>
         </section>
-        <?php   if($role>1) drawAsideAgent();
-                if($role>2) drawAsideAdmin(); ?>
+        <?php   if($role == 'AGENT') drawAsideAgent();
+                if($role == 'ADMIN'){
+                    drawAsideAdmin();
+                    drawAsideAgent();
+                 }
+        ?>
         <form action="../actions/action_logout.php" method="post">
             <button type="submit" id="logout-button">
                 <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt=""> 

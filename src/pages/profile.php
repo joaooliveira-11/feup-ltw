@@ -11,6 +11,6 @@ drawHeaderMain();
 $db = getDatabaseConnection();
 $user= User::getSingleUser($db,$session->getId());
 drawAside();
-drawProfile($user);
+drawProfile($user, $db);
 drawFooterMain();
 ?>
