@@ -66,6 +66,22 @@
           return intval($result['idRole']);
       }
 
+      public function getRoles(PDO $db) : array {
+        $stmt = $db->prepare('
+          SELECT r.name
+          FROM Role r
+          JOIN User_Roles ur ON r.idRole = ur.idRole
+          WHERE ur.idUser = ?
+        ');
+    
+        $stmt->execute(array($this->idUser));
+        $roles = array();
+        while ($role = $stmt->fetch()) {
+          $roles[] = $role['name'];
+        }
+        return $roles;
+      }
+
     
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 

@@ -176,13 +176,16 @@ INSERT INTO FAQ (question, answer) VALUES
 
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Server Down', 'Server is not responding', 1, '2023-04-20',3,1,1);
+VALUES ('Chest Pain Assessment Delay', 'Patient presents to the Cardiology department with chest pain but experiences a delay in receiving a timely assessment and evaluation, potentially impacting the timely diagnosis and treatment of a cardiac condition.', 1, '2023-04-20',3,1,1);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 3, 4, 2);
+VALUES ('Skin Biopsy Complication ', 'Patient undergoes a skin biopsy procedure in the Dermatology department but experiences complications, such as infection or bleeding, requiring additional medical attention and follow-up care.', 2, '2023-04-19', 3, 4, 2);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 3, 5, 3);
+VALUES ('Medication Side Effects', 'Patient with a neurological condition experiences severe side effects from prescribed medications, such as dizziness, nausea, and confusion, requiring prompt intervention and adjustment of the treatment plan.', 3, '2023-04-18', 3, 5, 3);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
+VALUES ('Miscommunication in Therapy Session', 'Patient reports miscommunication or misunderstanding with their assigned therapist during a therapy session, leading to confusion or dissatisfaction with the therapeutic process.', 3, '2023-04-18', 3, 5, 4);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
 VALUES ('Server Down', 'Server is not responding', 1, '2023-04-20',2,1,1);
@@ -199,9 +202,21 @@ VALUES (1,1,'22-04-2023');
 INSERT INTO Ticket_Status(idTicket, idStatus, date)
 VALUES (1,2,'22-04-2023');
 
+INSERT INTO Ticket_Status(idTicket, idStatus, date)
+VALUES (2,1,'22-04-2023');
+
+INSERT INTO Ticket_Status(idTicket, idStatus, date)
+VALUES (3,1,'22-04-2023');
+
+INSERT INTO Ticket_Status(idTicket, idStatus, date)
+VALUES (4,1,'22-04-2023');
+
+
 
 
 
 INSERT INTO User_Roles(idUser, idRole) VALUES (1,1);
 INSERT INTO User_Roles(idUser, idRole) VALUES (2,2);
+INSERT INTO User_Roles(idUser, idRole) VALUES (3,1);
+INSERT INTO User_Roles(idUser, idRole) VALUES (3,2);
 INSERT INTO User_Roles(idUser, idRole) VALUES (3,3);
