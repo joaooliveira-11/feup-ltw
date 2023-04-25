@@ -17,7 +17,7 @@
                 email: <?php echo $user->getEmail(); ?>
             </div>
             <div>
-                roles: <?php echo implode(', ', $user->getRoles($db)); ?>
+                roles: <?php echo $user->getLastUserRole($db); ?>
             </div>
         </article>
     </section>

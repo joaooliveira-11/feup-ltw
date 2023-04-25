@@ -212,9 +212,6 @@ INSERT INTO Ticket_Status(idTicket, idStatus, date)
 VALUES (4,1,'22-04-2023');
 
 
-
-
-
 INSERT INTO User_Roles(idUser, idRole) VALUES (1,1);
 INSERT INTO User_Roles(idUser, idRole) VALUES (2,2);
 INSERT INTO User_Roles(idUser, idRole) VALUES (3,1);
