@@ -1,39 +1,38 @@
-<?php function drawFAQ(PDO $db){ ?>
+<?php function drawFAQ(PDOStatement $faqs){ ?>
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <link rel="stylesheet" href="../css/faq.css">
+  </head>
+  <body>
+    <div class = "FAQ_Overflow">
 
+    <div class="container">
+      <h1>Frequently Asked Questions</h1>
+      <div class="accordion">
+      <?php foreach ($faqs as $faq) { ?>
+        <div class="accordion-item">
+          <button id="accordion-button-1" aria-expanded="false">
+            <span class="accordion-title">
+                <?php echo $faq['question'] ?>
+            </span>
+            <span class="icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-content">
+            <p>
+                <?php echo $faq['answer'] ?>
+            </p>
+          </div>
+        </div>
+        
+        <?php } ?>
+      </div>
+    </div>
+    <script src="../javascript/faq.js"></script>
+    </div>
 
-    <?php
-        $that = $db->prepare("Select * From FAQ");
-        $that->execute();
-
-        $faq = $that->fetchAll();
-    ?>
-
-    <body>
-        <section id="FAQ">
-            <div class = "container">
-                <div class="accordion">
-                <?php foreach ($faq as $row) { ?>
-                    <div class="accordion-item" id="question">         
-                        <div class="accordion-link" id="question">
-                            <a href="#question">
-                                <?php echo $row['question'] ?>
-                                <img src="../docs/images/icon-plus.png" alt="more" id="more">
-                                <img src="../docs/images/icon-minus.png" alt="more" id="remove">
-                            </a>
-                </div>
-
-                        <div class="answer">
-                            <p>
-                            <?php echo $row['answer'] ?>
-                            </p>
-                        </div>
-                    </div> 
-                <?php } ?>      
-                </div>
-            </div>
-        </section>
-    </body>
+  </body>
+</html>
 
 <?php } ?>
