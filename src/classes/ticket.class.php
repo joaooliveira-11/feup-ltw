@@ -2,16 +2,16 @@
   declare(strict_types = 1);
 
   class Ticket {
-    private int $idTicket;
+    private ?int $idTicket;
     private string $title;
     private string $description;
     private int $priority;
     private string $createDate;
     private int $cria;
-    private int $resolve;
+    private ?int $resolve;
     private int $idDepartment;
     
-    public function __construct(int $idTicket, string $title, string $description, int $priority, string $createDate, int $cria, int $resolve, int $idDepartment) {
+    public function __construct(?int $idTicket, string $title, string $description, int $priority, string $createDate, int $cria, ?int $resolve, int $idDepartment) {
         $this->idTicket = $idTicket;
         $this->title = $title;
         $this->description = $description;
@@ -115,6 +115,14 @@
             }
         }
         return $tickets;
+    }
+
+    function insert_ticket($db){
+        $stmt = $db->prepare('
+          INSERT INTO Ticket(title, description, priority, create_date, cria, resolve, idDepartment) VALUES (?,?,?,?,?,?,?)
+        ');
+
+        $stmt->execute(array($this->getTitle(), $this->getDescription(), $this->getPriority(), $this->getCreateDate(), $this->getCria(), NULL, $this->getidDepartment()));
     }
 }
 ?>

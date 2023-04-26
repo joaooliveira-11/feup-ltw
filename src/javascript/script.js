@@ -1,6 +1,7 @@
 HomeButton = document.getElementById('HomeButton');
 ProfileButton = document.getElementById('ProfileButton');
 MyTicketsButton = document.getElementById('MyTicketsButton');
+NewTicket = document.getElementById('CreateNewTicket');
 OpenTicketsButton = document.getElementById('TicketsOpenButton');
 AssignedTicketsButton = document.getElementById('AssignedTicketsButton');
 
@@ -14,6 +15,10 @@ HomeButton.addEventListener('click', function (){
 
 MyTicketsButton.addEventListener('click', function (){
     window.location.href="http://localhost:9000/pages/mytickets.php";
+})
+
+NewTicket.addEventListener('click', function (){
+    window.location.href="http://localhost:9000/pages/newTicket.php";
 })
 
 OpenTicketsButton.addEventListener('click', function (){
