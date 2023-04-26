@@ -102,7 +102,7 @@ function drawAside(){
 
     $user = User::getSingleUser($db, $session->getId());
 
-    $role = $user->getLastUserRole($db);
+    $role = $user->getUserRole($db);
     ?>
     <aside>
         <section id="HomeButton">
@@ -121,11 +121,8 @@ function drawAside(){
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
             <div> Inquiries </div>
         </section>
-        <?php   if($role == 'AGENT') drawAsideAgent();
-                if($role == 'ADMIN'){
-                    drawAsideAdmin();
-                    drawAsideAgent();
-                 }
+        <?php   if($role>1) drawAsideAgent();
+                if($role>2) drawAsideAdmin();
         ?>
         <form action="../actions/action_logout.php" method="post">
             <button type="submit" id="logout-button">
@@ -168,9 +165,9 @@ function drawMainPage(array $departments, PDO $db) { ?>
             the right team for prompt resolution.</p>
         <p> Here are the different departments that can handle your issue:</p>
     </article>
-    <article id="DepartmentsMain">
+    <article id="DepartmentsMain" class="MainOverflow">
     <?php foreach ($departments as $department) { ?>
-            <section id="ADeparmentMain">
+            <section id="ADepartmentMain">
                 <h4>
                     <?php echo $department['name'] ?>
                 </h4>

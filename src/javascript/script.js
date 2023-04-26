@@ -21,7 +21,7 @@ OpenTicketsButton.addEventListener('click', function (){
 })
 
 AssignedTicketsButton.addEventListener('click', function (){
-    window.location.href="http://localhost:9000/pages/assignedTickets.php";
+    window.location.href="http://localhost:9000/pages/myAssignedTickets.php";
 })
 
 

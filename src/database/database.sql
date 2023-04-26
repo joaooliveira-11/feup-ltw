@@ -73,7 +73,7 @@ CREATE TABLE Reply(
 CREATE TABLE Status(
                        idStatus INTEGER PRIMARY KEY AUTOINCREMENT,
                        stage TEXT NOT NULL,
-                       CONSTRAINT CHECK_Status_status CHECK (stage = 'OPEN' OR stage = 'SOLVED' OR stage = 'CLOSED')
+                       CONSTRAINT CHECK_Status_status CHECK (stage = 'OPEN' OR stage = 'ASSIGNED' OR stage = 'CLOSED')
 );
 
 CREATE TABLE User_Roles(
@@ -159,10 +159,6 @@ INSERT INTO User (name,username, email, password) VALUES ('Constança Guedes', '
 INSERT INTO User (name,username, email, password) VALUES ('Pedro Diniz', 'pedrodiniz', 'pedrodiniz@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 
 
-INSERT INTO Role (name) VALUES ('CLIENT');
-INSERT INTO Role (name) VALUES ('AGENT');
-INSERT INTO Role (name) VALUES ('ADMIN');
-
 INSERT INTO Department (name, description) VALUES
                                                ('Cardiology', 'This department specializes in the diagnosis, treatment, and management of conditions related to the heart and cardiovascular system.'),
                                                ('Dermatology', 'This department deals with the diagnosis and treatment of conditions related to the skin, hair, and nails.'),
@@ -174,7 +170,7 @@ INSERT INTO Department (name, description) VALUES
                                                ('General and Family Medicine', 'This department provides comprehensive primary care services for individuals of all ages, including preventive care, health screenings, and management of acute and chronic medical conditions.');
 
 INSERT INTO Status (stage) VALUES ('OPEN');
-INSERT INTO Status (stage) VALUES ('SOLVED');
+INSERT INTO Status (stage) VALUES ('ASSIGNED');
 INSERT INTO Status (stage) VALUES ('CLOSED');
 
 INSERT INTO FAQ (question, answer) VALUES

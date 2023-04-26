@@ -56,18 +56,19 @@
           $stmt->execute(array($this->name, $this->username, $this->email, $this->password, $this->idUser));
       }
 
-      function getLastUserRole($db) : string{
-          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ? ORDER BY ROWID DESC LIMIT 1');
+      function getUserRole($db) : int{
+          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ?');
           $stmt->execute(array($this->idUser));
           $role = $stmt->fetch();
-          if ($role) {
-            $stmt = $db->prepare('SELECT name FROM Role WHERE idRole = ?');
-            $stmt->execute(array($role['idRole']));
-            $rolename = $stmt->fetch();
-            return $rolename['name'];
-        } else {
-            return '';
-        }
+          return intval($role['idRole']);
+      }
+
+
+      function getRoleName($db, int $role) : string{
+          $stmt = $db->prepare('SELECT name FROM Role WHERE idRole = ?');
+          $stmt->execute(array($role));
+          $rolename = $stmt->fetch();
+          return $rolename['name'];
       }
 
       function getDepartments($db) {

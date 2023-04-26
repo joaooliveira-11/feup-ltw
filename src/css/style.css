@@ -137,18 +137,20 @@ main{
     padding: 1em;
     border-radius: 10px;
 }
-
 #DepartmentsMain{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    max-height: 400px; /* Este max-height vai ser alterado, sendo igual ao height do #HomePageContent menos o height do 1º article, que é aquela descrição.
+}
+
+.MainOverflow{
+    max-height: 400px ; /* Este max-height vai ser alterado, sendo igual ao height do #HomePageContent menos o height do 1º article, que é aquela descrição.
                         Este 1ºarticle pode variar, dependendo do dispositivo onde tamos a ver. Penso que a única maneira de calcular isto seja através de
                         JavaScript (pelo menos é o que o chatGPT diz) */
     overflow-y: auto;
 }
 
-#ADeparmentMain{
+#ADepartmentMain{
     background-color: #D9D9D9;
     width: 400px;
     border-radius: 15px;
@@ -156,13 +158,13 @@ main{
     margin: 1em;
 }
 
-#ADeparmentMain > h4 {
+#ADepartmentMain > h4 {
     margin: 0.5em 0;
     padding-bottom: 0.3em;
     border-bottom: #224957 1px solid;
 }
 
-#ADeparmentMain > p {
+#ADepartmentMain > p {
     padding: 0 1em;
     margin: 1em;
 }
@@ -203,31 +205,45 @@ main{
 
 #ProfileMain > section{
     display: flex;
-    justify-content: center ;
-    align-content: flex-end;
+    justify-content: space-evenly ;
+    align-items: center;
     padding-right: 3em;
     padding-top: 5em;
 }
 
 #ProfileMain >section >article {
-    position: relative;
     font-size: 1.1em;
-    line-height: 1.5em;
-    top:3em;
-    left:1em;
+    line-height: 2.5em;
+    padding-left: 1.5em;
+    width: 50%;
+}
+#ProfileMain > section > article > div {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    border-bottom: #224957 1px solid;
+}
+
+
+#ProfileMain >section > article > div > span {
+    text-align: right;
+    display: block;
+    vertical-align: center;
 }
 
 #EditProfileButton{
     display: block;
-    margin: 3em auto 0;
+    margin: 2em auto 0;
     padding: 8px 28px;
     font-size: 1.3em;
     text-align: center;
-    background-color: #C0CAC5;
+    background-color: mediumpurple;
+    color:whitesmoke;
 }
 
-#tickets {
+.ticketsPage {
     color: #224957;
+    background-color: transparent;
 }
 
 .retangulo {
@@ -238,13 +254,20 @@ main{
     margin-right: auto;
 }
 
-.blackLine {
-    border-bottom: 0.2px solid #224957;
-    margin-top: -3px;
+.retangulo > section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: #224957 1px solid;
 }
+.retangulo > section > h3 {
+    display: inline;
+    margin: 10px;
+}
+.retangulo > section,
 
 #ticketText {
-    margin-left: 2vw;
+    text-align: center;
     padding-top: 10px;
 }
 
@@ -269,7 +292,7 @@ main{
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background-color: rgb(252, 149, 105);
+    background-color: rgb(200, 238, 119);
     margin-right: 0.5em;
 }
 
@@ -289,7 +312,7 @@ main{
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background-color: rgb(200, 238, 119);
+    background-color: rgb(252, 149, 105);
     margin-right: 0.5em;
 }
 
@@ -388,4 +411,14 @@ main{
 
 #SubmitEditButtons >button:last-child{
     background-color: #F0887A;
+}
+
+.green{
+    background-color: rgb(252, 149, 105);
+}
+.orange{
+    background-color: yellow;
+}
+.red {
+    background-color: rgb(200, 238, 119);
 }

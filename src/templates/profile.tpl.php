@@ -1,23 +1,25 @@
 <?php function drawProfile($user, PDO $db)
-{ ?>
+{
+    $idRole = $user->getUserRole($db);
+    ?>
 <main id="ProfileMain">
-    <div id="HeaderProfile">
+    <div id="HeaderProfile" class="HeaderMain">
         Profile
     </div>
     <section>
         <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png">
         <article>
             <div>
-                name: <?php echo $user->getName();  ?>
+                Name:  <span><?php echo $user->getName();  ?></span>
             </div>
             <div>
-                username: <?php echo $user->getUsername();  ?>
+                Username: <span><?php echo $user->getUsername();  ?></span>
             </div>
             <div>
-                email: <?php echo $user->getEmail(); ?>
+                E-mail: <span><?php echo $user->getEmail(); ?></span>
             </div>
             <div>
-                roles: <?php echo $user->getLastUserRole($db); ?>
+                Role: <span><?php echo $user->getRoleName($db, $idRole); ?></span>
             </div>
         </article>
     </section>

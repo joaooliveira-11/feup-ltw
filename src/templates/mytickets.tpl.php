@@ -1,5 +1,5 @@
 <?php function drawMyTicketPage(array $tickets, PDO $db) { ?>
-    <section id="tickets">
+    <section class ="ticketsPage">
         <div id="yourTickets">
             <p id="TicketStatus" class="TicketStatusTitle">Your tickets:</p>
             <p id="TicketStatus" class= "circuloRed">Opened</p>
@@ -7,23 +7,42 @@
             <p id="TicketStatus" class= "circuloGreen">Closed</p>
 
         </div>
-        
-        <?php foreach($tickets as $ticket) {?>
-            <div class="retangulo">
-                <h3 id="ticketText"><?=$ticket->getTitle()?></h3>
-                <p class="blackLine"><p>
-                <h3 id="ticketDescription"><?=$ticket->getDescription()?></h3>
-                <p class="blackLine"><p>
-                <h3 id="inline">Departament: <?=$ticket->getTicketDepartmentName($db)?></h3>
-                <h3 id="inline">Status: <?=$ticket->getLastTicketStatus($db)?></h3>
-                <h3 id="inline">Date: <?=$ticket->getCreateDate()?></h3>
-                </p>
-            </div>
-        <?php }?>
+        <section class="MainOverflow">
+            <?php foreach($tickets as $ticket) {
+                drawSingleTicket($db,$ticket);
+            }?>
+        </section>
        
     </section>
 
 <?php }
 
-
+function drawSingleTicket($db,Ticket $ticket){ ?>
+    <?php
+        $status = $ticket->getLastTicketStatus($db);
+        $backgroundColor="";
+        switch ($status){
+            case "OPEN" :
+                $backgroundColor = "red";
+                break;
+            case "ASSIGNED" :
+                $backgroundColor = "orange";
+                break;
+            case "CLOSED" :
+                $backgroundColor = "green";
+                break;
+        }
+    ?>
+    <div class="retangulo <?php echo $backgroundColor ?>">
+        <h2 id="ticketText"><?=$ticket->getTitle()?></h2>
+        <section>
+            <h3 id="ticketDescription"><?=$ticket->getDescription()?></h3>
+        </section>
+        <section>
+            <h3 id="inline">Departament: <?=$ticket->getTicketDepartmentName($db)?></h3>
+            <h3 id="inline">Status: <?=$status?></h3>
+            <h3 id="inline">Date: <?=$ticket->getCreateDate()?></h3>
+        </section>
+    </div>
+<?php }
 
