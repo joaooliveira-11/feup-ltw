@@ -7,7 +7,7 @@
             <p id="TicketStatus" class= "circuloGreen">Closed</p>
 
         </div>
-        <section class="MainOverflow">
+        <section class="TicketOverflow">
             <?php foreach($tickets as $ticket) {
                 drawSingleTicket($db,$ticket);
             }?>

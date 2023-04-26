@@ -149,7 +149,11 @@ main{
                         JavaScript (pelo menos é o que o chatGPT diz) */
     overflow-y: auto;
 }
-
+.TicketOverflow{
+    max-height: 450px;
+    margin-bottom: 2em;
+    overflow-y: auto;
+}
 #ADepartmentMain{
     background-color: #D9D9D9;
     width: 400px;
@@ -318,6 +322,7 @@ main{
 
 #yourTickets {
     margin-top: 2em;
+    margin-bottom: 2em;
     margin-left: 7em;
     font-size: 18px;
 }
