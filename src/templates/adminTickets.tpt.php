@@ -6,8 +6,8 @@ require_once(dirname(__DIR__).'/utils/session.php');
 require_once(dirname(__DIR__).'/templates/mytickets.tpl.php');
 
 function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
-    <main class = "ticketsPage">
-        <section id="Filter">
+    <section class = "ticketsPage">
+        <section id="Filter" class="yourTickets" >
             Filter by:
             <button>
                 Department
@@ -19,10 +19,12 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
                 Date
             </button>
         </section>
-        <?php foreach ($departmentTickets as $ticket){
-            drawSingleTicket($db, $ticket);
-        } ?>
-    </main>
+        <section class="TicketOverflow">
+            <?php foreach ($departmentTickets as $ticket){
+                drawSingleTicket($db, $ticket);
+            } ?>
+        </section>
+    </section>
 <?php }
 
 function drawAssignedTicketsMain(){ ?>

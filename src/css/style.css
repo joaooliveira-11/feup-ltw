@@ -320,7 +320,7 @@ main{
     margin-right: 0.5em;
 }
 
-#yourTickets {
+.yourTickets {
     margin-top: 2em;
     margin-bottom: 2em;
     margin-left: 7em;
@@ -426,4 +426,7 @@ main{
 }
 .red {
     background-color: rgb(200, 238, 119);
+}
+.departmentTicketsPage{
+
 }

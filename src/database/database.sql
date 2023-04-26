@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS Ticket_Hashtags;
 DROP TABLE IF EXISTS Ticket_Status;
 
 DROP TRIGGER IF EXISTS insert_user_roles;
+DROP TRIGGER IF EXISTS insert_ticket_status;
 
 CREATE TABLE User (
                       idUser INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -95,10 +96,11 @@ CREATE TABLE Ticket_Hashtags(
 );
 
 CREATE TABLE Ticket_Status(
+                              count INTEGER PRIMARY KEY AUTOINCREMENT,
                               idTicket INTEGER REFERENCES Ticket,
                               idStatus INTEGER REFERENCES Status,
-                              date DATE,
-                              PRIMARY KEY (idTicket, idStatus)
+                              date DATE
+
 );
 
 CREATE TABLE FAQ (
@@ -115,6 +117,13 @@ AFTER INSERT ON User
 FOR EACH ROW
 BEGIN
     INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 2); --quando se regista um user, ele é um cliente.
+END;
+
+CREATE TRIGGER insert_ticket_status
+    AFTER INSERT ON Ticket
+    FOR EACH ROW
+BEGIN
+    INSERT INTO Ticket_Status (idTicket, idStatus, date) VALUES (NEW.idTicket, 1, NEW.create_date); --quando se cria um ticket, ele começa a open.
 END;
 
 ------------------------------------------------------------------------------------------
@@ -173,6 +182,8 @@ INSERT INTO Status (stage) VALUES ('OPEN');
 INSERT INTO Status (stage) VALUES ('ASSIGNED');
 INSERT INTO Status (stage) VALUES ('CLOSED');
 
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
+
 INSERT INTO FAQ (question, answer) VALUES
                                        ('How do I reset my password?', 'To reset your password, go to the login page and click on the "Forgot Password" link. Enter your email address and follow the instructions in the email you receive to reset your password.'),
                                        ('Why am I experiencing slow page load times?', 'Slow page load times can be caused by a variety of factors, including your internet connection, your device, and the website itself. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),
@@ -206,21 +217,10 @@ INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, id
 VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 2, 4, 2);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 2, 5, 3);
-
-INSERT INTO Ticket_Status(idTicket, idStatus, date)
-VALUES (1,1,'22-04-2023');
+VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 1, 5, 3);
 
 INSERT INTO Ticket_Status(idTicket, idStatus, date)
 VALUES (1,2,'22-04-2023');
 
-INSERT INTO Ticket_Status(idTicket, idStatus, date)
-VALUES (2,1,'22-04-2023');
-
-INSERT INTO Ticket_Status(idTicket, idStatus, date)
-VALUES (3,1,'22-04-2023');
-
-INSERT INTO Ticket_Status(idTicket, idStatus, date)
-VALUES (4,1,'22-04-2023');
 
 

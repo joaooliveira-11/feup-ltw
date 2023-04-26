@@ -1,6 +1,6 @@
 <?php function drawMyTicketPage(array $tickets, PDO $db) { ?>
     <section class ="ticketsPage">
-        <div id="yourTickets">
+        <div class="yourTickets">
             <p id="TicketStatus" class="TicketStatusTitle">Your tickets:</p>
             <p id="TicketStatus" class= "circuloRed">Opened</p>
             <p id="TicketStatus" class= "circuloYellow">Assigned</p>
