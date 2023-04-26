@@ -69,7 +69,7 @@ function drawEditProfileMain(){ ?>
                 <div>
                     Current Password:
                     <label>
-                        <input type="password" placeholder="Obrigatório preencher" name="currentPassword">
+                        <input type="password" placeholder="Obrigatório preencher" name="currentPassword" required="required">
                     </label>
                 </div>
                 <div>
@@ -94,5 +94,55 @@ function drawEditProfileMain(){ ?>
                 </button>
             </div>
         </form>
+    </main>
+<?php } ?>
+
+<?php function drawCreateNewTicket(array $departments) { ?>
+    <main> 
+    <section id="createticket">
+        <form action="../actions/action_newticket.php" method="post">
+            <div class="form-wrapper">
+                <div class="ticket-title">
+                    <label for="ticket_title">Title: </label>
+                    <input type="text" name="title" id="ticket_title" required="required" maxlength="30">
+                </div>
+
+                <div class="ticket-desc">
+                    <label for="ticket_description">Description</label>
+                    <br>
+                    <textarea name="description" id="ticket_description" required="required" rows="4" cols="75" maxlength="300"></textarea>
+                </div> 
+                
+                <div class="ticket-bottom">
+                    <div class="ticket-dep">
+                        <label for="ticket_department">Department: </label>
+                        <select name="department" id="ticket_department">
+                            <?php foreach ($departments as $department) { ?>
+                                <option value="<?php echo $department['name']; ?>"><?php echo $department['name']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="ticket-prio">
+                        <label for="ticket_priority">Priority</label>
+                        <select name="priority" id="ticket_priority">
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                        </select>
+                    </div>
+                    
+                    <div class="ticket-date">
+                        <label for="ticket_createdate">Date</label>
+                        <input type="date" name="date" id="ticket_createdate" required="required" min="2023-05-23">
+                    </div>
+                </div>
+            </div>
+            <button class="btn-submit" type="submit">Submit Ticket</button>
+            <button class="btn-cancel" onclick="window.location.href='../pages/newTicket.php'">Cancel</button>
+        </form>
+    </section>
     </main>
 <?php } ?>
