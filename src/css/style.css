@@ -69,18 +69,21 @@ aside{
     flex-direction: column;
 }
 
-aside > section > img{
+aside > a > img {
     width: 15%;
+    align-content: left;
+    margin-right: 1em;
 }
 
-aside > section > div{
+aside > a {
     display: flex;
-    align-content: center;
-    justify-content: center;
-    margin: 0 1em;
+    align-content: left;
+    justify-content: left;
+    text-decoration: none;
+    color: #224957;
 }
 
-aside > section{
+aside > a{
     padding-top: 1em;
     padding-bottom: 1em;
     padding-left: 1em;
@@ -89,7 +92,7 @@ aside > section{
     border-bottom: #224957 1px solid;
 }
 
-aside > section:hover{
+aside > a:hover{
     cursor: pointer;
     background-color: #dde2e4;
 }

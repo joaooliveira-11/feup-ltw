@@ -105,25 +105,28 @@ function drawAside(){
     $role = $user->getUserRole($db);
     ?>
     <aside>
-        <section id="HomeButton">
+        <a href="../pages/main.php" id="HomeButton">
             <img src="../docs/images/kisspng-website-house-home-world-wide-web-computer-icons-house-clip-art-5ab036bbf19551.9166615015214977879895.png" alt="">
-            <div> Home </div>
-        </section>
-        <section id="ProfileButton">
+            Home
+        </a>
+        <a href="../pages/profile.php" id="ProfileButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
-            <div> Profile </div>
-        </section>
-        <section id="MyTicketsButton">
+            Profile
+        </a>
+        <a href="../pages/mytickets.php" id="MyTicketsButton">
             <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
-            <div> My Tickets </div>
-        </section>
-        <section id="InquiriesButton">
+            My Tickets
+        </a>
+        <a href="../pages/inquiries.php" id="InquiriesButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
-            <div> Inquiries </div>
-        </section>
-        <?php   if($role>1) drawAsideAgent();
-                if($role>2) drawAsideAdmin();
+            Inquiries
+        </a>
+
+        <?php   
+            if($role>1) drawAsideAgent();
+            if($role>2) drawAsideAdmin();
         ?>
+
         <form action="../actions/action_logout.php" method="post">
             <button type="submit" id="logout-button">
                 <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt=""> 
@@ -135,22 +138,23 @@ function drawAside(){
 <?php }
 
 function drawAsideAgent(){ ?>
-    <section id="TicketsOpenButton">
+    <a href="../pages/openTickets.php" id="TicketsOpenButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        <div> Tickets Open to Solve</div>
-    </section id="TicketsToManageButton">
-    <section id="AssignedTicketsButton">
+        Tickets Open to Solve
+    </a>
+    <a href="../pages/myAssignedTickets.php" id="AssignedTicketsButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        <div> Tickets Assigned to me</div>
-    </section>
+        Tickets Assigned to me
+    </a>
 
 <?php }
 
 function drawAsideAdmin(){ ?>
-    <section>
+
+    <a href="../pages/manage.php" id="ManageWebsite">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        <div> Manage Website</div>
-    </section>
+        Manage Website
+    </a>
 
 <?php }
 
