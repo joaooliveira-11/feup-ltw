@@ -39,9 +39,9 @@ function drawSingleTicket($db,Ticket $ticket){ ?>
             <h3 id="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
         <section>
-            <h3 id="inline">Departament: <?=$ticket->getTicketDepartmentName($db)?></h3>
-            <h3 id="inline">Status: <?=$status?></h3>
-            <h3 id="inline">Date: <?=$ticket->getCreateDate()?></h3>
+            <h5 id="inline">Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
+            <h5 id="inline">Status: <?=$status?></h5>
+            <h5 id="inline">Date: <?=$ticket->getCreateDate()?></h5>
         </section>
     </div>
 <?php }

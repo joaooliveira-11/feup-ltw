@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Imperial+Script&family=Lexend+Deca:wght@400;600&family=Ruda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Imperial+Script&family=Lexend+Deca:wght@300&family=Ruda&display=swap');
 
 html {
     background-color: #E5E5E5;
@@ -262,20 +262,22 @@ main{
 }
 
 .retangulo > section{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    padding: 1em;
     border-top: #224957 1px solid;
+    text-align: center;
+}
+.retangulo > section:last-child{
+    text-align: left;
 }
 .retangulo > section > h3 {
     display: inline;
     margin: 10px;
 }
-.retangulo > section,
 
 #ticketText {
     text-align: center;
     padding-top: 10px;
+    margin-bottom: 10px;
 }
 
 #ticketDescription {
