@@ -153,8 +153,7 @@ main{
     overflow-y: auto;
 }
 .TicketOverflow{
-    max-height: 450px;
-    margin-bottom: 2em;
+    height: 35vw;
     overflow-y: auto;
 }
 #ADepartmentMain{
@@ -251,6 +250,7 @@ main{
 .ticketsPage {
     color: #224957;
     background-color: transparent;
+    margin: 0 2em 2em 2em;
 }
 
 .retangulo {
@@ -267,8 +267,23 @@ main{
     text-align: center;
 }
 .retangulo > section:last-child{
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
+.retangulo > section:last-child > article{
+    display: flex;
+    flex-direction: row;
+}
+.retangulo > section:last-child > article > h5{
+    margin: 0 2em;
+}
+
+.retangulo > section:last-child > article > form{
+    margin: 0 1.3em;
+}
+
 .retangulo > section > h3 {
     display: inline;
     margin: 10px;
@@ -283,11 +298,6 @@ main{
 #ticketDescription {
     text-align: center;
     height: 10%;
-}
-
-#inline {
-    display: inline;
-    margin-right: 10%;
 }
 
 #TicketStatus {
@@ -541,5 +551,15 @@ form .btn-cancel{
     font-size: 0.9em;
     font-weight: 600;
 }
+#AssignTicket{
+    display: flex;
+}
+
+#AssignTicket > form > button{
+    padding: 0.5em 1em;
+    background-color: slateblue;
+    color: whitesmoke;
+}
+
 
 

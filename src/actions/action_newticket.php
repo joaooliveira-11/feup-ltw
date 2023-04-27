@@ -21,7 +21,7 @@ $stmt = $db->prepare('SELECT idDepartment FROM Department WHERE name = ?');
 $stmt->execute(array($department));
 $idDepartment = $stmt->fetch();
 
-$new_ticket = new Ticket(NULL, $title, $description, intval($priority), $date, 3, NULL, intval($idDepartment['idDepartment']));
+$new_ticket = new Ticket(NULL, $title, $description, intval($priority), $date, $session->getId(), NULL, intval($idDepartment['idDepartment']));
 $new_ticket->insert_ticket($db);
 
 header('Location: ../pages/main.php');

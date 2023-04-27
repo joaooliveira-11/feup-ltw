@@ -96,7 +96,7 @@ CREATE TABLE Ticket_Hashtags(
 );
 
 CREATE TABLE Ticket_Status(
-                              count INTEGER PRIMARY KEY AUTOINCREMENT,
+                              id_random INTEGER PRIMARY KEY AUTOINCREMENT,
                               idTicket INTEGER REFERENCES Ticket,
                               idStatus INTEGER REFERENCES Status,
                               date DATE

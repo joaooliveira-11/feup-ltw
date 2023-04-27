@@ -9,7 +9,7 @@
         </div>
         <section class="TicketOverflow">
             <?php foreach($tickets as $ticket) {
-                drawSingleTicket($db,$ticket);
+                drawSingleTicket($db,$ticket,1);
             }?>
         </section>
        
@@ -17,7 +17,7 @@
 
 <?php }
 
-function drawSingleTicket($db,Ticket $ticket){ ?>
+function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é para saber o que desenhar em cada página. Se for na página my tickets, desenho o ticket de uma determinada maneira; Se for na página DepartmentTickets, desenho o ticket doutra maneira, com mais funcionalidades?>
     <?php
         $status = $ticket->getLastTicketStatus($db);
         $backgroundColor="";
@@ -39,9 +39,31 @@ function drawSingleTicket($db,Ticket $ticket){ ?>
             <h3 id="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
         <section>
-            <h5 id="inline">Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
-            <h5 id="inline">Status: <?=$status?></h5>
-            <h5 id="inline">Date: <?=$ticket->getCreateDate()?></h5>
+            <article>
+                <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
+                <h5>Status: <?=$status?></h5>
+                <h5>Date: <?=$ticket->getCreateDate()?></h5>
+            </article>
+            <?php
+            if($entity>1){
+                if($status=="OPEN"){
+                    $ticket_id = $ticket->getIdTicket();
+                    ?>
+                    <article id="AssignTicket">
+                        <form method="post" action="../actions/action_assign_to_agent.php">
+                            <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
+                                Assign Ticket to me
+                            </button>
+                        </form>
+                        <form>
+                            <button>
+                                Assign Ticket to other agent
+                            </button>
+                        </form>
+                    </article>
+                <?php }
+            }
+            ?>
         </section>
     </div>
 <?php }

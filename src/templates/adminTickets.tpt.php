@@ -21,13 +21,18 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
         </section>
         <section class="TicketOverflow">
             <?php foreach ($departmentTickets as $ticket){
-                drawSingleTicket($db, $ticket);
+                drawSingleTicket($db, $ticket, 2);
             } ?>
         </section>
     </section>
 <?php }
 
-function drawAssignedTicketsMain(){ ?>
 
+function drawAssignedTicketsMain(array $assignedTickets, PDO $db){ ?>
+    <section class="TicketOverflow">
+        <?php foreach ($assignedTickets as $ticket){
+            drawSingleTicket($db, $ticket, 2);
+        } ?>
+    </section>
 <?php } ?>
 

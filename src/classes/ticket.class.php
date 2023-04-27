@@ -97,7 +97,7 @@
     public static function getDepartmentTickets(PDO $db, array $idDepartments){
         $tickets = array();
         foreach($idDepartments as $id) {
-            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ?');
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ? AND resolve IS NULL ');
             $stmt->execute(array($id));
 
 
@@ -113,6 +113,25 @@
                     intval($ticket['idDepartment']),
                 );
             }
+        }
+        return $tickets;
+    }
+    public static function getAssignedTickets(PDO $db, int $resolve){
+        $stmt = $db->prepare('SELECT * FROM Ticket WHERE resolve = ?');
+        $stmt->execute(array($resolve));
+
+        $tickets = array();
+        while ($ticket = $stmt->fetch()) {
+            $tickets[] = new Ticket(
+                intval($ticket['idTicket']),
+                $ticket['title'],
+                $ticket['description'],
+                intval($ticket['priority']),
+                $ticket['create_date'],
+                intval($ticket['cria']),
+                intval($ticket['resolve']),
+                intval($ticket['idDepartment']),
+            );
         }
         return $tickets;
     }
