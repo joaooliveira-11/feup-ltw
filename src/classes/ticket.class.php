@@ -54,6 +54,22 @@
         return $this->idDepartment;
     }
 
+    public static function getTicketFromId(PDO $db, int $idTicket){
+        $stmt = $db->prepare('SELECT * FROM Ticket WHERE idTicket = ?');
+        $stmt->execute(array($idTicket));
+        $ticket = $stmt->fetch();
+        return new Ticket(
+            intval($ticket['idTicket']),
+            $ticket['title'],
+            $ticket['description'],
+            intval($ticket['priority']),
+            $ticket['create_date'],
+            intval($ticket['cria']),
+            intval($ticket['resolve']),
+            intval($ticket['idDepartment'])
+        );
+    }
+
     public static function getTickets(PDO $db, int $cria): array {
         $stmt = $db->prepare('SELECT * FROM Ticket WHERE cria = ?');
         $stmt->execute(array($cria));
@@ -68,7 +84,7 @@
                 $ticket['create_date'],
                 intval($ticket['cria']),
                 intval($ticket['resolve']),
-                intval($ticket['idDepartment']),
+                intval($ticket['idDepartment'])
             );
         }
         return $tickets;

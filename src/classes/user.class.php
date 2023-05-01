@@ -126,10 +126,29 @@
       );
     }
 
+    static function getUsersFromDepartment(PDO $db, $idDepartment){
+        $stmt = $db->prepare('
+            SELECT User.idUser, User.name, User.username, User.email, User.password, COUNT(Ticket.idTicket) as ticket_count
+            FROM User
+            INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
+            LEFT JOIN Ticket ON User.idUser = Ticket.resolve
+            WHERE User_Departments.idDepartment = ?
+            GROUP BY User.idUser, User.name, User.username, User.email, User.password
+            ORDER BY ticket_count
+          ');
+        $stmt->execute(array($idDepartment));
+
+        $users = array();
+        while ($user = $stmt->fetch()) {
+            $users[] = array($user['name'],$user['ticket_count'], $user['idUser']);
+        }
+        return $users;
+    }
+
   
     static function getUsers(PDO $db, int $count) : array {
 
-        $stmt = $db->prepare('SELECT idUser, name,usename, email, password, FROM User LIMIT ?');
+        $stmt = $db->prepare('SELECT idUser, name,username, email, password, FROM User LIMIT ?');
         $stmt->execute(array($count));
 
         $users = array();

@@ -17,26 +17,28 @@
 
 <?php }
 
-function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é para saber o que desenhar em cada página. Se for na página my tickets, desenho o ticket de uma determinada maneira; Se for na página DepartmentTickets, desenho o ticket doutra maneira, com mais funcionalidades?>
+function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é para saber o que desenhar em cada página. Se for na página my tickets, desenho o ticket de uma determinada maneira; Se for na página DepartmentTickets, desenho o ticket doutra maneira, com mais funcionalidades, se for na página myAssignedTickets, desenho o ticket de outra maneira?>
     <?php
         $status = $ticket->getLastTicketStatus($db);
         $backgroundColor="";
-        switch ($status){
-            case "OPEN" :
-                $backgroundColor = "red";
-                break;
-            case "ASSIGNED" :
-                $backgroundColor = "orange";
-                break;
-            case "CLOSED" :
-                $backgroundColor = "green";
-                break;
+        if($entity<=2) {
+            switch ($status) {
+                case "OPEN" :
+                    $backgroundColor = "red";
+                    break;
+                case "ASSIGNED" :
+                    $backgroundColor = "orange";
+                    break;
+                case "CLOSED" :
+                    $backgroundColor = "green";
+                    break;
+            }
         }
     ?>
     <div class="retangulo <?php echo $backgroundColor ?>">
-        <h2 id="ticketText"><?=$ticket->getTitle()?></h2>
+        <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
         <section>
-            <h3 id="ticketDescription"><?=$ticket->getDescription()?></h3>
+            <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
         <section>
             <article>
@@ -49,14 +51,14 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                 if($status=="OPEN"){
                     $ticket_id = $ticket->getIdTicket();
                     ?>
-                    <article id="AssignTicket">
+                    <article class="AssignTicket">
                         <form method="post" action="../actions/action_assign_to_agent.php">
                             <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
                                 Assign Ticket to me
                             </button>
                         </form>
-                        <form>
-                            <button>
+                        <form method="post" action="../pages/agentsAvaiableToAssign.php">
+                            <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
                                 Assign Ticket to other agent
                             </button>
                         </form>

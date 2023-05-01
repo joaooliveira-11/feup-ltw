@@ -135,8 +135,8 @@ function drawEditProfileMain(){ ?>
                     </div>
                     
                     <div class="ticket-date">
-                        <label for="ticket_createdate">Date</label>
-                        <input type="date" name="date" id="ticket_createdate" required="required" min="2023-05-23">
+                        <label for="ticket_createdate"><?php echo date('d-m-Y')?></label>
+                        <input type="hidden" name="date" id="ticket_createdate" value="<?php echo date('d-m-Y')?>">
                     </div>
                 </div>
             </div>

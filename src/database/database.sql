@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Reply;
 DROP TABLE IF EXISTS Status;
 DROP TABLE IF EXISTS FAQ;
+DROP TABLE IF EXISTS Inquiry;
 
 DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
@@ -37,6 +38,16 @@ CREATE TABLE Role(
                      CONSTRAINT CHECK_Role_name CHECK (name = 'ADMIN' OR name = 'CLIENT' OR name = 'AGENT')
 );
 
+CREATE TABLE Inquiry(
+                     idInquiry INTEGER PRIMARY KEY AUTOINCREMENT,
+                     idUserReceiving INTEGER REFERENCES User, --user que recebeu a notificação
+                     idUserGiving INTEGER REFERENCES User, --user que "fez" a notificação (pode ser opcional)
+                     idTicket INTEGER REFERENCES Ticket,
+                     type TEXT NOT NULL, -- o type pode ser ASSIGN_REQUEST, TICKET_REPONDED, etc(depois adiciona-se mais, dependendo das funcionalidades)
+                     date DATE
+
+);
+
 CREATE TABLE Department(
                            idDepartment INTEGER PRIMARY KEY AUTOINCREMENT,
                            name TEXT NOT NULL,
@@ -57,7 +68,7 @@ CREATE TABLE Ticket(
 );
 
 CREATE TABLE Hashtag(
-                        idTicket INTEGER PRIMARY KEY AUTOINCREMENT,
+                        idTicket INTEGER PRIMARY KEY,
                         name TEXT NOT NULL,
                         CONSTRAINT UNIQUE_Hashtag_name UNIQUE (name)
 );
@@ -182,8 +193,6 @@ INSERT INTO Status (stage) VALUES ('OPEN');
 INSERT INTO Status (stage) VALUES ('ASSIGNED');
 INSERT INTO Status (stage) VALUES ('CLOSED');
 
-INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
-
 INSERT INTO FAQ (question, answer) VALUES
                                        ('How do I reset my password?', 'To reset your password, go to the login page and click on the "Forgot Password" link. Enter your email address and follow the instructions in the email you receive to reset your password.'),
                                        ('Why am I experiencing slow page load times?', 'Slow page load times can be caused by a variety of factors, including your internet connection, your device, and the website itself. Try clearing your browser cache and cookies, or using a different browser or device to see if that resolves the issue.'),
@@ -211,7 +220,7 @@ INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, id
 VALUES ('Miscommunication in Therapy Session', 'Patient reports miscommunication or misunderstanding with their assigned therapist during a therapy session, leading to confusion or dissatisfaction with the therapeutic process.', 3, '2023-04-18', 3, 5, 4);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Server Down', 'Server is not responding', 1, '2023-04-20',2,1,1);
+VALUES ('Server Down', 'Server is not responding', 2, '2023-04-20',2,1,1);
 
 INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
 VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 2, 4, 2);
@@ -222,5 +231,9 @@ VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18
 INSERT INTO Ticket_Status(idTicket, idStatus, date)
 VALUES (1,2,'22-04-2023');
 
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
+
+INSERT INTO Inquiry (idInquiry, idUserReceiving, idUserGiving, idTicket, type, "date") VALUES (1,1,1,1,'ASSIGN_AGENT','22-04-2023');
 
 
