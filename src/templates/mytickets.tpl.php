@@ -50,6 +50,8 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             if($entity>1){
                 if($status=="OPEN"){
                     $ticket_id = $ticket->getIdTicket();
+                    $agentRequired = $ticket->searchIfRequestedToAssign($db);
+                    if(!$agentRequired){
                     ?>
                     <article class="AssignTicket">
                         <form method="post" action="../actions/action_assign_to_agent.php">
@@ -63,7 +65,14 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                             </button>
                         </form>
                     </article>
-                <?php }
+                <?php
+                    }
+                    else{ ?>
+                        <article class="AssignTicket">
+                            Ticket already requested to be assign to <?php echo User::getSingleUser($db,$agentRequired)->getName()  ?>
+                        </article>
+                   <?php }
+                }
             }
             ?>
         </section>

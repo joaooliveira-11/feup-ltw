@@ -159,5 +159,11 @@
 
         $stmt->execute(array($this->getTitle(), $this->getDescription(), $this->getPriority(), $this->getCreateDate(), $this->getCria(), NULL, $this->getidDepartment()));
     }
+      function searchIfRequestedToAssign(PDO $db){
+          $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ?');
+          $stmt->execute(array($this->idTicket));
+          $result = $stmt->fetch();
+          return intval($result);
+      }
 }
 ?>
