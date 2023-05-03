@@ -159,11 +159,40 @@
 
         $stmt->execute(array($this->getTitle(), $this->getDescription(), $this->getPriority(), $this->getCreateDate(), $this->getCria(), NULL, $this->getidDepartment()));
     }
-      function searchIfRequestedToAssign(PDO $db){
+
+    function searchIfRequestedToAssign(PDO $db){
           $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ?');
           $stmt->execute(array($this->idTicket));
           $result = $stmt->fetch();
           return intval($result['idUserReceiving']);
-      }
+    }
+
+    function get_status_id(PDO $db, string $status) : int{
+        $stmt = $db->prepare('SELECT idStatus FROM Status WHERE stage = ? ');
+        $stmt->execute(array($status));
+        $result = $stmt->fetch();
+        return intval($result['idStatus']);
+    }
+
+    function possibleChangingStatus(PDO $db, string $status): array {
+            $stmt = $db->prepare('SELECT stage FROM Status WHERE stage != ?');
+            $stmt->execute(array($status));
+            $result = array();
+            while($stage = $stmt->fetch()){
+                $result[] = $stage['stage'];
+            }
+            return $result;
+    }
+
+    function change_ticket_status(PDO $db, int $idticket, string $status){
+        $idstatus = get_status_id($db, $status);
+        $date = date('d-m-Y');
+        $stmt = $db->prepare('
+          INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
+        ');
+
+        $stmt->execute(array($idticket, $idstatus, $date));
+    }
+    
 }
 ?>
