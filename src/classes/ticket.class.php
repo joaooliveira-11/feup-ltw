@@ -163,7 +163,7 @@
           $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ?');
           $stmt->execute(array($this->idTicket));
           $result = $stmt->fetch();
-          return intval($result);
+          return intval($result['idUserReceiving']);
       }
 }
 ?>

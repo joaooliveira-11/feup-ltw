@@ -9,13 +9,13 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
     <section class = "ticketsPage">
         <section id="Filter" class="yourTickets">
             Filter by:
-            <button>
+            <button id="DepartmentFilterButton">
                 Department
             </button>
-            <button>
+            <button id="StatusFilterButton">
                 Ticket Status
             </button>
-            <button>
+            <button id="DateFilterButton">
                 Date
             </button>
         </section>
