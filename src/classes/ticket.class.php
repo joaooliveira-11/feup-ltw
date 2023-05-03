@@ -194,5 +194,34 @@
         $stmt->execute(array($idticket, $idstatus, $date));
     }
     
+
+    function get_department_id(PDO $db, string $department) : int{
+        $stmt = $db->prepare('SELECT idDepartment FROM Department WHERE name = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return intval($result['idDepartment']);
+    }
+
+
+    function possibleChangingDepartment(PDO $db, string $department): array {
+        $stmt = $db->prepare('SELECT name FROM Department WHERE name != ?');
+        $stmt->execute(array($department));
+        $result = array();
+        while($department = $stmt->fetch()){
+            $result[] = $department['name'];
+        }
+        return $result;
+    }
+
+    
+    function change_ticket_department(PDO $db, string $department){
+          $iddepartment = get_department_id($db, $department);
+          $stmt = $db->prepare('
+            UPDATE Ticket SET title = ?, description = ?, priority = ?, create_date = ?, cria = ?, resolve = ?, idDepartment = ?
+            WHERE idTicket = ?
+          ');
+
+          $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, $this->resolve, $iddepartment , $this->idTicket));
+    }
 }
 ?>
