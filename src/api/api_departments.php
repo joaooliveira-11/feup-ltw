@@ -15,5 +15,11 @@ $user = User::getSingleUser($db, $session->getId());
 if($user->getUserRole($db) < 2) die(header('Location: ../pages/login.php')); //verificar se é um agent, pelo menos
 
 $departments = $user->getDepartments($db);
+$return_departments = array();
 
-echo json_encode($departments);
+foreach ($departments as $department){
+    $departmentName = User::getDepartmentName($db, intval($department));
+    $return_departments[] = array(intval($department), $departmentName['name']);
+}
+
+echo json_encode($return_departments);
