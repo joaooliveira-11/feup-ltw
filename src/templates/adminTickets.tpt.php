@@ -9,15 +9,23 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
     <section class = "ticketsPage">
         <section id="Filter" class="yourTickets">
             Filter by:
-            <button id="DepartmentFilterButton">
-                Department
-            </button>
-            <button id="StatusFilterButton">
-                Ticket Status
-            </button>
-            <button id="DateFilterButton">
-                Date
-            </button>
+            <article>
+                <div id="DepartmentFilter">
+                    <button id="DepartmentFilterButton">
+                        Department
+                    </button>
+                </div>
+                <div id="StatusFilter">
+                    <button id="StatusFilterButton">
+                        Ticket Status
+                    </button>
+                </div>
+                <div id="DateFilter">
+                    <button id="DateFilterButton">
+                        Date
+                    </button>
+                </div>
+            </article>
         </section>
         <section class="TicketOverflow">
             <?php foreach ($departmentTickets as $ticket){
