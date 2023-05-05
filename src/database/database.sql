@@ -233,6 +233,7 @@ VALUES (1,2,'22-04-2023');
 
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
 
 INSERT INTO Inquiry (idInquiry, idUserReceiving, idUserGiving, idTicket, type, "date") VALUES (1,1,1,1,'ASSIGN_AGENT','22-04-2023');
 

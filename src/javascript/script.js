@@ -5,6 +5,7 @@ filterDepartment.classList.add("FilterList");
 const filter_section = document.querySelector('#Filter');
 filter_section.appendChild(filterDepartment);
 let display = false;
+const ticket_list = document.querySelectorAll(".retangulo");
 
 filter_department_button.addEventListener('click', async function () {
     const response = await fetch('../api/api_departments.php');
@@ -20,9 +21,25 @@ filter_department_button.addEventListener('click', async function () {
     }
     if(filter_search) filter_search.innerHTML = "";
     for (department of departments){
-        console.log(department);
-        const list_item = document.createElement('li');
-        list_item.textContent = departments;
-        filterDepartment.appendChild(list_item);
+        const list_item = document.createElement('input');
+        list_item.type = "checkbox";
+        list_item.value = department[0];
+        list_item.checked = true;
+        list_item.addEventListener('click',() => updateTicketPage(list_item.value));
+        const deptDiv = document.createElement('div');
+        deptDiv.id = "DepartmentListObject";
+        deptDiv.innerText = department[1];
+        deptDiv.appendChild(list_item);
+        filterDepartment.appendChild(deptDiv);
     }
 })
+
+function updateTicketPage(id){
+    ticket_list.forEach(async function (ticket){
+        if(ticket.getAttribute('data-department') === id){
+            console.log()
+            if(ticket.style.display==="none") ticket.style.display = "block";
+            else ticket.style.display = "none";
+        }
+    })
+}

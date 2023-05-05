@@ -18,7 +18,8 @@ $departments = $user->getDepartments($db);
 $return_departments = array();
 
 foreach ($departments as $department){
-    $departments[] = User::getDepartmentName($department);
+    $departmentName = User::getDepartmentName($db, intval($department));
+    $return_departments[] = array(intval($department), $departmentName['name']);
 }
 
-echo json_encode($departments);
+echo json_encode($return_departments);

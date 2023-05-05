@@ -144,6 +144,13 @@
         }
         return $users;
     }
+      static function getDepartmentName(PDO $db, $idDepartment){
+          $stmt = $db->prepare('
+            SELECT name FROM Department WHERE idDepartment = ?
+          ');
+          $stmt->execute(array($idDepartment));
+          return $stmt->fetch();
+      }
 
   
     static function getUsers(PDO $db, int $count) : array {
