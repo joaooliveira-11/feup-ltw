@@ -47,9 +47,9 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                 <h5>Date: <?=$ticket->getCreateDate()?></h5>
             </article>
             <?php
-            if($entity>1){
+            $ticket_id = $ticket->getIdTicket();
+            if($entity==2){
                 if($status=="OPEN"){
-                    $ticket_id = $ticket->getIdTicket();
                     $agentRequired = $ticket->searchIfRequestedToAssign($db);
                     if(!$agentRequired){
                     ?>
@@ -74,6 +74,20 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                    <?php }
                 }
             }
+            else if($entity==3){ ?>
+                <article class="AssignTicket">
+                    <form method="post" action="">
+                        <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
+                            Change Department
+                        </button>
+                    </form>
+                    <form method="post" action="">
+                        <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
+                            Change Status
+                        </button>
+                    </form>
+                </article>
+           <?php }
             ?>
         </section>
     </div>
