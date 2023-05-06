@@ -98,6 +98,7 @@ aside > a:hover{
 }
 button{
     cursor: pointer;
+    z-index: 1;
 }
 
 aside > form {
@@ -604,6 +605,7 @@ form .btn-cancel{
 }
 
 #Filter {
+    position: relative;
     display: flex;
     justify-content: space-between;
 }
@@ -617,14 +619,19 @@ form .btn-cancel{
     padding: 0.5em 1em;
 }
 #Filter ul{
+    position: absolute;
+    top:33px;
     padding: 0;
     margin:0;
+    z-index: 2;
 }
 
 #Filter ul>div{
     background-color: white;
     border: 1px #224957 solid;
-    padding: 0.4em 1em;
+    border-radius: 14px;
+    padding: 0.4em 0.6em;
+    margin-bottom: 0.24em;
     display: flex;
     justify-content: space-between;
 }

@@ -3,12 +3,14 @@ const filter_department_button = document.getElementById('DepartmentFilterButton
 const filterDepartment = document.createElement('ul');
 filterDepartment.classList.add("FilterList");
 filterDepartment.style.display="none";
-const departments_text = document.createElement("div");
-departments_text.innerText = "Departments:";
 const filter_section = document.querySelector('#DepartmentFilter');
 filter_section.appendChild(filterDepartment);
 let display = false;
 const ticket_list = document.querySelectorAll(".retangulo");
+
+const filter_status_button = document.getElementById('StatusFilterButton');
+const filterStatus = document.createElement('ul');
+filterStatus.classList.add("FilterList")
 
 filter_department_button.addEventListener('click', async function () {
     const response = await fetch('../api/api_departments.php');
@@ -23,7 +25,6 @@ filter_department_button.addEventListener('click', async function () {
         filterDepartment.style.display = "block";
     }
     if(filter_search) filter_search.innerHTML = "";
-    filterDepartment.appendChild(departments_text);
     for (department of departments){
         const list_item = document.createElement('input');
         list_item.type = "checkbox";

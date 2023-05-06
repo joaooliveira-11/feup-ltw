@@ -85,7 +85,7 @@ CREATE TABLE Reply(
 CREATE TABLE Status(
                        idStatus INTEGER PRIMARY KEY AUTOINCREMENT,
                        stage TEXT NOT NULL,
-                       CONSTRAINT CHECK_Status_status CHECK (stage = 'OPEN' OR stage = 'ASSIGNED' OR stage = 'CLOSED')
+                       constraint Unique_Stage UNIQUE (stage);
 );
 
 CREATE TABLE User_Roles(
