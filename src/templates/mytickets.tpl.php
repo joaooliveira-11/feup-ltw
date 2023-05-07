@@ -76,16 +76,11 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             }
             else if($entity==3){ ?>
                 <article class="AssignTicket">
-                    <form method="post" action="">
-                        <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
-                            Change Department
-                        </button>
-                    </form>
-                    <form method="post" action="">
-                        <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
-                            Change Status
-                        </button>
-                    </form>
+                        <div id="status_change">
+                            <button type="submit" name="Ticket"  id="change-status-btn" value="<?php echo $ticket_id ?>">
+                                Change Status
+                            </button>
+                        </div>
                 </article>
            <?php }
             ?>

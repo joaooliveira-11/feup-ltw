@@ -174,7 +174,7 @@
         return intval($result['idStatus']);
     }
 
-    function possibleChangingStatus(PDO $db, string $status): array {
+    public static function possibleChangingStatus(PDO $db, string $status): array {
             $stmt = $db->prepare('SELECT stage FROM Status WHERE stage != ?');
             $stmt->execute(array($status));
             $result = array();
@@ -184,14 +184,14 @@
             return $result;
     }
 
-    function change_ticket_status(PDO $db, int $idticket, string $status){
+    public function change_ticket_status(PDO $db,string $status){
         $idstatus = get_status_id($db, $status);
         $date = date('d-m-Y');
         $stmt = $db->prepare('
           INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
         ');
 
-        $stmt->execute(array($idticket, $idstatus, $date));
+        $stmt->execute(array($this->idTicket, $idstatus, $date));
     }
     
 
