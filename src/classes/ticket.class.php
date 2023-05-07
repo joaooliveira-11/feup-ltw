@@ -167,7 +167,7 @@
           return intval($result['idUserReceiving']);
     }
 
-    function get_status_id(PDO $db, string $status) : int{
+    public function get_status_id(PDO $db, string $status) : int{
         $stmt = $db->prepare('SELECT idStatus FROM Status WHERE stage = ? ');
         $stmt->execute(array($status));
         $result = $stmt->fetch();
@@ -185,7 +185,7 @@
     }
 
     public function change_ticket_status(PDO $db,string $status){
-        $idstatus = get_status_id($db, $status);
+        $idstatus = Ticket::get_status_id($db, $status);
         $date = date('d-m-Y');
         $stmt = $db->prepare('
           INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)

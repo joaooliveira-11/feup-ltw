@@ -130,10 +130,9 @@ function updateTicketPageStatus(id, i){
         }
     })
 }
-
-
 /*
 const change_ticketstatus_button = document.getElementById('change-status-btn');
+const ticket_id = change_ticketstatus_button.getAttribute('data-ticket-id');
 const selectnewstatus = document.createElement('ul');
 selectnewstatus.classList.add("StatuschangeList");
 selectnewstatus.style.display="none";
@@ -144,7 +143,7 @@ let displayStatus2 = false;
 let possiblestatus;
 
 change_ticketstatus_button.addEventListener('click', async function () {
-    const response = await fetch('../api/api_possibleStatus.php?Ticket='+this.value);
+    const response = await fetch('../api/api_possibleStatus.php?Ticket='+ticket_id );
     possiblestatus = await response.json();
     const filter_search = document.querySelector(".StatuschangeList");
     displayStatus2 = !displayStatus2;
@@ -160,7 +159,7 @@ change_ticketstatus_button.addEventListener('click', async function () {
         const item = document.createElement('button');
         item.value = Status;
         item.innerText = Status;
-        item.addEventListener('click', () => updateTicketStatus(item.value, this.value));
+        item.addEventListener('click', () => updateTicketStatus(item.value, ticket_id));
         selectnewstatus.appendChild(item);
     }
 })
