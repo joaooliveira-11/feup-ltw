@@ -140,7 +140,7 @@ function drawAside(){
 function drawAsideAgent(){ ?>
     <a href="../pages/openTickets.php" id="TicketsOpenButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        Tickets Open to Solve
+        Tickets From My Department(s)
     </a>
     <a href="../pages/myAssignedTickets.php" id="AssignedTicketsButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">

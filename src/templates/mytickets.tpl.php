@@ -49,7 +49,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             <?php
             $ticket_id = $ticket->getIdTicket();
             if($entity==2){
-                if($status=="OPEN"){
+                if($status==="OPEN"){
                     $agentRequired = $ticket->searchIfRequestedToAssign($db);
                     if(!$agentRequired){
                     ?>
@@ -73,6 +73,12 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                         </article>
                    <?php }
                 }
+                else if($ticket==="ASSIGNED"){
+                    $idResolve = $ticket->getResolve(); ?>
+                    <article class="AssignTicket">
+                        Ticket assigned to agent <?php echo User::getSingleUser($db,$idResolve)->getName() ?>
+                    </article>
+                <?php }
             }
             else if($entity==3){ ?>
                 <article class="AssignTicket">
