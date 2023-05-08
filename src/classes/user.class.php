@@ -57,7 +57,7 @@
       }
 
       function getUserRole($db) : int{
-          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ?');
+          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ? ORDER BY ROWID DESC LIMIT 1');
           $stmt->execute(array($this->idUser));
           $role = $stmt->fetch();
           return intval($role['idRole']);

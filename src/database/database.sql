@@ -90,9 +90,9 @@ CREATE TABLE Status(
 );
 
 CREATE TABLE User_Roles(
+                           id_random INTEGER PRIMARY KEY AUTOINCREMENT,
                            idUser INTEGER REFERENCES User,
-                           idRole INTEGER REFERENCES Role,
-                           PRIMARY KEY (idUser, idRole)
+                           idRole INTEGER REFERENCES Role
 );
 
 CREATE TABLE User_Departments(
@@ -221,5 +221,4 @@ INSERT INTO FAQ (question, answer) VALUES
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
-
 
