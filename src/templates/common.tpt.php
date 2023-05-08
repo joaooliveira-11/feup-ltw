@@ -24,7 +24,7 @@ function drawLogin()
             </form>
             <div class="form_alternative">
                 <p><span class="bold">Not a member?</span></p>
-                <a class="form_button" href="register.php">Sign up here</a>
+                <a class="form_button" href="../pages/register.php">Sign up here</a>
             </div>
         </div>
     </section>
@@ -34,7 +34,6 @@ function drawLogin()
 <?php function drawInitialFooter()
 { ?>
 
-    <link rel="stylesheet" href="../css/forms.css">
     <img src="../docs/images/initialFooter.png" alt="">
 
 <?php }
@@ -52,6 +51,7 @@ function drawFooterMain(){ ?>
 
  function drawRegister()
 { ?>
+    <link rel="stylesheet" href="../css/forms.css">
 
     <section id="register">
         <div class="container sign_form">
