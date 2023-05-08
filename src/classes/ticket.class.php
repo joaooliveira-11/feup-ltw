@@ -113,7 +113,7 @@
     public static function getDepartmentTickets(PDO $db, array $idDepartments){
         $tickets = array();
         foreach($idDepartments as $id) {
-            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ? AND resolve IS NULL ');
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ?');
             $stmt->execute(array($id));
 
 
