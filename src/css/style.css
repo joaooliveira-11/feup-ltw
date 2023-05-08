@@ -289,7 +289,7 @@ main{
     margin: 0 2em;
 }
 
-.retangulo > section:last-child > article > form{
+.retangulo article form, .retangulo article div{
     margin: 0 1.3em;
 }
 
@@ -558,7 +558,7 @@ form .btn-cancel{
     display: flex;
 }
 
-.AssignTicket > form > button{
+.AssignTicket button{
     padding: 0.5em 1em;
     background-color: slateblue;
     color: whitesmoke;
@@ -618,7 +618,7 @@ form .btn-cancel{
     margin: 0 3.5em;
     padding: 0.5em 1em;
 }
-#Filter ul{
+ul{
     position: absolute;
     top:33px;
     padding: 0;
@@ -634,4 +634,23 @@ form .btn-cancel{
     margin-bottom: 0.24em;
     display: flex;
     justify-content: space-between;
+}
+
+.ChangeStatusButton{
+    position: relative;
+}
+
+.change-status-btn{
+    margin-bottom:1em
+}
+
+.StatuschangeList{
+    position: absolute;
+    right: -35px;
+    top:36px;
+}
+
+.StatuschangeList > button{
+    background-color: crimson;
+    margin-right: 1em;
 }

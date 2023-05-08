@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS Ticket_Status;
 
 DROP TRIGGER IF EXISTS insert_user_roles;
 DROP TRIGGER IF EXISTS insert_ticket_status;
+DROP TRIGGER IF EXISTS update_ticket_resolve;
 
 CREATE TABLE User (
                       idUser INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -85,7 +86,7 @@ CREATE TABLE Reply(
 CREATE TABLE Status(
                        idStatus INTEGER PRIMARY KEY AUTOINCREMENT,
                        stage TEXT NOT NULL,
-                       constraint Unique_Stage UNIQUE (stage);
+                       constraint Unique_Stage UNIQUE (stage)
 );
 
 CREATE TABLE User_Roles(
@@ -135,6 +136,14 @@ CREATE TRIGGER insert_ticket_status
     FOR EACH ROW
 BEGIN
     INSERT INTO Ticket_Status (idTicket, idStatus, date) VALUES (NEW.idTicket, 1, NEW.create_date); --quando se cria um ticket, ele começa a open.
+END;
+
+CREATE TRIGGER update_ticket_resolve
+    AFTER Insert ON Ticket_Status
+    FOR EACH ROW
+    WHEN NEW.idStatus = 1
+BEGIN
+    UPDATE Ticket SET resolve = NULL WHERE idTicket = NEW.idTicket;
 END;
 
 ------------------------------------------------------------------------------------------

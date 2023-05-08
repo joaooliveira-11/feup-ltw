@@ -86,9 +86,9 @@ function drawFooterMain(){ ?>
 
 <?php }
 
-function drawHeaderMain(){ ?>
+function drawHeaderMain($scriptPage = "script.js"){?>
     <link rel="stylesheet" href="../css/style.css">
-    <script defer src="../javascript/script.js"></script>
+    <script defer src="../javascript/<?php echo $scriptPage?>"></script>
 
     <header id ="HeaderMain">
         TicketEase

@@ -8,7 +8,7 @@ require_once(dirname(__DIR__).'/utils/session.php');
 require_once(dirname(__DIR__).'/templates/adminTickets.tpt.php');
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-drawHeaderMain();
+drawHeaderMain("changeStatus.js");
 $db = getDatabaseConnection();
 $ticketsAssigned = Ticket::getAssignedTickets($db,$session->getId());
 drawAside();
