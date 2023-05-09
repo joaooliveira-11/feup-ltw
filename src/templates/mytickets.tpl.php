@@ -87,8 +87,8 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                             Change Status
                         </button>
                     </div>
-                    <div>
-                        <button>
+                    <div id="department_change_<?php echo $ticket_id?>" class ="ChangeStatusButton">
+                        <button type="submit" name="Ticket" class="change-department-btn"  data-ticket-id="<?php echo $ticket_id ?>">
                             Change Department
                         </button>
                     </div>

@@ -215,13 +215,21 @@
 
     
     function change_ticket_department(PDO $db, string $department){
-          $iddepartment = get_department_id($db, $department);
+          $iddepartment = Ticket::get_department_id($db, $department);
           $stmt = $db->prepare('
             UPDATE Ticket SET title = ?, description = ?, priority = ?, create_date = ?, cria = ?, resolve = ?, idDepartment = ?
             WHERE idTicket = ?
           ');
 
           $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, $this->resolve, $iddepartment , $this->idTicket));
+
+          $idstatus = 1;
+          $date = date('d-m-Y');
+          $stmt = $db->prepare('
+           INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
+          ');
+
+          $stmt->execute(array($this->idTicket, $idstatus, $date));
     }
 }
 ?>

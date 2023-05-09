@@ -38,3 +38,45 @@ change_ticketstatus_buttons.forEach(function(change_ticketstatus_button) {
         location.reload();
     }
 })
+
+
+const change_ticketdepartment_buttons = document.querySelectorAll('.change-department-btn');
+
+change_ticketdepartment_buttons.forEach(function(change_ticketdepartment_button) {
+    const ticket_id = change_ticketdepartment_button.getAttribute('data-ticket-id');
+    const selectnewdepartment = document.createElement('ul');
+    selectnewdepartment.classList.add("DepartmentchangeList");
+    selectnewdepartment.id= "DepartmentchangeList_"+ticket_id;
+    selectnewdepartment.style.display="none";
+    const filter_new_department = document.querySelector('#department_change_'+ticket_id);
+    filter_new_department.appendChild(selectnewdepartment);
+
+    let displayDepartment2 = false;
+    let possibleDepartment;
+
+    change_ticketdepartment_button.addEventListener('click', async function () {
+        const response = await fetch('../api/api_possibleDepartments.php?Ticket='+ticket_id );
+        possibleDepartment = await response.json();
+        const filter_search = document.querySelector("#DepartmentchangeList_"+ticket_id);
+        displayDepartment2 = !displayDepartment2;
+        if(!displayDepartment2){
+            selectnewdepartment.style.display = "none";
+        }
+        else{
+            selectnewdepartment.style.display = "flex";
+        }
+        if(filter_search) filter_search.innerHTML = "";
+        for (Department of possibleDepartment){
+            const item = document.createElement('button');
+            item.value = Department;
+            item.innerText = Department;
+            item.addEventListener('click', () => updateTicketDepartment(item.value, ticket_id));
+            selectnewdepartment.appendChild(item);
+        }
+    })
+    async function updateTicketDepartment(Department, Ticket){
+        const response = await fetch('../api/api_changeDepartment.php?Ticket='+Ticket+'&Department='+Department);
+        answer = await response.json();
+        location.reload();
+    }
+})
