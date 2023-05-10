@@ -47,11 +47,13 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
 
-            <div class="hashtags-container">
-                <button id="add-hashtags-button" onclick="addHashtag()">Add Hashtag</button>
-            </div>
-        
+        <div class="hashtags-container">
+            <button id="add-hashtags-button" onclick="addHashtag()">Add Hashtag</button>
+        </div>
 
+        <ul id="autocomplete-list"></ul>
+
+        
         <section>
             <article>
                 <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
