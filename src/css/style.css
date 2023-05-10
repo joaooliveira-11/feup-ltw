@@ -240,7 +240,6 @@ main{
 #ProfileMain >section > article > div > span {
     text-align: right;
     display: block;
-    vertical-align: center;
 }
 
 #EditProfileButton{

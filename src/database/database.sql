@@ -141,6 +141,27 @@ END;
 --------------------------------------Data Insertion--------------------------------------
 ------------------------------------------------------------------------------------------
 
+INSERT INTO Hashtag (name) VALUES ('hospital');
+INSERT INTO Hashtag (name) VALUES ('healthcare');
+INSERT INTO Hashtag (name) VALUES ('medicine');
+INSERT INTO Hashtag (name) VALUES ('doctor');
+INSERT INTO Hashtag (name) VALUES ('nurse');
+INSERT INTO Hashtag (name) VALUES ('patientcare');
+INSERT INTO Hashtag (name) VALUES ('emergency');
+INSERT INTO Hashtag (name) VALUES ('surgery');
+INSERT INTO Hashtag (name) VALUES ('ICU');
+INSERT INTO Hashtag (name) VALUES ('pediatrics');
+INSERT INTO Hashtag (name) VALUES ('oncology');
+INSERT INTO Hashtag (name) VALUES ('radiology');
+INSERT INTO Hashtag (name) VALUES ('pharmacy');
+INSERT INTO Hashtag (name) VALUES ('mentalhealth');
+INSERT INTO Hashtag (name) VALUES ('rehabilitation');
+INSERT INTO Hashtag (name) VALUES ('healthtech');
+INSERT INTO Hashtag (name) VALUES ('telemedicine');
+INSERT INTO Hashtag (name) VALUES ('publichealth');
+INSERT INTO Hashtag (name) VALUES ('wellness');
+INSERT INTO Hashtag (name) VALUES ('medicalresearch');
+
 INSERT INTO Role (name) VALUES ('CLIENT');
 INSERT INTO Role (name) VALUES ('AGENT');
 INSERT INTO Role (name) VALUES ('ADMIN');
