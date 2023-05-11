@@ -48,7 +48,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
         </section>
 
         <div class="hashtags-container">
-            <button id="add-hashtags-button" onclick="addHashtag()">Add Hashtag</button>
+            <button id="add-hashtags-button" onclick="addHashtag(<?=$ticket->getIdTicket()?>)">Add Hashtag</button>
         </div>
 
         <ul id="autocomplete-list"></ul>

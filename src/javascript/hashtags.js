@@ -1,4 +1,4 @@
-function addHashtag() {
+function addHashtag(idTicket) {
     const container = document.querySelector('.hashtags-container');
     const button = document.querySelector('#add-hashtags-button');
   
@@ -28,7 +28,7 @@ function addHashtag() {
         xhr.onload = function() {
           if (xhr.status === 200) {
             const hashtags = JSON.parse(xhr.responseText);
-            showAutocomplete(hashtags, input);          
+            showAutocomplete(hashtags, input, idTicket);          
             }
         };
         xhr.send();
@@ -36,11 +36,12 @@ function addHashtag() {
     }
   }
   
-  function showAutocomplete(hashtags, input) {
+  function showAutocomplete(hashtags, input, idTicket) {
     const list = document.getElementById('autocomplete-list');
     list.innerHTML = '';
   
-    for (let i = 0; i < hashtags.length; i++) {
+    let i;
+    for (i = 0; i < hashtags.length; i++) {
       const hashtag = hashtags[i];
       const item = document.createElement('li');
       item.textContent = hashtag;
@@ -50,4 +51,22 @@ function addHashtag() {
       });
       list.appendChild(item);
     }
+
+    list.addEventListener('click', function() {
+        const hashtag = this.textContent;
+    
+        // Make an AJAX request to insert the chosen hashtag into the database
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `../javascript/hashtags.php?q=add:${i+1}:${idTicket}`, true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log(response.message);
+            }
+        };
+        xhr.send();
+    
+        input.value = hashtag;
+        list.innerHTML = '';
+    });
 }
