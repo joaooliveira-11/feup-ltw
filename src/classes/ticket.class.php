@@ -22,7 +22,7 @@
         $this->idDepartment = $idDepartment;
     }
     
-    public function getIdTicket(): int {
+    public function getIdTicket(): ?int {
         return $this->idTicket;
     }
     
@@ -46,7 +46,7 @@
         return $this->cria;
     }
 
-    public function getResolve(): int {
+    public function getResolve(): ?int {
         return $this->resolve;
     }
 
@@ -187,11 +187,12 @@
     public function change_ticket_status(PDO $db,string $status){
         $idstatus = Ticket::get_status_id($db, $status);
         $date = date('d-m-Y');
+        if($status === 'OPEN') $idResolve = NULL;
+        else $idResolve = $this->resolve;
         $stmt = $db->prepare('
-          INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
+          INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
         ');
-
-        $stmt->execute(array($this->idTicket, $idstatus, $date));
+        $stmt->execute(array($this->idTicket, $idstatus, $this->idDepartment, $idResolve, $date));
     }
     
 
@@ -221,15 +222,15 @@
             WHERE idTicket = ?
           ');
 
-          $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, $this->resolve, $iddepartment , $this->idTicket));
+          $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, NULL, $iddepartment , $this->idTicket));
 
           $idstatus = 1;
           $date = date('d-m-Y');
           $stmt = $db->prepare('
-           INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
+           INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
           ');
 
-          $stmt->execute(array($this->idTicket, $idstatus, $date));
+          $stmt->execute(array($this->idTicket, $idstatus,$iddepartment, NULL,$date));
     }
 }
 ?>
