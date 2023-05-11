@@ -4,6 +4,7 @@ require_once(dirname(__DIR__).'/database/connection.php');
 require_once(dirname(__DIR__).'/classes/user.class.php');
 require_once(dirname(__DIR__).'/utils/session.php');
 require_once(dirname(__DIR__).'/templates/mytickets.tpl.php');
+require_once(dirname(__DIR__).'/classes/ticket.class.php');
 
 function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
     <section class = "ticketsPage">
@@ -75,3 +76,16 @@ function drawAgentsAvailableMain(int $idTicket, array $users){ ?>
         </table>
     </main>
 <?php }
+
+function drawTicketHistory(array $changes, PDO $db){ ?>
+    <section class="TicketChanges">
+        <?php foreach ($changes as $change){ ?>
+            <div class="Ticket">
+                <p>Status: <?php echo $change['idStatus'] ? Ticket::get_status_name($db, intval($change['idStatus'])) : '-'; ?></p>
+                <p>Department: <?php echo $change['idDepartment'] ? Ticket::get_department_name($db, intval($change['idDepartment'])) : '-'; ?></p>
+                <p>Agent: <?php echo $change['agent'] ? User::getUser_username($db, intval($change['agent'])) : '-'; ?></p>
+                <p>Date: <?php echo $change['date']; ?></p>
+            </div>
+        <?php } ?>
+    </section>
+<?php } 

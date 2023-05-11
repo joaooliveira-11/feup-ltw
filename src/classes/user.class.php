@@ -181,6 +181,13 @@
         } else return $default;
       } 
 
+      public static function getUser_username(PDO $db, int $iduser) : ?string{
+        $stmt = $db->prepare('Select name From User WHERE idUser = ?');
+        $stmt->execute(array($iduser));
+        $role = $stmt->fetch();
+        return $role['name'];
+    }
+
   }
 
 ?>

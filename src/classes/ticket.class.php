@@ -132,6 +132,7 @@
         }
         return $tickets;
     }
+
     public static function getAssignedTickets(PDO $db, int $resolve){
         $stmt = $db->prepare('SELECT * FROM Ticket WHERE resolve = ?');
         $stmt->execute(array($resolve));
@@ -172,6 +173,20 @@
         $stmt->execute(array($status));
         $result = $stmt->fetch();
         return intval($result['idStatus']);
+    }
+
+    public static function get_status_name(PDO $db, int $status) : string{
+        $stmt = $db->prepare('SELECT stage FROM Status WHERE idStatus = ? ');
+        $stmt->execute(array($status));
+        $result = $stmt->fetch();
+        return $result['stage'];
+    }
+
+    public static function get_department_name(PDO $db, int $department) : string{
+        $stmt = $db->prepare('SELECT name FROM Department WHERE idDepartment = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return $result['name'];
     }
 
     public static function possibleChangingStatus(PDO $db, string $status): array {
@@ -232,5 +247,16 @@
 
           $stmt->execute(array($this->idTicket, $idstatus,$iddepartment, NULL,$date));
     }
+
+    public function getTicketHistory(PDO $db): array{
+        $stmt = $db->prepare('SELECT * FROM Ticket_Status WHERE idTicket = ?');
+        $stmt->execute(array($this->idTicket));
+        $changes = array();
+        while ($change= $stmt->fetch()) {
+            $changes[] = $change;
+        }
+        return $changes;
+    }
+
 }
 ?>

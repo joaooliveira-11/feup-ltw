@@ -654,3 +654,30 @@ ul{
     background-color: crimson;
     margin-right: 1em;
 }
+
+.TicketChanges {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Ticket {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  
+  .Ticket:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .Ticket p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .Ticket p:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
