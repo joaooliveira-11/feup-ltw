@@ -45,7 +45,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                 <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
                 <h5>Status: <?=$status?></h5>
                 <h5 data-date="<?php echo $ticket->getCreateDate()?>">Date: <?=$ticket->getCreateDate()?></h5>
-                <h5>Priority: <?=$ticket->getPriority()?></h5>
+                <h5 data-priority = "<?php echo $ticket->getPriority()?>">Priority: <?=$ticket->getPriority()?></h5>
                 <h5><a href="../pages/ticketChanges.php?Ticket=<?php echo $ticket->getIdTicket(); ?>">Ticket History</a></h5>
             </article>
             <?php

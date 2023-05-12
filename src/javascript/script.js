@@ -22,6 +22,11 @@ let date_order = 0;
 let image = document.querySelector('#DateFilterButton img');
 order_date_button.appendChild(image);
 
+const order_priority_button = document.getElementById("PriorityFilterButton");
+let priority_order = 0;
+let image_priority = document.querySelector('#PriorityFilterButton img');
+order_priority_button.appendChild(image_priority);
+
 let ticket_list = document.querySelectorAll(".retangulo");
 let ticket_list_dictionary = [];
 let dictionaryForOrder = [];
@@ -138,6 +143,8 @@ function updateTicketPageStatus(id, i){
 
 order_date_button.addEventListener('click',async function(){
     date_order++;
+    priority_order=0;
+    image_priority.src='../docs/images/icon-minus.png';
     if(date_order===1){
         image.src = '../docs/images/seta_para_baixo.png'
     }
@@ -176,8 +183,6 @@ order_date_button.addEventListener('click',async function(){
                 }
             }
             changePosition(i,imin,sectionParent);
-            if(date_order===1) {
-            }
         }
         for(i= ticket_list.length-1;i>0;i--){
             sectionParent.insertBefore(dictionaryForOrder[i-1],dictionaryForOrder[i]);
@@ -200,3 +205,50 @@ function dateToNumber(date){
 
     return parseInt(day) + parseInt(month)*100 + parseInt(year)*10000;
 }
+
+order_priority_button.addEventListener('click',async function(){
+    date_order = 0;
+    image.src='../docs/images/icon-minus.png';
+    priority_order++;
+    if(priority_order===1){
+        image_priority.src = '../docs/images/seta_para_baixo.png'
+    }
+    else if(priority_order===2){
+        image_priority.src = '../docs/images/seta_para_cima.png'
+    }
+    else {
+        priority_order=0;
+        image_priority.src='../docs/images/icon-minus.png';
+
+    }
+    sectionParent = ticket_list[0].parentNode;
+    if(priority_order===0){
+        for(i= ticket_list.length-1;i>0;i--){
+            sectionParent.insertBefore(ticket_list[i-1],ticket_list[i]);
+        }
+    }
+    else {
+        for (i = 0; i < arrayToOrder.length - 1; i++) {
+            let imin = i;
+            for (j = i + 1; j <arrayToOrder.length; j++) {
+                const ticketA = dictionaryForOrder[imin];
+                const ticketA_priority = ticketA.querySelector("section:last-child h5:nth-child(4)").getAttribute('data-priority');
+                const ticketB = dictionaryForOrder[j];
+                const ticketB_priority = ticketB.querySelector("section:last-child h5:nth-child(4)").getAttribute('data-priority');
+                if (priority_order === 1) {
+                    if (ticketA_priority < ticketB_priority) {
+                        imin = j;
+                    }
+                } else if (priority_order === 2) {
+                    if (ticketA_priority > ticketB_priority) {
+                        imin = j;
+                    }
+                }
+            }
+            changePosition(i,imin,sectionParent);
+        }
+        for(i= ticket_list.length-1;i>0;i--){
+            sectionParent.insertBefore(dictionaryForOrder[i-1],dictionaryForOrder[i]);
+        }
+    }
+})

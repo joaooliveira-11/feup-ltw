@@ -111,7 +111,7 @@
         }
     }
 
-    public static function getDepartmentTickets(PDO $db, array $idDepartments , array $SelectedTickets = null){
+    public static function getDepartmentTickets(PDO $db, array $idDepartments){
         $tickets = array();
         foreach($idDepartments as $id) {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ?');

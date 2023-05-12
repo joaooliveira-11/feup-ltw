@@ -9,8 +9,8 @@ require_once(dirname(__DIR__).'/classes/ticket.class.php');
 function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
     <section class = "ticketsPage">
         <section id="Filter" class="yourTickets">
-            Filter by:
             <article>
+                Filter By:
                 <div id="DepartmentFilter">
                     <button id="DepartmentFilterButton">
                         Department
@@ -19,6 +19,15 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
                 <div id="StatusFilter">
                     <button id="StatusFilterButton">
                         Ticket Status
+                    </button>
+                </div>
+            </article>
+            <article>
+                Order By:
+                <div id="PriorityFilter">
+                    <button id="PriorityFilterButton">
+                        Priority
+                        <img src="../docs/images/icon-minus.png">
                     </button>
                 </div>
                 <div id="DateFilter">

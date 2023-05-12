@@ -607,8 +607,8 @@ form .btn-cancel{
 
 #Filter {
     position: relative;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 #Filter > article{
@@ -656,33 +656,33 @@ ul{
     margin-right: 1em;
 }
 
-#DateFilterButton img{
+#DateFilterButton img, #PriorityFilterButton img{
     max-width: 13px;
 }
 
 .TicketChanges {
     display: flex;
     flex-direction: column;
-  }
+}
   
-  .Ticket {
+.Ticket {
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
-  }
+}
   
-  .Ticket:last-child {
+.Ticket:last-child {
     margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
-  }
+}
   
-  .Ticket p {
+.Ticket p {
     margin: 0;
     font-size: 14px;
-  }
+}
   
-  .Ticket p:first-child {
+.Ticket p:first-child {
     font-weight: bold;
     margin-bottom: 5px;
-  }
+}
