@@ -22,7 +22,7 @@
         $this->idDepartment = $idDepartment;
     }
     
-    public function getIdTicket(): int {
+    public function getIdTicket(): ?int {
         return $this->idTicket;
     }
     
@@ -46,7 +46,7 @@
         return $this->cria;
     }
 
-    public function getResolve(): int {
+    public function getResolve(): ?int {
         return $this->resolve;
     }
 
@@ -176,6 +176,20 @@
         return intval($result['idStatus']);
     }
 
+    public static function get_status_name(PDO $db, int $status) : string{
+        $stmt = $db->prepare('SELECT stage FROM Status WHERE idStatus = ? ');
+        $stmt->execute(array($status));
+        $result = $stmt->fetch();
+        return $result['stage'];
+    }
+
+    public static function get_department_name(PDO $db, int $department) : string{
+        $stmt = $db->prepare('SELECT name FROM Department WHERE idDepartment = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return $result['name'];
+    }
+
     public static function possibleChangingStatus(PDO $db, string $status): array {
             $stmt = $db->prepare('SELECT stage FROM Status WHERE stage != ?');
             $stmt->execute(array($status));
@@ -189,11 +203,12 @@
     public function change_ticket_status(PDO $db,string $status){
         $idstatus = Ticket::get_status_id($db, $status);
         $date = date('d-m-Y');
+        if($status === 'OPEN') $idResolve = NULL;
+        else $idResolve = $this->resolve;
         $stmt = $db->prepare('
-          INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
+          INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
         ');
-
-        $stmt->execute(array($this->idTicket, $idstatus, $date));
+        $stmt->execute(array($this->idTicket, $idstatus, $this->idDepartment, $idResolve, $date));
     }
     
 
@@ -223,15 +238,26 @@
             WHERE idTicket = ?
           ');
 
-          $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, $this->resolve, $iddepartment , $this->idTicket));
+          $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, NULL, $iddepartment , $this->idTicket));
 
           $idstatus = 1;
           $date = date('d-m-Y');
           $stmt = $db->prepare('
-           INSERT INTO Ticket_Status(idTicket, idStatus, date) VALUES (?,?,?)
+           INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
           ');
 
-          $stmt->execute(array($this->idTicket, $idstatus, $date));
+          $stmt->execute(array($this->idTicket, $idstatus,$iddepartment, NULL,$date));
     }
+
+    public function getTicketHistory(PDO $db): array{
+        $stmt = $db->prepare('SELECT * FROM Ticket_Status WHERE idTicket = ?');
+        $stmt->execute(array($this->idTicket));
+        $changes = array();
+        while ($change= $stmt->fetch()) {
+            $changes[] = $change;
+        }
+        return $changes;
+    }
+
 }
 ?>

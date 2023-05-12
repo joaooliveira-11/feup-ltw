@@ -111,6 +111,8 @@ CREATE TABLE Ticket_Status(
                               id_random INTEGER PRIMARY KEY AUTOINCREMENT,
                               idTicket INTEGER REFERENCES Ticket,
                               idStatus INTEGER REFERENCES Status,
+                              idDepartment INTEGER REFERENCES Department,
+                              agent INTEGER REFERENCES User,
                               date DATE
 
 );
@@ -135,8 +137,10 @@ CREATE TRIGGER insert_ticket_status
     AFTER INSERT ON Ticket
     FOR EACH ROW
 BEGIN
-    INSERT INTO Ticket_Status (idTicket, idStatus, date) VALUES (NEW.idTicket, 1, NEW.create_date); --quando se cria um ticket, ele começa a open.
+    INSERT INTO Ticket_Status (idTicket, idStatus, idDepartment, agent, date)
+    VALUES (NEW.idTicket, 1, NEW.idDepartment, NULL, NEW.create_date);
 END;
+
 
 CREATE TRIGGER update_ticket_resolve
     AFTER Insert ON Ticket_Status

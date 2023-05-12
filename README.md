@@ -12,7 +12,7 @@ Clients should be able to:
 
 Agents should be able to (they are also clients):
 - List tickets from their departments (e.g., "Accounting"), and filter them in different ways (e.g., by date, by assigned agent, by status, by priority, by hashtag). (NOT DONE - BERNA)
-- Change the department of a ticket (e.g., the client chose the wrong department). (NOT DONE - JONY)
+- Change the department of a ticket (e.g., the client chose the wrong department). (DONE - falta css)
 - Assign a ticket to themselves or someone else. (DONE)
 - Change the status of a ticket. Tickets can have many statuses (e.g., open, assigned, closed); some may change automatically (e.g., ticket changes to "assigned" - after being assigned to an agent). (DONE)
 - Edit ticket hashtags easily (just type hashtag to add (with autocomplete), and click to remove). (NOT DONE - KIKA)
