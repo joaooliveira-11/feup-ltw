@@ -36,7 +36,14 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
         }
     ?>
     <div class="retangulo <?php echo $backgroundColor ?>" data-department = "<?php echo $ticket->getidDepartment()?>" data-status ="<?php echo $ticket->getLastTicketStatus($db)?>">
-        <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
+        <section class = "AssignTicket">
+            <div>
+                <form method="post" action="../pages/ticketChanges.php">
+                    <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket()?>">Ticket History</button>
+                </form>
+            </div>
+            <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
+        </section>
         <section>
             <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
@@ -46,7 +53,6 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                 <h5>Status: <?=$status?></h5>
                 <h5 data-date="<?php echo $ticket->getCreateDate()?>">Date: <?=$ticket->getCreateDate()?></h5>
                 <h5 data-priority = "<?php echo $ticket->getPriority()?>">Priority: <?=$ticket->getPriority()?></h5>
-                <h5><a href="../pages/ticketChanges.php?Ticket=<?php echo $ticket->getIdTicket(); ?>">Ticket History</a></h5>
             </article>
             <?php
             $ticket_id = $ticket->getIdTicket();

@@ -250,7 +250,7 @@
     }
 
     public function getTicketHistory(PDO $db): array{
-        $stmt = $db->prepare('SELECT * FROM Ticket_Status WHERE idTicket = ?');
+        $stmt = $db->prepare('SELECT * FROM Ticket_Status WHERE idTicket = ? ORDER BY id_random DESC');
         $stmt->execute(array($this->idTicket));
         $changes = array();
         while ($change= $stmt->fetch()) {

@@ -150,6 +150,16 @@ BEGIN
     UPDATE Ticket SET resolve = NULL WHERE idTicket = NEW.idTicket;
 END;
 
+CREATE TRIGGER insert_inquiry_after_reply
+    AFTER INSERT ON Reply
+    FOR EACH ROW
+BEGIN
+    INSERT INTO Inquiry (idUserReceiving, idUserGiving, idTicket, message, type, date)
+    SELECT CASE WHEN NEW.idUser = T.cria THEN T.resolve ELSE T.cria END, NEW.idUser, NEW.idTicket, NEW.message, 'TICKET_RESPONDED', NEW.create_date
+    FROM Ticket T
+    WHERE T.idTicket = NEW.idTicket;
+END;
+
 ------------------------------------------------------------------------------------------
 --------------------------------------Data Insertion--------------------------------------
 ------------------------------------------------------------------------------------------

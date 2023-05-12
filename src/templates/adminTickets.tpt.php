@@ -88,14 +88,19 @@ function drawAgentsAvailableMain(int $idTicket, array $users){ ?>
 <?php }
 
 function drawTicketHistory(array $changes, PDO $db){ ?>
-    <section class="TicketChanges">
-        <?php foreach ($changes as $change){ ?>
-            <div class="Ticket">
-                <p>Status: <?php echo $change['idStatus'] ? Ticket::get_status_name($db, intval($change['idStatus'])) : '-'; ?></p>
-                <p>Department: <?php echo $change['idDepartment'] ? Ticket::get_department_name($db, intval($change['idDepartment'])) : '-'; ?></p>
-                <p>Agent: <?php echo $change['agent'] ? User::getUser_username($db, intval($change['agent'])) : '-'; ?></p>
-                <p>Date: <?php echo $change['date']; ?></p>
+    <main id ="TicketHistory">
+        <section class="TicketChanges">
+            <div>
+                Last Changes:
             </div>
-        <?php } ?>
-    </section>
+            <?php foreach ($changes as $change){ ?>
+                <div class="Ticket">
+                    <p>Status: <?php echo $change['idStatus'] ? Ticket::get_status_name($db, intval($change['idStatus'])) : '-'; ?></p>
+                    <p>Department: <?php echo $change['idDepartment'] ? Ticket::get_department_name($db, intval($change['idDepartment'])) : '-'; ?></p>
+                    <p>Agent: <?php echo $change['agent'] ? User::getUser_username($db, intval($change['agent'])) : '-'; ?></p>
+                    <p>Date: <?php echo $change['date']; ?></p>
+                </div>
+            <?php } ?>
+        </section>
+    </main>
 <?php } 

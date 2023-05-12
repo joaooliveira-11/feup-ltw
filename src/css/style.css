@@ -269,8 +269,22 @@ main{
     margin-right: auto;
     margin-top: 3em;
 }
+.retangulo > section:first-child{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
 
-.retangulo > section{
+.retangulo > section:first-child form{
+    margin:0;
+}
+
+.retangulo > section:first-child div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.retangulo > section:not(:first-child){
     padding: 1em;
     border-top: #224957 1px solid;
     text-align: center;
@@ -660,21 +674,24 @@ ul{
     max-width: 13px;
 }
 
+#TicketHistory{
+    padding: 0;
+}
+
 .TicketChanges {
     display: flex;
     flex-direction: column;
+    color: #224957;
 }
   
 .Ticket {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    padding: 0.6em 0.5em;
+    font-size: 2em;
+    border-bottom: 1px solid #224957;
 }
   
 .Ticket:last-child {
-    margin-bottom: 0;
     border-bottom: none;
-    padding-bottom: 0;
 }
   
 .Ticket p {
@@ -685,4 +702,14 @@ ul{
 .Ticket p:first-child {
     font-weight: bold;
     margin-bottom: 5px;
+}
+
+.Ticket p{
+    font-size: 0.4em;
+}
+
+.TicketChanges div:first-child{
+    padding: 1em 20px;
+    border-bottom: 4px #224957 solid;
+
 }
