@@ -13,7 +13,7 @@ drawHeaderMain();
 $db = getDatabaseConnection();
 $user= User::getSingleUser($db,$session->getId());
 $userDepartments = $user->getDepartments($db);
-$DepartmentTickets = Ticket::getDepartmentTickets($db,$userDepartments);
+$DepartmentTickets = Ticket::getDepartmentTickets($db,$userDepartments,$user->getId());
 drawAside();
 drawDepartmentsTicketsMain($DepartmentTickets, $db);
 drawFooterMain();

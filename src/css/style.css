@@ -280,7 +280,7 @@ main{
 
 .retangulo > section:first-child div{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 

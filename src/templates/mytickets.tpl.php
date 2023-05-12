@@ -41,6 +41,11 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                 <form method="post" action="../pages/ticketChanges.php">
                     <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket()?>">Ticket History</button>
                 </form>
+                <?php if($entity===3 || $entity===1) { //só aparece este botão no ?>
+                <form method="post" action="../pages/messages.php">
+                    <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket()?>"> Messages </button>
+                </form>
+                <?php } ?>
             </div>
             <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
         </section>
