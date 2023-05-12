@@ -44,7 +44,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             <article>
                 <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
                 <h5>Status: <?=$status?></h5>
-                <h5>Date: <?=$ticket->getCreateDate()?></h5>
+                <h5 data-date="<?php echo $ticket->getCreateDate()?>">Date: <?=$ticket->getCreateDate()?></h5>
             </article>
             <?php
             $ticket_id = $ticket->getIdTicket();

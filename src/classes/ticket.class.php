@@ -110,7 +110,8 @@
             return '';
         }
     }
-    public static function getDepartmentTickets(PDO $db, array $idDepartments){
+
+    public static function getDepartmentTickets(PDO $db, array $idDepartments , array $SelectedTickets = null){
         $tickets = array();
         foreach($idDepartments as $id) {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ?');
@@ -132,6 +133,7 @@
         }
         return $tickets;
     }
+
     public static function getAssignedTickets(PDO $db, int $resolve){
         $stmt = $db->prepare('SELECT * FROM Ticket WHERE resolve = ?');
         $stmt->execute(array($resolve));

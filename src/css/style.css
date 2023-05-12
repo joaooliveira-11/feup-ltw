@@ -296,6 +296,7 @@ main{
 .retangulo > section > h3 {
     display: inline;
     margin: 10px;
+    overflow-wrap: break-word;
 }
 
 .ticketText {
@@ -653,4 +654,8 @@ ul{
 .StatuschangeList > button{
     background-color: crimson;
     margin-right: 1em;
+}
+
+#DateFilterButton img{
+    max-width: 13px;
 }

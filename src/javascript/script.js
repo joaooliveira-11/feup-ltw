@@ -17,12 +17,19 @@ filter_section_Status.appendChild(filterStatus);
 let displayStatus = false;
 let statuses;
 
-const ticket_list = document.querySelectorAll(".retangulo");
-ticket_list_dictionary = [];
+const order_date_button = document.getElementById("DateFilterButton");
+let date_order = 0;
+let image = document.querySelector('#DateFilterButton img');
+order_date_button.appendChild(image);
+
+let ticket_list = document.querySelectorAll(".retangulo");
+let ticket_list_dictionary = [];
+let dictionaryForOrder = [];
+let arrayToOrder = [];
 ticket_list.forEach(function(ticket,index){
-    const ticket_key = `ticket_${index}`;
-    ticket_list_dictionary[ticket_key] = 0;
-    console.log(ticket_key);
+    ticket_list_dictionary[index] = 0;
+    dictionaryForOrder[index] = ticket;
+    arrayToOrder.push(index);
 })
 
 let arrayDepartmentsSelected=[];
@@ -61,15 +68,14 @@ filter_department_button.addEventListener('click', async function () {
 function updateTicketPageDepartment(id,i){
     arrayDepartmentsSelected[i] = !arrayDepartmentsSelected[i];
     ticket_list.forEach(async function (ticket,index){
-        const ticket_key = `ticket_${index}`;
         if(ticket.getAttribute('data-department') === id){
             if (arrayDepartmentsSelected[i]) {
-                ticket_list_dictionary[ticket_key]--;
+                ticket_list_dictionary[index]--;
             }
             else {
-                ticket_list_dictionary[ticket_key]++;
+                ticket_list_dictionary[index]++;
             }
-            if (ticket_list_dictionary[ticket_key] === 0) {
+            if (ticket_list_dictionary[index] === 0) {
                 ticket.style.display = "block";
             }
             else {
@@ -113,15 +119,14 @@ filter_status_button.addEventListener('click',async function (){
 function updateTicketPageStatus(id, i){
     arrayStatusSelected[i] = !arrayStatusSelected[i];
     ticket_list.forEach(async function (ticket,index){
-        const ticket_key=`ticket_${index}`;
         if(ticket.getAttribute('data-Status') === id) {
             if (arrayStatusSelected[i]) {
-                ticket_list_dictionary[ticket_key]--;
+                ticket_list_dictionary[index]--;
             }
             else {
-                ticket_list_dictionary[ticket_key]++;
+                ticket_list_dictionary[index]++;
             }
-            if (ticket_list_dictionary[ticket_key] === 0) {
+            if (ticket_list_dictionary[index] === 0) {
                 ticket.style.display = "block";
             }
             else {
@@ -129,4 +134,69 @@ function updateTicketPageStatus(id, i){
             }
         }
     })
+}
+
+order_date_button.addEventListener('click',async function(){
+    date_order++;
+    if(date_order===1){
+        image.src = '../docs/images/seta_para_baixo.png'
+    }
+    else if(date_order===2){
+        image.src = '../docs/images/seta_para_cima.png'
+    }
+    else {
+        date_order=0;
+        image.src='../docs/images/icon-minus.png';
+
+    }
+    sectionParent = ticket_list[0].parentNode;
+    if(date_order===0){
+        for(i= ticket_list.length-1;i>0;i--){
+            sectionParent.insertBefore(ticket_list[i-1],ticket_list[i]);
+        }
+    }
+    else {
+        for (i = 0; i < arrayToOrder.length - 1; i++) {
+            let imin = i;
+            for (j = i + 1; j <arrayToOrder.length; j++) {
+                const ticketA = dictionaryForOrder[imin];
+                const ticketA_date = ticketA.querySelector("section:last-child h5:nth-child(3)").getAttribute('data-date');
+                const ticketA_realDate = dateToNumber(ticketA_date);
+                const ticketB = dictionaryForOrder[j];
+                const ticketB_date = ticketB.querySelector("section:last-child h5:nth-child(3)").getAttribute('data-date');
+                const ticketB_realDate = dateToNumber(ticketB_date);
+                if (date_order === 1) {
+                    if (ticketA_realDate < ticketB_realDate) {
+                        imin = j;
+                    }
+                } else if (date_order === 2) {
+                    if (ticketA_realDate > ticketB_realDate) {
+                        imin = j;
+                    }
+                }
+            }
+            changePosition(i,imin,sectionParent);
+            if(date_order===1) {
+            }
+        }
+        for(i= ticket_list.length-1;i>0;i--){
+            sectionParent.insertBefore(dictionaryForOrder[i-1],dictionaryForOrder[i]);
+        }
+    }
+})
+
+
+function changePosition(i,j,parent){
+    const temp = dictionaryForOrder[arrayToOrder[i]];
+    dictionaryForOrder[arrayToOrder[i]] = dictionaryForOrder[arrayToOrder[j]];
+    dictionaryForOrder[arrayToOrder[j]] = temp;
+}
+
+function dateToNumber(date){
+    let parts = date.split('-');
+    let day = parts[0];
+    let month = parts[1];
+    let year = parts[2];
+
+    return parseInt(day) + parseInt(month)*100 + parseInt(year)*10000;
 }

@@ -23,6 +23,7 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
                 <div id="DateFilter">
                     <button id="DateFilterButton">
                         Date
+                        <img src="../docs/images/icon-minus.png">
                     </button>
                 </div>
             </article>
