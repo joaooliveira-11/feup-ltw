@@ -18,5 +18,5 @@ INSERT INTO FAQ (question, answer) VALUES (?,?)
 
 $stmt->execute(array($question, $answer));
 
-header('Location: ../pages/main.php');
+header('Location: ../pages/faq.php');
 ?>
