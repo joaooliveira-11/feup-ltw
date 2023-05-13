@@ -29,10 +29,31 @@
         <?php } ?>
       </div>
     </div>
+    <button id="CreateNewFAQ" onclick="window.location.href='../pages/newFAQ.php'"> <span>+</span> New FAQ</button>
     <script src="../javascript/faq.js"></script>
     </div>
-
   </body>
 </html>
 
+<?php } ?>
+
+<?php function drawCreateNewFAQ(){ ?>
+    <main> 
+        <section id="create-faq">
+            <form action="../actions/action_newFAQ.php" method="post">
+                <div class="form-field">
+                    <label for="question">Question:</label>
+                    <input type="text" name="question" id="question" required>
+                </div>
+                <div class="form-field">
+                    <label for="answer">Answer:</label>
+                    <textarea name="answer" id="answer" rows="4" cols="50" required maxlength="300"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">Submit</button>
+                    <button type="button" class="btn-cancel" onclick="window.location.href='../pages/faq.php'">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
 <?php } ?>
