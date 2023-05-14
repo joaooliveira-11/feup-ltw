@@ -14,6 +14,6 @@ drawAside();
 $db = getDatabaseConnection();
 $idTicket = intval($_POST['idTicket']);
 $ticket = Ticket::getTicketFromId($db,$idTicket);
-$users = User::getUsersFromDepartment($db,$ticket->getidDepartment());
+$users = User::getUsersFromDepartment($db,$ticket->getidDepartment(),$ticket->getCria(), User::getSingleUser($db,$session->getId())->getId());
 drawAgentsAvailableMain($idTicket, $users);
 drawFooterMain();

@@ -68,9 +68,30 @@ class Inquiry
         return $inquiries;
     }
 
-    public static function deleteInquiry(PDO $db, int $idInquiry){
+    public static function getInquiryFromId(PDO $db, int $idInquiry){
+        $stmt = $db->prepare('SELECT * FROM Inquiry WHERE idInquiry = ?');
+        $stmt->execute(array($idInquiry));
+        $inquiry = $stmt->fetch();
+        return new Inquiry(
+            intval($inquiry['idInquiry']),
+            intval($inquiry['idUserReceiving']),
+            intval($inquiry['idUserGiving']),
+            intval($inquiry['idTicket']),
+            $inquiry['type'],
+            $inquiry['date']
+        );
+    }
+
+    public static function deleteInquiryAssignRequest(PDO $db, int $idInquiry){
         $stmt = $db->prepare('DELETE FROM Inquiry WHERE idInquiry = ?');
         $stmt->execute(array($idInquiry));
+    }
+
+    public static function getLastInquiryFromTicket (PDO $db, int $idTicket) : int{
+        $stmt = $db->prepare('SELECT idInquiry FROM Inquiry WHERE idTicket = ? ORDER BY ROWID DESC LIMIT 1');
+        $stmt->execute(array($idTicket));
+        $idInquiry = $stmt->fetchColumn();
+        return intval($idInquiry);
     }
 
 

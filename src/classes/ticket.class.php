@@ -261,5 +261,12 @@
         return $changes;
     }
 
+    public function getLastReplyFromTicket(PDO $db, $idUser){
+        $stmt = $db->prepare('SELECT message FROM Reply WHERE idTicket = ? AND idUser = ? ORDER BY ROWID DESC LIMIT 1');
+        $stmt->execute(array($this->idTicket, $idUser));
+        $reply = $stmt->fetchColumn();
+        return $reply;
+    }
+
 }
 ?>

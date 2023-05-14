@@ -154,8 +154,8 @@ CREATE TRIGGER insert_inquiry_after_reply
     AFTER INSERT ON Reply
     FOR EACH ROW
 BEGIN
-    INSERT INTO Inquiry (idUserReceiving, idUserGiving, idTicket, message, type, date)
-    SELECT CASE WHEN NEW.idUser = T.cria THEN T.resolve ELSE T.cria END, NEW.idUser, NEW.idTicket, NEW.message, 'TICKET_RESPONDED', NEW.create_date
+    INSERT INTO Inquiry (idUserReceiving, idUserGiving, idTicket, type, date)
+    SELECT CASE WHEN NEW.idUser = T.cria THEN T.resolve ELSE T.cria END, NEW.idUser, NEW.idTicket, 'TICKET_RESPONDED', NEW.create_date
     FROM Ticket T
     WHERE T.idTicket = NEW.idTicket;
 END;
@@ -235,4 +235,34 @@ INSERT INTO FAQ (question, answer) VALUES
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
+
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment) VALUES
+    ('Title 1', 'Description 1', 1, '2023-05-11', 1, 2, 1),
+    ('Title 2', 'Description 2', 2, '2023-05-11', 2, 3, 2),
+    ('Title 3', 'Description 3', 3, '2023-05-11', 3, 1, 3),
+    ('Title 4', 'Description 4', 1, '2023-05-11', 1, 3, 2),
+    ('Title 5', 'Description 5', 2, '2023-05-11', 2, 3, 1);
+
+
+INSERT INTO Reply (message, create_date, idTicket, idUser) VALUES
+                                                               ('First reply to ticket 3', '2023-01-03', 3, 1),
+                                                               ('Second reply to ticket 3', '2023-01-04', 3, 3),
+                                                               ('Third reply to ticket 3', '2023-01-05', 3, 1),
+                                                               ('Fourth reply to ticket 3', '2023-01-06', 3, 3),
+                                                               ('Fifth reply to ticket 3', '2023-01-07', 3, 1),
+                                                               ('Sixth reply to ticket 3', '2023-01-08', 3, 3),
+                                                               ('Seventh reply to ticket 3', '2023-01-09', 3, 1),
+                                                               ('Eighth reply to ticket 3', '2023-01-10', 3, 3),
+                                                               ('Ninth reply to ticket 3', '2023-01-11', 3, 1),
+                                                               ('Tenth reply to ticket 3', '2023-01-12', 3, 3),
+                                                               ('First reply to ticket 4', '2023-01-13', 4, 1),
+                                                               ('Second reply to ticket 4', '2023-01-14', 4, 3),
+                                                               ('Third reply to ticket 4', '2023-01-15', 4, 1),
+                                                               ('Fourth reply to ticket 4', '2023-01-16', 4, 3),
+                                                               ('Fifth reply to ticket 4', '2023-01-17', 4, 1),
+                                                               ('Sixth reply to ticket 4', '2023-01-18', 4, 3),
+                                                               ('Seventh reply to ticket 4', '2023-01-19', 4, 1),
+                                                               ('Eighth reply to ticket 4', '2023-01-20', 4, 3),
+                                                               ('Ninth reply to ticket 4', '2023-01-21', 4, 1),
+                                                               ('Tenth reply to ticket 4', '2023-01-22', 4, 3);
 
