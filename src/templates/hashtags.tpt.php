@@ -49,19 +49,23 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
 
+        <section class= hashtags>
         <div class="hashtags-container">
             <button id="add-hashtags-button" onclick="addHashtag(<?=$ticket->getIdTicket()?>, '<?=$autocompleteId?>')">Add Hashtag</button>
+                <ul id="<?=$autocompleteId?>"></ul>
         </div>
 
-        <ul id="<?=$autocompleteId?>"></ul>
 
         <?php $hashtags = $ticket->getTicketHashtags($db); ?>
-
-        <?php foreach ($hashtags as $hashtag) : ?>
-            <a href="../actions/action_remove_hashtag.php?ticket_id=<?php echo $ticket->getIdTicket()?>&hashtag_id=<?php echo $hashtag['id'] ?>">
-                #<?php echo $hashtag['name'] ?>
-            </a>
-        <?php endforeach; ?>
+            <?php foreach ($hashtags as $hashtag) : ?>
+                <div class="hashtag-button">
+                <a href="../actions/action_remove_hashtag.php?ticket_id=<?php echo $ticket->getIdTicket()?>&hashtag_id=<?php echo $hashtag['id'] ?>">
+                    #<?php echo $hashtag['name'] ?>
+                    <img src="../docs/images/icons-multiply.png" alt="remove_hashtag">
+                </a>
+                </div>
+            <?php endforeach; ?>
+        </section>
 
         <section>
             <article>
