@@ -44,7 +44,7 @@ CREATE TABLE Inquiry(
                      idUserReceiving INTEGER REFERENCES User, --user que recebeu a notificação
                      idUserGiving INTEGER REFERENCES User, --user que "fez" a notificação (pode ser opcional)
                      idTicket INTEGER REFERENCES Ticket,
-                     type TEXT NOT NULL, -- o type pode ser ASSIGN_REQUEST, TICKET_REPONDED, etc(depois adiciona-se mais, dependendo das funcionalidades)
+                     type TEXT NOT NULL, -- o type pode ser ASSIGN_REQUEST, TICKET_RESPONDED, etc(depois adiciona-se mais, dependendo das funcionalidades)
                      date DATE
 
 );
@@ -150,15 +150,6 @@ BEGIN
     UPDATE Ticket SET resolve = NULL WHERE idTicket = NEW.idTicket;
 END;
 
-CREATE TRIGGER insert_inquiry_after_reply
-    AFTER INSERT ON Reply
-    FOR EACH ROW
-BEGIN
-    INSERT INTO Inquiry (idUserReceiving, idUserGiving, idTicket, type, date)
-    SELECT CASE WHEN NEW.idUser = T.cria THEN T.resolve ELSE T.cria END, NEW.idUser, NEW.idTicket, 'TICKET_RESPONDED', NEW.create_date
-    FROM Ticket T
-    WHERE T.idTicket = NEW.idTicket;
-END;
 
 ------------------------------------------------------------------------------------------
 --------------------------------------Data Insertion--------------------------------------

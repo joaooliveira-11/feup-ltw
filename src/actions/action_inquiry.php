@@ -14,7 +14,6 @@ $user = User::getSingleUser($db,$session->getId());
 if(!(empty($_POST['idUserReceiving'])) and !(empty($_POST['idTicket']))){
     $stmt = $db->prepare('INSERT INTO Inquiry (idUserReceiving,idUserGiving,idTicket,type,date) VALUES (?,?,?,?,?)');
     $stmt->execute(array(intval($_POST['idUserReceiving']),$user->getId(),intval($_POST['idTicket']),$_POST['type'],date('d-m-Y')));
-    //print_r(array($_POST['idUserReceiving'],$user->getId(),$_POST['idTicket'],$_POST['type'],date('d-m-Y')));
     header('Location: ../pages/main.php');
 }
 

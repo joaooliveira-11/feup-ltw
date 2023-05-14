@@ -6,14 +6,15 @@ function drawUserInquiries(PDO $db, array $inquiries){ ?>
         $dictionaryInquiriesResponses = array();
         foreach ($inquiries as $inquiry){
             if ($inquiry->getType()==="TICKET_RESPONDED"){
-                if(array_key_exists($inquiry->getIdInquiry(),$dictionaryInquiriesResponses)){
-                    $dictionaryInquiriesResponses[$inquiry->getTicket()]+=1;
+                if(array_key_exists($inquiry->getTicket(),$dictionaryInquiriesResponses)){
+                    $dictionaryInquiriesResponses[$inquiry->getTicket()] +=1;
                 }
                 else{
                     $dictionaryInquiriesResponses[$inquiry->getTicket()] = 1;
                 }
             }
         }
+        print_r($dictionaryInquiriesResponses);
         foreach ($inquiries as $inquiry){
             $inquiryType = $inquiry->getType();
             if($inquiryType==="ASSIGN_AGENT"){
@@ -63,7 +64,6 @@ function drawTicketAssignRequest(PDO $db, Inquiry $inquiry){
 
 function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber){
     $ticket = Ticket::getTicketFromId($db,$inquiry->getTicket());
-    print_r($ticket);
     ?>
     <section class="retangulo">
         <section class = "AssignTicket">

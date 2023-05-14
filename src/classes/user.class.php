@@ -2,11 +2,11 @@
   declare(strict_types = 1);
 
   class User {
-    public int $idUser;
-    public string $name;
-    public string $username;
-    public string $email;
-    public string $password;
+    private int $idUser;
+    private string $name;
+    private string $username;
+    private string $email;
+    private string $password;
 
     public function __construct(int $idUser, string $name, string $username, string $email, string $password)
     {

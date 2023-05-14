@@ -268,5 +268,13 @@
         return $reply;
     }
 
+    public function getTicketReceiver(PDO $db, int $idUser){
+        $stmt = $db->prepare('SELECT cria,resolve FROM Ticket WHERE idTicket = ? ');
+        $stmt->execute(array($this->idTicket));
+        $users = $stmt->fetchColumn();
+        if (intval($users[0]) === $idUser) return intval($users[1]);
+        else return intval($users[0]);
+    }
+
 }
 ?>
