@@ -15,7 +15,7 @@
 
   if($user) {
     $session->setUsername($user->getUsername());
-    $session->setId($user->idUser);
+    $session->setId($user->getId());
     unset($_SESSION['input']['username login']);
     unset($_SESSION['input']['password login']);
     //$_SESSION['id'] = $user->idUser;
