@@ -1,41 +1,41 @@
 function addHashtag(idTicket, autocompleteId) {
-    const container = document.querySelector('.hashtags-container');
-    const button = document.querySelector('#add-hashtags-button');
-  
-    if (!container.querySelector('textarea')) {
-      const textarea = document.createElement('textarea');
-      textarea.setAttribute('name', 'hashtags');
-      textarea.setAttribute('id', 'hashtags-${idTicket}');
-      textarea.setAttribute('placeholder', 'Type a hashtag');
-  
-      container.insertBefore(textarea, button.nextSibling);
-      setTimeout(() => {
-        if (!textarea.value) {
-          container.removeChild(textarea);
-        }
-      }, 30000);
-    }
-  
-    const input = document.getElementById('hashtags-${idTicket}');
-  
-    if (input) {
-      input.addEventListener('input', function() {
-        const query = this.value;
-  
-        // Make an AJAX request to fetch the matching hashtags from the server
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `../javascript/hashtags.php?q=${encodeURIComponent(query)}`, true);
-        xhr.onload = function() {
-          if (xhr.status === 200) {
-            const hashtags = JSON.parse(xhr.responseText);
-            console.log(hashtags)
-            showAutocomplete(hashtags, input, idTicket, autocompleteId);          
-            }
-        };
-        xhr.send();
-      });
-    }
+  const container = document.querySelector(`#ticket-${idTicket} .hashtags-container`);
+  const button = container.querySelector('#add-hashtags-button');
+
+  if (!container.querySelector('textarea')) {
+    const textarea = document.createElement('textarea');
+    textarea.setAttribute('name', 'hashtags');
+    textarea.setAttribute('id', `hashtags-${idTicket}`);
+    textarea.setAttribute('placeholder', 'Type a hashtag');
+
+    container.insertBefore(textarea, button.nextSibling);
+    setTimeout(() => {
+      if (!textarea.value) {
+        container.removeChild(textarea);
+      }
+    }, 30000);
   }
+
+  const input = document.getElementById(`hashtags-${idTicket}`);
+
+  if (input) {
+    input.addEventListener('input', function() {
+      const query = this.value;
+
+      // Make an AJAX request to fetch the matching hashtags from the server
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', `../javascript/hashtags.php?q=${encodeURIComponent(query)}`, true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          const hashtags = JSON.parse(xhr.responseText);
+          console.log(hashtags)
+          showAutocomplete(hashtags, input, idTicket, autocompleteId);          
+        }
+      };
+      xhr.send();
+    });
+  }
+}
   
   function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
     const list = document.getElementById(autocompleteId);

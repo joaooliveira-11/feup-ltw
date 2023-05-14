@@ -42,7 +42,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
         $autocompleteId = "autocomplete-list-" . $ticket->getIdTicket();
     ?>
     <script src="../javascript/hashtags.js"></script>
-    <div class="retangulo <?php echo $backgroundColor ?>">
+    <div class="retangulo <?php echo $backgroundColor ?>" id="ticket-<?=$ticket->getIdTicket()?>">
         <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
 
         <section>
@@ -58,7 +58,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
         <?php $hashtags = $ticket->getTicketHashtags($db); ?>
 
         <?php foreach ($hashtags as $hashtag) : ?>
-            <<a href="../actions/action_remove_hashtag.php?ticket_id=<?php echo $ticket->getIdTicket()?>&hashtag_id=<?php echo $hashtag['id'] ?>">
+            <a href="../actions/action_remove_hashtag.php?ticket_id=<?php echo $ticket->getIdTicket()?>&hashtag_id=<?php echo $hashtag['id'] ?>">
                 #<?php echo $hashtag['name'] ?>
             </a>
         <?php endforeach; ?>
