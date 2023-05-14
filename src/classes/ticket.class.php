@@ -165,5 +165,18 @@
           $result = $stmt->fetch();
           return intval($result['idUserReceiving']);
       }
+
+    function getTicketHashtags(PDO $db): array {
+        $stmt = $db->prepare('SELECT h.idHashtag, h.name FROM Ticket_Hashtags th JOIN Hashtag h ON th.idHashtag = h.idHashtag WHERE th.idTicket = ?');
+        $stmt->execute(array($this->idTicket));
+        $hashtags = array();
+        while ($hashtag = $stmt->fetch()) {
+            $hashtags[] = array(
+                'id' => intval($hashtag['idHashtag']),
+                'name' => $hashtag['name']
+            );
+        }
+        return $hashtags;
+    }
 }
 ?>

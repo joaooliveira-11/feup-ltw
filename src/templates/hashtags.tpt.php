@@ -55,9 +55,14 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
 
         <ul id="<?=$autocompleteId?>"></ul>
 
+        <?php $hashtags = $ticket->getTicketHashtags($db); ?>
 
+        <?php foreach ($hashtags as $hashtag) : ?>
+            <<a href="../actions/action_remove_hashtag.php?ticket_id=<?php echo $ticket->getIdTicket()?>&hashtag_id=<?php echo $hashtag['id'] ?>">
+                #<?php echo $hashtag['name'] ?>
+            </a>
+        <?php endforeach; ?>
 
-        
         <section>
             <article>
                 <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
