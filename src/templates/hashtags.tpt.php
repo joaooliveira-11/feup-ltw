@@ -38,6 +38,8 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                     break;
             }
         }
+
+        $autocompleteId = "autocomplete-list-" . $ticket->getIdTicket();
     ?>
     <script src="../javascript/hashtags.js"></script>
     <div class="retangulo <?php echo $backgroundColor ?>">
@@ -48,10 +50,12 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
         </section>
 
         <div class="hashtags-container">
-            <button id="add-hashtags-button" onclick="addHashtag(<?=$ticket->getIdTicket()?>)">Add Hashtag</button>
+            <button id="add-hashtags-button" onclick="addHashtag(<?=$ticket->getIdTicket()?>, '<?=$autocompleteId?>')">Add Hashtag</button>
         </div>
 
-        <ul id="autocomplete-list"></ul>
+        <ul id="<?=$autocompleteId?>"></ul>
+
+
 
         
         <section>

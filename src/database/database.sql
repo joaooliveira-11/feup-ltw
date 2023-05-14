@@ -68,7 +68,7 @@ CREATE TABLE Ticket(
 );
 
 CREATE TABLE Hashtag(
-                        idTicket INTEGER PRIMARY KEY,
+                        idHashtag INTEGER PRIMARY KEY,
                         name TEXT NOT NULL,
                         CONSTRAINT UNIQUE_Hashtag_name UNIQUE (name)
 );
