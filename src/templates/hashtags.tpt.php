@@ -60,7 +60,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
 
         <div id="hashtag-button-container-<?php echo $ticket->getIdTicket(); ?>">
             <?php foreach ($hashtags as $hashtag) : ?>
-                <button class="hashtag-button" id="hashtag-button-<?php echo $ticket->getIdTicket() ?>-<?php echo $hashtag['id'] ?>"
+                <button class="hashtag-button" onclick="removeHashtag(<?=$ticket->getIdTicket()?>, <?php echo $hashtag['id'] ?>)" id="hashtag-button-<?php echo $ticket->getIdTicket() ?>-<?php echo $hashtag['id'] ?>"
                     data-ticket-id="<?php echo $ticket->getIdTicket() ?>" data-hashtag-id="<?php echo $hashtag['id'] ?>">
                     <a>#<?php echo $hashtag['name'] ?></a>
                     <img src="../docs/images/icons-multiply.png" alt="remove_hashtag">

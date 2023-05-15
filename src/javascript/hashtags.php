@@ -10,7 +10,9 @@ if (!$session->isLoggedIn()) {
 }
 
 $db = getDatabaseConnection();
-$q = $_GET['q'];
+
+// Retrieve the query string from the request
+$q = $_REQUEST['q'];
 
 // Check if the query is for inserting a hashtag
 if (substr($q, 0, 4) === 'add:') {

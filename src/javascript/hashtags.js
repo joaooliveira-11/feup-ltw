@@ -121,3 +121,25 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
     list.appendChild(item);
   }
 }
+
+function removeHashtag(ticketId, hashtagId) {
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `../javascript/hashtags.php?q=remove:${hashtagId}:${ticketId}`, true);
+  //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  
+  // Define the AJAX response handler
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      // Handle the AJAX response here
+      console.log(xhr.responseText);
+      
+      // Remove the hashtag button from the DOM
+      var buttonId = "hashtag-button-" + ticketId + "-" + hashtagId;
+      var button = document.getElementById(buttonId);
+      button.parentNode.removeChild(button);
+    }
+  };
+  
+  xhr.send();
+}
