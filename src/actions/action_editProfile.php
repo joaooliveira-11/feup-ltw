@@ -58,5 +58,5 @@ if($newPassword) {
 }
 
 $updateUser->save($db);
-$session->logout();
-header('Location: ../pages/login.php');
+$session->addMessage('success', 'Profile Updated successful!');
+header('Location: ../pages/editProfile.php');
