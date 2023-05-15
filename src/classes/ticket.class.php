@@ -192,6 +192,13 @@
         return $result['name'];
     }
 
+    public static function get_department_from_id(PDO $db, int $department){
+        $stmt = $db->prepare('SELECT * FROM Department WHERE idDepartment = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return $result;
+    }
+
     public static function possibleChangingStatus(PDO $db, string $status): array {
             $stmt = $db->prepare('SELECT stage FROM Status WHERE stage != ?');
             $stmt->execute(array($status));

@@ -178,14 +178,14 @@ main{
     margin: 1em;
 }
 
-#CreateNewTicket{
+.CreateNewTicket{
     margin: 2em 3em 0 3em;
     padding: 10px 20px;
     background-color: #20DF7F;
     font-size: 1em;
 }
 
-#CreateNewTicket > span {
+.CreateNewTicket > span {
     font-size: 1.3em;
     padding-right: 10px;
 }
@@ -469,10 +469,10 @@ label{
     color:#224957;
 }
 
-#createticket form {
+.createticket form {
     margin: 0;
 }
-#createticket form div{
+.createticket form div{
     padding: 0.5em 0;
 }
 .ticket-title {
@@ -537,7 +537,7 @@ label{
     border-radius: 10px;
 }
 
-#createticket .form-wrapper {
+.createticket .form-wrapper {
     padding: 1em;
     padding-bottom: 3em;
     background: #AFAFAF;
@@ -549,7 +549,7 @@ form .btn-submit {
     margin-top: 2.5em;
     margin-right: 1em;
     padding: 0.5em 1em;
-    width: 10em;
+    width: 11em;
     background-color: #20DF7F;
     font-size: 0.9em;
     font-weight: 600;
@@ -856,4 +856,14 @@ aside ul>button{
 
 #InformationAssignTicket{
     margin-left: 1.5em;
+}
+
+#manageDepartmentsHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#manageDepartmentsHeader button{
+    margin: 0;
 }

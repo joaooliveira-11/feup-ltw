@@ -202,7 +202,7 @@ function drawMainPage(array $departments, PDO $db) { ?>
         <?php } ?>
     </article>
         <a href="../pages/newTicket.php">
-            <button id="CreateNewTicket"> <span>+</span> New Ticket</button>
+            <button class="CreateNewTicket"> <span>+</span> New Ticket</button>
         </a>
 </main>
 
