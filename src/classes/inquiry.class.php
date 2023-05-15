@@ -52,8 +52,8 @@ class Inquiry
 
     public static function getUserInquiries(PDO $db, int $idUser): array
     {
-        $stmt = $db->prepare('SELECT * FROM Inquiry ');
-        $stmt->execute();
+        $stmt = $db->prepare('SELECT * FROM Inquiry Where idUserReceiving = ?');
+        $stmt->execute(array($idUser));
         $inquiries = array();
         while ($inquiry = $stmt->fetch()) {
             $inquiries[] = new Inquiry(
