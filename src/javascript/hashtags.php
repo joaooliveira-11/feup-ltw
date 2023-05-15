@@ -34,8 +34,11 @@ if (substr($q, 0, 4) === 'add:') {
         $stmt_insert->execute();
     }
 
-    // Return a success message
-    echo json_encode(['message' => 'Hashtag inserted successfully']);
+    // Retrieve the updated list of hashtags for the ticket
+    $updatedHashtags = getHashtagsForTicket($ticket);
+
+    // Return a response object with the success message and updated hashtags
+    echo json_encode(['message' => 'Hashtag inserted successfully', 'hashtags' => $updatedHashtags]);
 } else {
     // Query the database for matching hashtags
     $stmt = $db->prepare('SELECT name FROM Hashtag WHERE name LIKE :query');
@@ -47,6 +50,19 @@ if (substr($q, 0, 4) === 'add:') {
 
     // Return the list of matching hashtags as JSON
     echo json_encode($hashtags);
+}
+
+function getHashtagsForTicket($ticketId) {
+    global $db;
+
+    $stmt = $db->prepare('SELECT Hashtag.idHashtag, Hashtag.name FROM Hashtag INNER JOIN Ticket_Hashtags ON Hashtag.idHashtag = Ticket_Hashtags.idHashtag WHERE Ticket_Hashtags.idTicket = :ticketId');
+    $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Fetch the hashtags for the ticket
+    $hashtags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $hashtags;
 }
 
 ?>
