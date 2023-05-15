@@ -180,7 +180,7 @@ function drawMainPage(array $departments, PDO $db) { ?>
     </article>
     <article id="DepartmentsMain" class="MainOverflow">
     <?php foreach ($departments as $department) { ?>
-            <section id="ADepartmentMain">
+            <section class="ADepartmentMain">
                 <h4>
                     <?php echo $department['name'] ?>
                 </h4>

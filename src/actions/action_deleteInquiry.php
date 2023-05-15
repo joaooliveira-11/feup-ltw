@@ -12,7 +12,8 @@ $currentUser = User::getSingleUser($db,$session->getId());
 print_r($_POST);
 $inquiry = Inquiry::getInquiryFromId($db,intval($_POST['idInquiry']));
 $type = $inquiry->getType();
-if($type==="ASSIGN_REQUEST") {
+print_r($inquiry);
+if($type==="ASSIGN_AGENT") {
     Inquiry::deleteInquiryAssignRequest($db, intval($_POST['idInquiry']));
 }
 header('Location: ../pages/inquiries.php');

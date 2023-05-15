@@ -87,7 +87,7 @@
       }
 
       static function getWebsiteDepartments($db){
-          $stmt = $db->prepare('Select * From Departments');
+          $stmt = $db->prepare('Select * From Department');
           $stmt->execute();
           return $stmt->fetchAll();
       }

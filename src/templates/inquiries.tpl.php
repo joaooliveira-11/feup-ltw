@@ -14,7 +14,6 @@ function drawUserInquiries(PDO $db, array $inquiries){ ?>
                 }
             }
         }
-        print_r($dictionaryInquiriesResponses);
         foreach ($inquiries as $inquiry){
             $inquiryType = $inquiry->getType();
             if($inquiryType==="ASSIGN_AGENT"){
@@ -37,7 +36,9 @@ function drawTicketAssignRequest(PDO $db, Inquiry $inquiry){
         <h5> Requested by: <?php echo $userRequesting->getName() ?></h5>
         <h2 class="ticketText"> <?php echo $ticket->getTitle() ?></h2>
         <section class="ticketDescription">
-            <?php echo $ticket->getDescription() ?>
+            <h3>
+                <?php echo $ticket->getDescription() ?>
+            </h3>
         </section>
         <section>
             <article>

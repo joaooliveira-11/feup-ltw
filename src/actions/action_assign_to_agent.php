@@ -30,7 +30,7 @@ if($assignAgent) {
        ');
         $stmt_new->execute(array($ticket_id, 2,$ticket->getidDepartment(), $ticket->getResolve(),$date));
         if($stmt_new){
-            if($_POST['Inquiry']) Inquiry::deleteInquiry($db, intval($_POST['Inquiry']));
+            if($_POST['Inquiry']) Inquiry::deleteInquiryAssignRequest($db, intval($_POST['Inquiry']));
             $session->addMessage("Success", "Ticket Assigned successfully");
             header('Location: ../pages/myAssignedTickets.php');
         }
