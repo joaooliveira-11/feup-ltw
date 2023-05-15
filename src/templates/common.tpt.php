@@ -86,9 +86,12 @@ function drawFooterMain(){ ?>
 
 <?php }
 
-function drawHeaderMain($scriptPage = "script.js"){?>
+function drawHeaderMain($scriptPage = null){?>
     <link rel="stylesheet" href="../css/style.css">
-    <script defer src="../javascript/<?php echo $scriptPage?>"></script>
+    <script defer src="../javascript/script.js"></script>
+    <?php if ($scriptPage!=null) { ?>
+        <script defer src="../javascript/<?php echo $scriptPage?>"></script>
+    <?php } ?>
 
     <header id ="HeaderMain">
         TicketEase
@@ -150,12 +153,18 @@ function drawAsideAgent(){ ?>
 <?php }
 
 function drawAsideAdmin(){ ?>
-
-    <a href="../pages/manage.php" id="ManageWebsite">
-        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        Manage Website
-    </a>
-
+    <div id="AsideAdmin">
+        <a id="ManageWebsite">
+            <img src="../docs/images/definition.png">
+            Manage Website
+        </a>
+        <img src="../docs/images/—Pngtree—vector%20right%20arrow%20icon_4184716.png" style="display: none" id="SetaParaDireita">
+        <ul style="display: none">
+            <button onclick="window.location.href='../pages/manageDepartments.php'">Manage Departments</button>
+            <button onclick="window.location.href='../pages/manageUsers.php'">Manage Users</button>
+            <button onclick="window.location.href='../pages/manageDepartments.php'">Other Options</button>
+        </ul>
+    </div>
 <?php }
 
 

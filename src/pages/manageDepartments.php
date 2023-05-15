@@ -1,21 +1,18 @@
 <?php
+
+
 require_once(dirname(__DIR__).'/templates/common.tpt.php');
 require_once(dirname(__DIR__).'/database/connection.php');
+require_once(dirname(__DIR__).'/classes/user.class.php');
+require_once(dirname(__DIR__).'/classes/ticket.class.php');
 require_once(dirname(__DIR__).'/utils/session.php');
 require_once(dirname(__DIR__) . '/templates/agentTickets.tpt.php');
-require_once(dirname(__DIR__).'/templates/mytickets.tpl.php');
-require_once(dirname(__DIR__).'/classes/ticket.class.php');
 
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-$db = getDatabaseConnection();
-$ticket_id = $_POST['Ticket'];
-$ticket = Ticket::getTicketFromId($db, intval($ticket_id));
-$changes = $ticket->getTicketHistory($db);
-
 drawHeaderMain();
-drawTicketHistory($changes, $db);
+$db = getDatabaseConnection();
+$departments = User::getWebsiteDepartments($db);
 drawAside();
+drawWebsiteDepartments();
 drawFooterMain();
-?>
-

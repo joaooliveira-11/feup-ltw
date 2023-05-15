@@ -130,7 +130,7 @@ CREATE TRIGGER insert_user_roles
 AFTER INSERT ON User
 FOR EACH ROW
 BEGIN
-    INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 2); --quando se regista um user, ele é um cliente.
+    INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 3); --quando se regista um user, ele é um cliente.
 END;
 
 CREATE TRIGGER insert_ticket_status

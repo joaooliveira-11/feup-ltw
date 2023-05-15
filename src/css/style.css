@@ -69,30 +69,26 @@ aside{
     flex-direction: column;
 }
 
-aside > a > img {
+aside a > img {
     width: 15%;
     align-content: left;
     margin-right: 1em;
 }
 
-aside > a {
+aside a {
     display: flex;
     align-content: left;
     justify-content: left;
     text-decoration: none;
     color: #224957;
-}
-
-aside > a{
     padding-top: 1em;
     padding-bottom: 1em;
     padding-left: 1em;
-    display: flex;
     align-items: center;
     border-bottom: #224957 1px solid;
 }
 
-aside > a:hover{
+aside a:hover{
     cursor: pointer;
     background-color: #dde2e4;
 }
@@ -712,4 +708,29 @@ ul{
     padding: 1em 20px;
     border-bottom: 4px #224957 solid;
 
+}
+
+#AsideAdmin{
+    position: relative;
+}
+
+#AsideAdmin ul{
+    position: absolute;
+    background-color: lightsalmon;
+    border-radius: 13px;
+    padding: 0.6em 0;
+    left: 18em;
+    top:-8em;
+}
+
+aside ul>button{
+    padding: 0.5em 0.6em;
+    margin: 1.14em;
+}
+
+#SetaParaDireita{
+    width: 18%;
+    position: absolute;
+    left: 15.43em;
+    top:0.5em;
 }

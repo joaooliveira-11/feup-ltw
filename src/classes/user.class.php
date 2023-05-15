@@ -86,6 +86,12 @@
 
       }
 
+      static function getWebsiteDepartments($db){
+          $stmt = $db->prepare('Select * From Departments');
+          $stmt->execute();
+          return $stmt->fetchAll();
+      }
+
 
     static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
 
