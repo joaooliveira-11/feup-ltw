@@ -276,5 +276,12 @@
         else return intval($users[0]);
     }
 
+    public function getAllLastReplyFromTicket(PDO $db){
+        $stmt = $db->prepare('SELECT r.message, u.username, r.create_date, r.idTicket, r.idUser FROM Reply r JOIN User u ON r.idUser = u.idUser WHERE r.idTicket = ? ORDER BY r.ROWID DESC LIMIT 1');
+        $stmt->execute(array($this->idTicket));
+        $reply = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $reply;
+    }
+
 }
 ?>

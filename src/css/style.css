@@ -767,3 +767,82 @@ aside ul>button{
     padding-bottom: 3em;
     position: relative;
 }
+
+.message {
+    max-width: 60%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.message-me {
+    margin-left: auto;
+    margin-right: 0;
+    background-color: #dcf8c6;
+    color: #000;
+}
+
+.message-other {
+    margin-right: auto;
+    margin-left: 0;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ece5dd;
+}
+
+.message-sender {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-timestamp {
+    font-size: 12px;
+    color: #999;
+    float: right;
+    margin-top: -4px;
+}
+
+.message-content {
+    clear: both;
+}
+
+#message-container {
+    position: relative;
+    padding: 20px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    background-color: #E5DDD5;
+}
+
+#send-message-form {
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#send-message-form input[type="text"] {
+    flex: 1;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #b1b1b1;
+    padding: 0 15px;
+    margin-right: 10px;
+}
+
+#send-message-form button {
+    width: 60px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #00BFA5; 
+    color: #fff;
+    cursor: pointer;
+}
