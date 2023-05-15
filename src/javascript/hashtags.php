@@ -39,7 +39,27 @@ if (substr($q, 0, 4) === 'add:') {
 
     // Return a response object with the success message and updated hashtags
     echo json_encode(['message' => 'Hashtag inserted successfully', 'hashtags' => $updatedHashtags]);
-} else {
+
+} else if (substr($q, 0, 7) === 'remove:') {
+    $args = substr($q, 7);
+    $args_arr = explode(':', $args);
+    $ticket = array_pop($args_arr);
+    $hashtag = $args_arr[0]; // Use index 0 since you only have one hashtag
+
+    // Remove the hashtag from the ticket_hashtags table
+    $stmt = $db->prepare('DELETE FROM Ticket_Hashtags WHERE idTicket = :idTicket AND idHashtag = :idHashtag');
+    $stmt->bindValue(':idHashtag', $hashtag, PDO::PARAM_INT);
+    $stmt->bindValue(':idTicket', $ticket, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Retrieve the updated list of hashtags for the ticket
+    $updatedHashtags = getHashtagsForTicket($ticket);
+
+    // Return a response object with the success message
+    echo json_encode(['message' => 'Hashtag removed successfully', 'hashtags' => $updatedHashtags]);
+    exit; // Terminate the script after sending the response
+}
+ else {
     // Query the database for matching hashtags
     $stmt = $db->prepare('SELECT name FROM Hashtag WHERE name LIKE :query');
     $stmt->bindValue(':query', $q . '%', PDO::PARAM_STR);

@@ -85,36 +85,35 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
       xhr.open('GET', `../javascript/hashtags.php?q=add:${hashtag}:${idTicket}`, true);
 
       xhr.onload = function() {
-        if (xhr.status === 200) {
-          const response = JSON.parse(xhr.responseText);
-          const updatedHashtags = response.hashtags;
+        const response = JSON.parse(xhr.responseText);
+        const updatedHashtags = response.hashtags;
 
-          if (hashtagButtonContainer) {
-            // Remove existing hashtag buttons
-            hashtagButtonContainer.innerHTML = '';
-          }
-
-          for (let j = 0; j < updatedHashtags.length; j++) {
-            const updatedHashtag = updatedHashtags[j];
-            const hashtagButton = document.createElement('div');
+        const hashtagButtonContainer = document.getElementById(`hashtag-button-container-${idTicket}`);
+        if (hashtagButtonContainer) {
+          // Clear existing hashtag buttons
+          hashtagButtonContainer.innerHTML = '';
+        
+          // Create and append new hashtag buttons
+          updatedHashtags.forEach((updatedHashtag) => {
+            const hashtagButton = document.createElement('button');
             hashtagButton.classList.add('hashtag-button');
-            const hashtagLink = document.createElement('a');
-            hashtagLink.href = `../actions/action_remove_hashtag.php?ticket_id=${idTicket}&hashtag_id=${updatedHashtag.id}`;
-            hashtagLink.textContent = `#${updatedHashtag.name}`;
+            hashtagButton.dataset.ticketId = idTicket;
+            hashtagButton.dataset.hashtagId = updatedHashtag.id;
+
+            const hashtagText = document.createElement('a');
+            hashtagText.text = `#${updatedHashtag.name}`;
+
             const removeIcon = document.createElement('img');
             removeIcon.src = '../docs/images/icons-multiply.png';
             removeIcon.alt = 'remove_hashtag';
-            hashtagLink.appendChild(removeIcon);
-            hashtagButton.appendChild(hashtagLink);
-            if (hashtagButtonContainer) {
-              // Append new hashtag button to the existing container
-              hashtagButtonContainer.appendChild(hashtagButton);
-            }
-          }
 
-          input.parentNode.removeChild(input);
+            hashtagButton.appendChild(hashtagText);
+            hashtagButton.appendChild(removeIcon);
+            hashtagButtonContainer.appendChild(hashtagButton);
+          });
         }
-      };
+          input.parentNode.removeChild(input);
+      }
       xhr.send();
       document.querySelector(`#ticket-${idTicket} .hashtags-container`).classList.remove('active');
     });
