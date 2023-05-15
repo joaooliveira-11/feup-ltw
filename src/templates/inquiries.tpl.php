@@ -83,7 +83,10 @@ function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber)
         </section>
         <section>
             <h5>
-                Last Message: <?php echo $ticket->getLastReplyFromTicket($db,$inquiry->getUserGiving()) ?>
+                <?php
+                $lastReply = $ticket->getLastReplyFromTicket($db,$inquiry->getUserGiving());
+                $ExibingText = strlen($lastReply) > 58 ? substr($lastReply, 0, 58) . '...' : $lastReply; ?>
+                Last Message: <?php echo $ExibingText ?>
             </h5>
             <form method="post" action="../actions/action_deleteInquiriesTicketResponded.php">
                 <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket() ?>"> See more </button>
