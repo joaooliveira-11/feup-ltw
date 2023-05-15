@@ -846,3 +846,14 @@ aside ul>button{
     color: #fff;
     cursor: pointer;
 }
+
+#InquiriesButton > div{
+    margin-left: 2.5em;
+    padding: 0 6px;
+    border-radius: 125px;
+    background-color: #ff2222;
+}
+
+#InformationAssignTicket{
+    margin-left: 1.5em;
+}

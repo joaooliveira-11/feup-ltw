@@ -2,6 +2,7 @@
 require_once(dirname(__DIR__).'/database/connection.php');
 require_once(dirname(__DIR__).'/classes/user.class.php');
 require_once(dirname(__DIR__).'/utils/session.php');
+require_once(dirname(__DIR__).'/classes/inquiry.class.php');
 
 function drawLogin()
 { ?>
@@ -104,6 +105,11 @@ function drawAside(){
     $session = new Session();
 
     $user = User::getSingleUser($db, $session->getId());
+    $inquiries = Inquiry::getUserInquiries($db,$user->getId());
+    $count_inquiries = 0;
+    foreach ($inquiries as $inquiry){
+        $count_inquiries++;
+    }
 
     $role = $user->getUserRole($db);
     ?>
@@ -123,6 +129,11 @@ function drawAside(){
         <a href="../pages/inquiries.php" id="InquiriesButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
             Inquiries
+            <?php if($count_inquiries>0) { ?>
+            <div>
+                <?php echo $count_inquiries; ?>
+            </div>
+            <?php } ?>
         </a>
 
         <?php   

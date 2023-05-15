@@ -53,7 +53,7 @@ function drawTicketAssignRequest(PDO $db, Inquiry $inquiry){
                         Accept
                     </button>
                 </form>
-                <form method="post" action="../actions/action_deleteInquiry.php">
+                <form method="post" action="../actions/action_deleteInquiryAssignAgent.php">
                     <button id="RejectTicketFromInquiry" type="submit" name="idInquiry" value="<?php echo $inquiry->getIdInquiry() ?>">
                         Reject
                     </button>
@@ -68,14 +68,13 @@ function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber)
     ?>
     <section class="retangulo">
         <section class = "AssignTicket">
-            <div>
+            <div id="InformationAssignTicket">
     <?php if($ticket->getCria()===$inquiry->getUserGiving()){ ?>
-            <?php echo $notificationNumber ?> New Message(s) From Client <?php echo User::getSingleUser($db,$inquiry->getIdInquiry())->getName() ?>
+            <?php echo $notificationNumber ?> New Message(s) From Client <?php echo User::getSingleUser($db,$inquiry->getUserGiving())->getName() ?>
     <?php }
-        else if ($ticket->getResolve()===$inquiry->getIdInquiry()){ ?>
-            <?php echo $notificationNumber ?> New Message(s) From Agent <?php echo User::getSingleUser($db,$inquiry->getIdInquiry())->getName() ?>
-        <?php }
-        else echo $ticket->getResolve(); echo $ticket->getCria(); echo $inquiry->getUserGiving() ; echo $inquiry->getUserReceiving()?>
+        else if ($ticket->getResolve()===$inquiry->getUserGiving()){ ?>
+            <?php echo $notificationNumber ?> New Message(s) From Agent <?php echo User::getSingleUser($db,$inquiry->getUserGiving())->getName() ?>
+        <?php } ?>
             </div>
             <h2 class="ticketText"><?php echo $ticket->getTitle()?></h2>
         </section>
@@ -86,8 +85,8 @@ function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber)
             <h5>
                 Last Message: <?php echo $ticket->getLastReplyFromTicket($db,$inquiry->getUserGiving()) ?>
             </h5>
-            <form method="post" action="../actions/action_deleteInquiry.php">
-                <button type="submit" name="Inquiry" value="<?php echo $inquiry->getIdInquiry() ?>"
+            <form method="post" action="../actions/action_deleteInquiriesTicketResponded.php">
+                <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket() ?>"> See more </button>
             </form>
         </section>
     </section>

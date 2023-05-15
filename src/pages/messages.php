@@ -8,7 +8,7 @@ $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 
 $idUser = $session->getId();
-$ticket_id = intval($_POST['Ticket']);
+$ticket_id = intval($_SESSION['Ticket']);
 
 drawHeaderMain("messages.js");
 drawAside();
