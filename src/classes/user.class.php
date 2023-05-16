@@ -150,6 +150,74 @@
         }
         return $users;
     }
+
+  static function getAllUsersFromDepartment(PDO $db, $idDepartment){
+    $stmt = $db->prepare('
+        SELECT User.idUser, User.username, COUNT(Ticket.idTicket) as ticket_count
+        FROM User
+        INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
+        LEFT JOIN Ticket ON User.idUser = Ticket.resolve
+        WHERE User_Departments.idDepartment = ?
+        GROUP BY User.idUser, User.username
+        ORDER BY ticket_count
+    ');
+    $stmt->execute(array($idDepartment));
+
+    $users = array();
+    while ($user = $stmt->fetch()) {
+        $users[] = array(
+            $user['username'],
+            $user['ticket_count'],
+            $user['idUser'],
+        );
+    }
+    return $users;
+}
+
+static function getAllUsersOutsideDepartment(PDO $db, $idDepartment){
+  $stmt = $db->prepare('
+        SELECT User.idUser, User.username
+        FROM User
+        WHERE User.idUser NOT IN (
+            SELECT idUser
+            FROM User_Departments
+            WHERE idDepartment = ?
+        )
+    ');
+  $stmt->execute(array($idDepartment));
+
+  $users = array();
+  while ($user = $stmt->fetch()) {
+      $users[] = array(
+          $user['username'],
+          $user['idUser'],
+      );
+  }
+  return $users;
+}
+
+static function countUserDepartments(PDO $db, int $idUser): int {
+  $stmt = $db->prepare('
+      SELECT COUNT(*) as department_count
+      FROM User_Departments
+      WHERE idUser = ?
+  ');
+  $stmt->execute(array($idUser));
+  $result = $stmt->fetch();
+  return intval($result['department_count']);
+}
+
+static function countAgentTicket(PDO $db, int $idUser): int {
+  $stmt = $db->prepare('
+      SELECT COUNT(*) as ticket_count
+      FROM Ticket
+      WHERE Ticket.resolve = ? 
+  ');
+  $stmt->execute(array($idUser));
+  $result = $stmt->fetch();
+  return intval($result['ticket_count']);
+}
+
       static function getDepartmentName(PDO $db, $idDepartment){
           $stmt = $db->prepare('
             SELECT name FROM Department WHERE idDepartment = ?

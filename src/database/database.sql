@@ -224,6 +224,7 @@ INSERT INTO FAQ (question, answer) VALUES
 
 
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,2);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
 
