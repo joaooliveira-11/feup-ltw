@@ -31,7 +31,7 @@ function addHashtag(idTicket, autocompleteId) {
 
       // Make an AJAX request to fetch the matching hashtags from the server
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', `../javascript/hashtags.php?q=${encodeURIComponent(query)}`, true);
+      xhr.open('GET', `../api/api_hashtags.php?q=${encodeURIComponent(query)}`, true);
       xhr.onload = function() {
         if (xhr.status === 200) {
           const hashtags = JSON.parse(xhr.responseText);
@@ -80,7 +80,7 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
       list.innerHTML = '';
 
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', `../javascript/hashtags.php?q=add:${hashtag}:${idTicket}`, true);
+      xhr.open('GET', `../api/api_hashtags.php?q=add:${hashtag}:${idTicket}`, true);
 
       xhr.onload = function() {
         const response = JSON.parse(xhr.responseText);
@@ -124,11 +124,11 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
 function removeHashtag(ticketId, hashtagId) {
  console.log('hereeee');
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `../javascript/hashtags.php?q=remove:${hashtagId}:${ticketId}`, true);
+  xhr.open('POST', `../api/api_hashtags.php?q=remove:${hashtagId}:${ticketId}`, true);
   
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      
+
       var buttonId = "hashtag-button-" + ticketId + "-" + hashtagId;
       var button = document.getElementById(buttonId);
       if (button) {
