@@ -8,7 +8,7 @@ All users should be able to (users can simultaneously be clients and agents):
 Clients should be able to:
 - Submit a new ticket optionally choosing a department (e.g., "Accounting"). (DONE - upgrade for optionally)
 - List and track tickets they have submitted. (DONE)
-- Reply to inquiries (e.g., the agent asks for more details) about their tickets and add more information to already submitted tickets. (NOT DONE)
+- Reply to inquiries (e.g., the agent asks for more details) about their tickets and add more information to already submitted tickets. (DONE)
 
 Agents should be able to (they are also clients):
 - List tickets from their departments (e.g., "Accounting"), and filter them in different ways (e.g., by date, by assigned agent, by status, by priority, by hashtag). (NOT DONE - BERNA)
@@ -16,12 +16,12 @@ Agents should be able to (they are also clients):
 - Assign a ticket to themselves or someone else. (DONE)
 - Change the status of a ticket. Tickets can have many statuses (e.g., open, assigned, closed); some may change automatically (e.g., ticket changes to "assigned" - after being assigned to an agent). (DONE)
 - Edit ticket hashtags easily (just type hashtag to add (with autocomplete), and click to remove). (NOT DONE - KIKA)
-- List all changes done to a ticket (e.g., status changes, assignments, edits). (NOT DONE)
+- List all changes done to a ticket (e.g., status changes, assignments, edits). (DONE)
 - Manage the FAQ and use an answer from the FAQ to answer a ticket. (NOT DONE)
 
 Admins should be able to (they are also agents):
 - Upgrade a client to an agent or an admin. (NOT DONE)
-- Add new departments, statuses, and other relevant entities. (NOT DONE)
+- Add new departments, statuses, and other relevant entities. (SEMI DONE)
 - Assign agents to departments. (NOT DONE)
 - Control the whole system. (NOT DONE)
 
