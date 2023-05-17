@@ -87,7 +87,6 @@ function drawDepartmentAgents(array $users, int $idDepartment, PDO $db){ ?>
             <thead>
             <tr>
                 <th>Agents</th>
-                <th>Number of tickets solving</th>
                 <th>Current Departments</th>
                 <th></th>
             </tr>
@@ -98,7 +97,6 @@ function drawDepartmentAgents(array $users, int $idDepartment, PDO $db){ ?>
             
                 <tr class="availableAgents">
                     <th><?php echo $user[0] ?></th>
-                    <th><?php echo $user[1] ?></th>
                     <th><?php echo User::countUserDepartments($db, intval($user[2]));?></th>
                 </tr>
         <?php }
@@ -117,29 +115,27 @@ function drawOutsideDepartmentAgents(array $users, int $idDepartment, PDO $db){ 
             <thead>
             <tr>
                 <th>Available Agents</th>
-                <th>Number of tickets solving</th>
                 <th>Current Departments</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <?php
-            foreach ($users as $user){ ?>
-                <tr class="availableAgents">
+            foreach ($users as $user){?>
+                <tr class="availableAgents" id ="<?= $user[1]?>">
                     <th><?php echo $user[0] ?></th>
-                    <th><?php echo User::countAgentTicket($db,intval($user[1])) ?></th>
-                    <th><?php echo User::countUserDepartments($db, intval($user[1]))?></th>
+                    <th><?php echo User::countUserDepartments($db, intval($user[1]));?></th>
                     <th>
-                        <form method="post" action="../actions/action_addDepartAgent.php">
-                            <input type="hidden" name="idUser" value="<?php echo $user[1]?>">
-                            <input type="hidden" name="idDepart" value="<?php echo $idDepartment?>">
-                            <button type="submit">Select</button>
+                        <form class="agentsOutside">
+                            <input type="hidden" id="userinput" name="idUser" value="<?php echo $user[1]?>">
+                            <input type="hidden" id="departinput" name="idDepart" value="<?= $idDepartment?>">
+                            <button type="submit" id="agentsOutside-button">Select</button>
                         </form>
                     </th>
                 </tr>
         <?php }
         ?>
             </tbody>
-        </table>
+        </table>        
     </main>
 <?php }
