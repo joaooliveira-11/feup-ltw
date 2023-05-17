@@ -11,11 +11,11 @@ if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 $db = getDatabaseConnection();
 
 $cria = $session->getId();
-$title = $_POST['title'];
-$description = $_POST['description'];
-$priority = $_POST['priority'];
-$date = $_POST['date'];
-$department = $_POST['department'];
+$title = htmlentities($_POST['title']);
+$description = htmlentities($_POST['description']);
+$priority = htmlentities($_POST['priority']);
+$date = htmlentities($_POST['date']);
+$department = htmlentities($_POST['department']);
 
 $stmt = $db->prepare('SELECT idDepartment FROM Department WHERE name = ?');
 $stmt->execute(array($department));

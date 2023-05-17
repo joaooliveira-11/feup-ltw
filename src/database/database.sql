@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS Ticket_Status;
 
 DROP TRIGGER IF EXISTS insert_user_roles;
 DROP TRIGGER IF EXISTS insert_ticket_status;
+DROP TRIGGER IF EXISTS update_ticket_resolve;
 
 CREATE TABLE User (
                       idUser INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,7 +44,7 @@ CREATE TABLE Inquiry(
                      idUserReceiving INTEGER REFERENCES User, --user que recebeu a notificação
                      idUserGiving INTEGER REFERENCES User, --user que "fez" a notificação (pode ser opcional)
                      idTicket INTEGER REFERENCES Ticket,
-                     type TEXT NOT NULL, -- o type pode ser ASSIGN_REQUEST, TICKET_REPONDED, etc(depois adiciona-se mais, dependendo das funcionalidades)
+                     type TEXT NOT NULL, -- o type pode ser ASSIGN_REQUEST, TICKET_RESPONDED, etc(depois adiciona-se mais, dependendo das funcionalidades)
                      date DATE
 
 );
@@ -85,13 +86,13 @@ CREATE TABLE Reply(
 CREATE TABLE Status(
                        idStatus INTEGER PRIMARY KEY AUTOINCREMENT,
                        stage TEXT NOT NULL,
-                       CONSTRAINT CHECK_Status_status CHECK (stage = 'OPEN' OR stage = 'ASSIGNED' OR stage = 'CLOSED')
+                       constraint Unique_Stage UNIQUE (stage)
 );
 
 CREATE TABLE User_Roles(
+                           id_random INTEGER PRIMARY KEY AUTOINCREMENT,
                            idUser INTEGER REFERENCES User,
-                           idRole INTEGER REFERENCES Role,
-                           PRIMARY KEY (idUser, idRole)
+                           idRole INTEGER REFERENCES Role
 );
 
 CREATE TABLE User_Departments(
@@ -110,6 +111,8 @@ CREATE TABLE Ticket_Status(
                               id_random INTEGER PRIMARY KEY AUTOINCREMENT,
                               idTicket INTEGER REFERENCES Ticket,
                               idStatus INTEGER REFERENCES Status,
+                              idDepartment INTEGER REFERENCES Department,
+                              agent INTEGER REFERENCES User,
                               date DATE
 
 );
@@ -127,15 +130,26 @@ CREATE TRIGGER insert_user_roles
 AFTER INSERT ON User
 FOR EACH ROW
 BEGIN
-    INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 2); --quando se regista um user, ele é um cliente.
+    INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 3); --quando se regista um user, ele é um cliente.
 END;
 
 CREATE TRIGGER insert_ticket_status
     AFTER INSERT ON Ticket
     FOR EACH ROW
 BEGIN
-    INSERT INTO Ticket_Status (idTicket, idStatus, date) VALUES (NEW.idTicket, 1, NEW.create_date); --quando se cria um ticket, ele começa a open.
+    INSERT INTO Ticket_Status (idTicket, idStatus, idDepartment, agent, date)
+    VALUES (NEW.idTicket, 1, NEW.idDepartment, NULL, NEW.create_date);
 END;
+
+
+CREATE TRIGGER update_ticket_resolve
+    AFTER Insert ON Ticket_Status
+    FOR EACH ROW
+    WHEN NEW.idStatus = 1
+BEGIN
+    UPDATE Ticket SET resolve = NULL WHERE idTicket = NEW.idTicket;
+END;
+
 
 ------------------------------------------------------------------------------------------
 --------------------------------------Data Insertion--------------------------------------
@@ -228,33 +242,40 @@ INSERT INTO FAQ (question, answer) VALUES
                                        ('How do I contact customer support?', 'To contact customer support, go to the "Contact Us" page on our website and fill out the form with your name, email address, and a description of your issue. We will get back to you as soon as possible.');
 
 
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Chest Pain Assessment Delay', 'Patient presents to the Cardiology department with chest pain but experiences a delay in receiving a timely assessment and evaluation, potentially impacting the timely diagnosis and treatment of a cardiac condition.', 1, '2023-04-20',3,1,1);
 
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Skin Biopsy Complication ', 'Patient undergoes a skin biopsy procedure in the Dermatology department but experiences complications, such as infection or bleeding, requiring additional medical attention and follow-up care.', 2, '2023-04-19', 3, 4, 2);
-
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Medication Side Effects', 'Patient with a neurological condition experiences severe side effects from prescribed medications, such as dizziness, nausea, and confusion, requiring prompt intervention and adjustment of the treatment plan.', 3, '2023-04-18', 3, 5, 3);
-
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Miscommunication in Therapy Session', 'Patient reports miscommunication or misunderstanding with their assigned therapist during a therapy session, leading to confusion or dissatisfaction with the therapeutic process.', 3, '2023-04-18', 3, 5, 4);
-
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Server Down', 'Server is not responding', 2, '2023-04-20',2,1,1);
-
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Website Error', 'Users are unable to login', 2, '2023-04-19', 2, 4, 2);
-
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment)
-VALUES ('Email Delivery Issue', 'Emails are not being delivered', 3, '2023-04-18', 1, 5, 3);
-
-INSERT INTO Ticket_Status(idTicket, idStatus, date)
-VALUES (1,2,'22-04-2023');
 
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,2);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
 
-INSERT INTO Inquiry (idInquiry, idUserReceiving, idUserGiving, idTicket, type, "date") VALUES (1,1,1,1,'ASSIGN_AGENT','22-04-2023');
+INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment) VALUES
+    ('Title 1', 'Description 1', 1, '2023-05-11', 1, 2, 1),
+    ('Title 2', 'Description 2', 2, '2023-05-11', 2, 3, 2),
+    ('Title 3', 'Description 3', 3, '2023-05-11', 3, 1, 3),
+    ('Title 4', 'Description 4', 1, '2023-05-11', 1, 3, 2),
+    ('Title 5', 'Description 5', 2, '2023-05-11', 2, 3, 1);
 
+
+INSERT INTO Reply (message, create_date, idTicket, idUser) VALUES
+                                                               ('First reply to ticket 3', '2023-01-03', 3, 1),
+                                                               ('Second reply to ticket 3', '2023-01-04', 3, 3),
+                                                               ('Third reply to ticket 3', '2023-01-05', 3, 1),
+                                                               ('Fourth reply to ticket 3', '2023-01-06', 3, 3),
+                                                               ('Fifth reply to ticket 3', '2023-01-07', 3, 1),
+                                                               ('Sixth reply to ticket 3', '2023-01-08', 3, 3),
+                                                               ('Seventh reply to ticket 3', '2023-01-09', 3, 1),
+                                                               ('Eighth reply to ticket 3', '2023-01-10', 3, 3),
+                                                               ('Ninth reply to ticket 3', '2023-01-11', 3, 1),
+                                                               ('Tenth reply to ticket 3', '2023-01-12', 3, 3),
+                                                               ('First reply to ticket 4', '2023-01-13', 4, 1),
+                                                               ('Second reply to ticket 4', '2023-01-14', 4, 3),
+                                                               ('Third reply to ticket 4', '2023-01-15', 4, 1),
+                                                               ('Fourth reply to ticket 4', '2023-01-16', 4, 3),
+                                                               ('Fifth reply to ticket 4', '2023-01-17', 4, 1),
+                                                               ('Sixth reply to ticket 4', '2023-01-18', 4, 3),
+                                                               ('Seventh reply to ticket 4', '2023-01-19', 4, 1),
+                                                               ('Eighth reply to ticket 4', '2023-01-20', 4, 3),
+                                                               ('Ninth reply to ticket 4', '2023-01-21', 4, 1),
+                                                               ('Tenth reply to ticket 4', '2023-01-22', 4, 3);
 

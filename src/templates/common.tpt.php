@@ -2,6 +2,7 @@
 require_once(dirname(__DIR__).'/database/connection.php');
 require_once(dirname(__DIR__).'/classes/user.class.php');
 require_once(dirname(__DIR__).'/utils/session.php');
+require_once(dirname(__DIR__).'/classes/inquiry.class.php');
 
 function drawLogin()
 { ?>
@@ -24,7 +25,7 @@ function drawLogin()
             </form>
             <div class="form_alternative">
                 <p><span class="bold">Not a member?</span></p>
-                <a class="form_button" href="register.php">Sign up here</a>
+                <a class="form_button" href="../pages/register.php">Sign up here</a>
             </div>
         </div>
     </section>
@@ -34,7 +35,6 @@ function drawLogin()
 <?php function drawInitialFooter()
 { ?>
 
-    <link rel="stylesheet" href="../css/forms.css">
     <img src="../docs/images/initialFooter.png" alt="">
 
 <?php }
@@ -52,6 +52,7 @@ function drawFooterMain(){ ?>
 
  function drawRegister()
 { ?>
+    <link rel="stylesheet" href="../css/forms.css">
 
     <section id="register">
         <div class="container sign_form">
@@ -86,9 +87,12 @@ function drawFooterMain(){ ?>
 
 <?php }
 
-function drawHeaderMain(){ ?>
+function drawHeaderMain($scriptPage = null){?>
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../javascript/script.js"></script>
+    <?php if ($scriptPage!=null) { ?>
+        <script defer src="../javascript/<?php echo $scriptPage?>"></script>
+    <?php } ?>
 
     <header id ="HeaderMain">
         TicketEase
@@ -101,6 +105,11 @@ function drawAside(){
     $session = new Session();
 
     $user = User::getSingleUser($db, $session->getId());
+    $inquiries = Inquiry::getUserInquiries($db,$user->getId());
+    $count_inquiries = 0;
+    foreach ($inquiries as $inquiry){
+        $count_inquiries++;
+    }
 
     $role = $user->getUserRole($db);
     ?>
@@ -120,6 +129,11 @@ function drawAside(){
         <a href="../pages/inquiries.php" id="InquiriesButton">
             <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
             Inquiries
+            <?php if($count_inquiries>0) { ?>
+            <div>
+                <?php echo $count_inquiries; ?>
+            </div>
+            <?php } ?>
         </a>
 
         <?php   
@@ -140,7 +154,7 @@ function drawAside(){
 function drawAsideAgent(){ ?>
     <a href="../pages/openTickets.php" id="TicketsOpenButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        Tickets Open to Solve
+        Tickets From My Department(s)
     </a>
     <a href="../pages/myAssignedTickets.php" id="AssignedTicketsButton">
         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
@@ -150,12 +164,18 @@ function drawAsideAgent(){ ?>
 <?php }
 
 function drawAsideAdmin(){ ?>
-
-    <a href="../pages/manage.php" id="ManageWebsite">
-        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
-        Manage Website
-    </a>
-
+    <div id="AsideAdmin">
+        <a id="ManageWebsite">
+            <img src="../docs/images/definition.png">
+            Manage Website
+        </a>
+        <img src="../docs/images/—Pngtree—vector%20right%20arrow%20icon_4184716.png" style="display: none" id="SetaParaDireita">
+        <ul style="display: none">
+            <button onclick="window.location.href='../pages/manageDepartments.php'">Manage Departments</button>
+            <button onclick="window.location.href='../pages/manageUsers.php'">Manage Users</button>
+            <button onclick="window.location.href='../pages/manageDepartments.php'">Other Options</button>
+        </ul>
+    </div>
 <?php }
 
 
@@ -171,7 +191,7 @@ function drawMainPage(array $departments, PDO $db) { ?>
     </article>
     <article id="DepartmentsMain" class="MainOverflow">
     <?php foreach ($departments as $department) { ?>
-            <section id="ADepartmentMain">
+            <section class="ADepartmentMain">
                 <h4>
                     <?php echo $department['name'] ?>
                 </h4>
@@ -182,7 +202,7 @@ function drawMainPage(array $departments, PDO $db) { ?>
         <?php } ?>
     </article>
         <a href="../pages/newTicket.php">
-            <button id="CreateNewTicket"> <span>+</span> New Ticket</button>
+            <button class="CreateNewTicket"> <span>+</span> New Ticket</button>
         </a>
 </main>
 

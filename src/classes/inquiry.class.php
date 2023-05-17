@@ -68,11 +68,46 @@ class Inquiry
         return $inquiries;
     }
 
-    public static function deleteInquiry(PDO $db, int $idInquiry){
-        $stmt = $db->prepare('DELETE FROM Inquiry WHERE idInquiry = ?');
+    public static function getInquiryFromId(PDO $db, int $idInquiry){
+        $stmt = $db->prepare('SELECT * FROM Inquiry WHERE idInquiry = ?');
         $stmt->execute(array($idInquiry));
+        $inquiry = $stmt->fetch();
+        return new Inquiry(
+            intval($inquiry['idInquiry']),
+            intval($inquiry['idUserReceiving']),
+            intval($inquiry['idUserGiving']),
+            intval($inquiry['idTicket']),
+            $inquiry['type'],
+            $inquiry['date']
+        );
     }
 
+    public function deleteInquiry(PDO $db){
+        $stmt = $db->prepare('DELETE FROM Inquiry WHERE idInquiry = ?');
+        $stmt->execute(array($this->idInquiry));
+    }
 
+    public static function getLastInquiryFromTicket (PDO $db, int $idTicket) : int{
+        $stmt = $db->prepare('SELECT idInquiry FROM Inquiry WHERE idTicket = ? ORDER BY ROWID DESC LIMIT 1');
+        $stmt->execute(array($idTicket));
+        $idInquiry = $stmt->fetchColumn();
+        return intval($idInquiry);
+    }
 
+    public static function getInquiriesFromTicketId(PDO $db, int $idTicket, int $idUser){
+        $stmt = $db->prepare('SELECT * FROM Inquiry WHERE idTicket = ? AND idUserReceiving = ?');
+        $stmt->execute(array($idTicket,$idUser));
+        $inquiries = array();
+        while ($inquiry = $stmt->fetch()) {
+            $inquiries[] = new Inquiry(
+                intval($inquiry['idInquiry']),
+                intval($inquiry['idUserReceiving']),
+                intval($inquiry['idUserGiving']),
+                intval($inquiry['idTicket']),
+                $inquiry['type'],
+                $inquiry['date']
+            );
+        }
+        return $inquiries;
+    }
 }

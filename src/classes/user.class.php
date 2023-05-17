@@ -2,11 +2,11 @@
   declare(strict_types = 1);
 
   class User {
-    public int $idUser;
-    public string $name;
-    public string $username;
-    public string $email;
-    public string $password;
+    private int $idUser;
+    private string $name;
+    private string $username;
+    private string $email;
+    private string $password;
 
     public function __construct(int $idUser, string $name, string $username, string $email, string $password)
     {
@@ -57,7 +57,7 @@
       }
 
       function getUserRole($db) : int{
-          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ?');
+          $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ? ORDER BY ROWID DESC LIMIT 1');
           $stmt->execute(array($this->idUser));
           $role = $stmt->fetch();
           return intval($role['idRole']);
@@ -84,6 +84,12 @@
           }
           return $result;
 
+      }
+
+      static function getWebsiteDepartments($db){
+          $stmt = $db->prepare('Select * From Department');
+          $stmt->execute();
+          return $stmt->fetchAll();
       }
 
 
@@ -126,17 +132,17 @@
       );
     }
 
-    static function getUsersFromDepartment(PDO $db, $idDepartment){
+    static function getUsersFromDepartment(PDO $db, $idDepartment,int $idCria, int $idUser){
         $stmt = $db->prepare('
             SELECT User.idUser, User.name, User.username, User.email, User.password, COUNT(Ticket.idTicket) as ticket_count
             FROM User
             INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
             LEFT JOIN Ticket ON User.idUser = Ticket.resolve
-            WHERE User_Departments.idDepartment = ?
+            WHERE User_Departments.idDepartment = ? AND User.idUser<>? AND User.idUser<>?
             GROUP BY User.idUser, User.name, User.username, User.email, User.password
             ORDER BY ticket_count
           ');
-        $stmt->execute(array($idDepartment));
+        $stmt->execute(array($idDepartment, $idCria, $idUser));
 
         $users = array();
         while ($user = $stmt->fetch()) {
@@ -144,6 +150,81 @@
         }
         return $users;
     }
+
+  static function getAllUsersFromDepartment(PDO $db, $idDepartment){
+    $stmt = $db->prepare('
+        SELECT User.idUser, User.username, COUNT(Ticket.idTicket) as ticket_count
+        FROM User
+        INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
+        LEFT JOIN Ticket ON User.idUser = Ticket.resolve
+        WHERE User_Departments.idDepartment = ?
+        GROUP BY User.idUser, User.username
+        ORDER BY ticket_count
+    ');
+    $stmt->execute(array($idDepartment));
+
+    $users = array();
+    while ($user = $stmt->fetch()) {
+        $users[] = array(
+            $user['username'],
+            $user['ticket_count'],
+            $user['idUser'],
+        );
+    }
+    return $users;
+}
+
+static function getAllUsersOutsideDepartment(PDO $db, $idDepartment){
+  $stmt = $db->prepare('
+        SELECT User.idUser, User.username
+        FROM User
+        WHERE User.idUser NOT IN (
+            SELECT idUser
+            FROM User_Departments
+            WHERE idDepartment = ?
+        )
+    ');
+  $stmt->execute(array($idDepartment));
+
+  $users = array();
+  while ($user = $stmt->fetch()) {
+      $users[] = array(
+          $user['username'],
+          $user['idUser'],
+      );
+  }
+  return $users;
+}
+
+static function countUserDepartments(PDO $db, int $idUser): int {
+  $stmt = $db->prepare('
+      SELECT COUNT(*) as department_count
+      FROM User_Departments
+      WHERE idUser = ?
+  ');
+  $stmt->execute(array($idUser));
+  $result = $stmt->fetch();
+  return intval($result['department_count']);
+}
+
+static function countAgentTicket(PDO $db, int $idUser): int {
+  $stmt = $db->prepare('
+      SELECT COUNT(*) as ticket_count
+      FROM Ticket
+      WHERE Ticket.resolve = ? 
+  ');
+  $stmt->execute(array($idUser));
+  $result = $stmt->fetch();
+  return intval($result['ticket_count']);
+}
+
+      static function getDepartmentName(PDO $db, $idDepartment){
+          $stmt = $db->prepare('
+            SELECT name FROM Department WHERE idDepartment = ?
+          ');
+          $stmt->execute(array($idDepartment));
+          return $stmt->fetch();
+      }
 
   
     static function getUsers(PDO $db, int $count) : array {
@@ -173,6 +254,13 @@
           return $attemp;
         } else return $default;
       } 
+
+      public static function getUser_username(PDO $db, int $iduser) : ?string{
+        $stmt = $db->prepare('Select name From User WHERE idUser = ?');
+        $stmt->execute(array($iduser));
+        $role = $stmt->fetch();
+        return $role['name'];
+    }
 
   }
 

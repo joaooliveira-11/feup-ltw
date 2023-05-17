@@ -6,6 +6,7 @@ require_once(dirname(__DIR__).'/utils/session.php');
 require_once(dirname(__DIR__).'/database/connection.php');
 require_once(dirname(__DIR__).'/classes/user.class.php');
 require_once(dirname(__DIR__).'/classes/inquiry.class.php');
+require_once(dirname(__DIR__).'/classes/ticket.class.php');
 
 $session = new Session();
 
@@ -14,16 +15,25 @@ if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 $db = getDatabaseConnection();
 $currentUser = User::getSingleUser($db,$session->getId());
 
+$ticket_id = intval($_POST['idTicket']);
+$date = date('d-m-Y');
+
 $assignAgent = $session->getId(); //isto serve para verificar se dei assign de um ticket para mim ou a outro agent
 
 if($assignAgent) {
     $stmt = $db->prepare('Update Ticket Set resolve=? WHERE idTicket=?');
     $stmt->execute(array($assignAgent, $_POST['idTicket']));
     if($stmt) {
-        $stmt_new = $db->prepare('Update Ticket_Status SET idStatus=? WHERE idTicket=?');
-        $stmt_new->execute(array(2, $_POST['idTicket']));
+        $ticket = Ticket::getTicketFromId($db, intval($ticket_id));
+        $stmt_new = $db->prepare('
+        INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
+       ');
+        $stmt_new->execute(array($ticket_id, 2,$ticket->getidDepartment(), $ticket->getResolve(),$date));
         if($stmt_new){
-            if($_POST['Inquiry']) Inquiry::deleteInquiry($db, intval($_POST['Inquiry']));
+            if($_POST['Inquiry']) {
+                $inquiry = Inquiry::getInquiryFromId($db,intval($_POST['Inquiry']));
+                $inquiry->deleteInquiry($db);
+            }
             $session->addMessage("Success", "Ticket Assigned successfully");
             header('Location: ../pages/myAssignedTickets.php');
         }

@@ -35,8 +35,20 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             }
         }
     ?>
-    <div class="retangulo <?php echo $backgroundColor ?>">
-        <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
+    <div class="retangulo <?php echo $backgroundColor ?>" data-department = "<?php echo $ticket->getidDepartment()?>" data-status ="<?php echo $ticket->getLastTicketStatus($db)?>">
+        <section class = "AssignTicket">
+            <div>
+                <form method="post" action="../pages/ticketChanges.php">
+                    <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket()?>">Ticket History</button>
+                </form>
+                <?php if(($entity===3 || $entity===1) && $ticket->getLastTicketStatus($db)!="OPEN") { //só aparece este botão no myTickets ou no myAssignedTickets?>
+                <form method="post" action="../actions/action_deleteInquiriesTicketResponded.php">
+                    <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket()?>"> Messages </button>
+                </form>
+                <?php } ?>
+            </div>
+            <h2 class="ticketText"><?=$ticket->getTitle()?></h2>
+        </section>
         <section>
             <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
@@ -44,12 +56,13 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             <article>
                 <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>
                 <h5>Status: <?=$status?></h5>
-                <h5>Date: <?=$ticket->getCreateDate()?></h5>
+                <h5 data-date="<?php echo $ticket->getCreateDate()?>">Date: <?=$ticket->getCreateDate()?></h5>
+                <h5 data-priority = "<?php echo $ticket->getPriority()?>">Priority: <?=$ticket->getPriority()?></h5>
             </article>
             <?php
-            if($entity>1){
-                if($status=="OPEN"){
-                    $ticket_id = $ticket->getIdTicket();
+            $ticket_id = $ticket->getIdTicket();
+            if($entity==2){
+                if($status==="OPEN"){
                     $agentRequired = $ticket->searchIfRequestedToAssign($db);
                     if(!$agentRequired){
                     ?>
@@ -73,7 +86,27 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                         </article>
                    <?php }
                 }
+                else{
+                    $idResolve = $ticket->getResolve(); ?>
+                    <article class="AssignTicket">
+                        Ticket assigned to agent <?php echo User::getSingleUser($db,$idResolve)->getName() ?>
+                    </article>
+                <?php }
             }
+            else if($entity==3){ ?>
+                <article class="AssignTicket">
+                    <div id="status_change_<?php echo $ticket_id?>" class ="ChangeStatusButton">
+                        <button type="submit" name="Ticket"  class="change-status-btn"  data-ticket-id="<?php echo $ticket_id ?>">
+                            Change Status
+                        </button>
+                    </div>
+                    <div id="department_change_<?php echo $ticket_id?>" class ="ChangeStatusButton">
+                        <button type="submit" name="Ticket" class="change-department-btn"  data-ticket-id="<?php echo $ticket_id ?>">
+                            Change Department
+                        </button>
+                    </div>
+                </article>
+           <?php }
             ?>
         </section>
     </div>

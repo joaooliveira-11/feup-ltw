@@ -22,7 +22,7 @@
         $this->idDepartment = $idDepartment;
     }
     
-    public function getIdTicket(): int {
+    public function getIdTicket(): ?int {
         return $this->idTicket;
     }
     
@@ -46,7 +46,7 @@
         return $this->cria;
     }
 
-    public function getResolve(): int {
+    public function getResolve(): ?int {
         return $this->resolve;
     }
 
@@ -110,28 +110,32 @@
             return '';
         }
     }
-    public static function getDepartmentTickets(PDO $db, array $idDepartments){
+
+    public static function getDepartmentTickets(PDO $db, array $idDepartments, int $idUser){
         $tickets = array();
         foreach($idDepartments as $id) {
-            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ? AND resolve IS NULL ');
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE idDepartment = ?');
             $stmt->execute(array($id));
 
 
             while ($ticket = $stmt->fetch()) {
-                $tickets[] = new Ticket(
-                    intval($ticket['idTicket']),
-                    $ticket['title'],
-                    $ticket['description'],
-                    intval($ticket['priority']),
-                    $ticket['create_date'],
-                    intval($ticket['cria']),
-                    intval($ticket['resolve']),
-                    intval($ticket['idDepartment']),
-                );
+                if(intval($ticket['cria'])!==$idUser && intval($ticket['resolve']!==$idUser)) {
+                    $tickets[] = new Ticket(
+                        intval($ticket['idTicket']),
+                        $ticket['title'],
+                        $ticket['description'],
+                        intval($ticket['priority']),
+                        $ticket['create_date'],
+                        intval($ticket['cria']),
+                        intval($ticket['resolve']),
+                        intval($ticket['idDepartment']),
+                    );
+                }
             }
         }
         return $tickets;
     }
+
     public static function getAssignedTickets(PDO $db, int $resolve){
         $stmt = $db->prepare('SELECT * FROM Ticket WHERE resolve = ?');
         $stmt->execute(array($resolve));
@@ -159,7 +163,8 @@
 
         $stmt->execute(array($this->getTitle(), $this->getDescription(), $this->getPriority(), $this->getCreateDate(), $this->getCria(), NULL, $this->getidDepartment()));
     }
-      function searchIfRequestedToAssign(PDO $db){
+
+    function searchIfRequestedToAssign(PDO $db){
           $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ?');
           $stmt->execute(array($this->idTicket));
           $result = $stmt->fetch();
@@ -178,5 +183,126 @@
         }
         return $hashtags;
     }
+    
+
+    public function get_status_id(PDO $db, string $status) : int{
+        $stmt = $db->prepare('SELECT idStatus FROM Status WHERE stage = ? ');
+        $stmt->execute(array($status));
+        $result = $stmt->fetch();
+        return intval($result['idStatus']);
+    }
+
+    public static function get_status_name(PDO $db, int $status) : string{
+        $stmt = $db->prepare('SELECT stage FROM Status WHERE idStatus = ? ');
+        $stmt->execute(array($status));
+        $result = $stmt->fetch();
+        return $result['stage'];
+    }
+
+    public static function get_department_name(PDO $db, int $department) : string{
+        $stmt = $db->prepare('SELECT name FROM Department WHERE idDepartment = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return $result['name'];
+    }
+
+    public static function get_department_from_id(PDO $db, int $department){
+        $stmt = $db->prepare('SELECT * FROM Department WHERE idDepartment = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return $result;
+    }
+
+    public static function possibleChangingStatus(PDO $db, string $status): array {
+            $stmt = $db->prepare('SELECT stage FROM Status WHERE stage != ?');
+            $stmt->execute(array($status));
+            $result = array();
+            while($stage = $stmt->fetch()){
+                $result[] = $stage['stage'];
+            }
+            return $result;
+    }
+
+    public function change_ticket_status(PDO $db,string $status){
+        $idstatus = Ticket::get_status_id($db, $status);
+        $date = date('d-m-Y');
+        if($status === 'OPEN') $idResolve = NULL;
+        else $idResolve = $this->resolve;
+        $stmt = $db->prepare('
+          INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
+        ');
+        $stmt->execute(array($this->idTicket, $idstatus, $this->idDepartment, $idResolve, $date));
+    }
+    
+
+    function get_department_id(PDO $db, string $department) : int{
+        $stmt = $db->prepare('SELECT idDepartment FROM Department WHERE name = ? ');
+        $stmt->execute(array($department));
+        $result = $stmt->fetch();
+        return intval($result['idDepartment']);
+    }
+
+
+    function possibleChangingDepartment(PDO $db, string $department): array {
+        $stmt = $db->prepare('SELECT name FROM Department WHERE name != ?');
+        $stmt->execute(array($department));
+        $result = array();
+        while($department = $stmt->fetch()){
+            $result[] = $department['name'];
+        }
+        return $result;
+    }
+
+    
+    function change_ticket_department(PDO $db, string $department){
+          $iddepartment = Ticket::get_department_id($db, $department);
+          $stmt = $db->prepare('
+            UPDATE Ticket SET title = ?, description = ?, priority = ?, create_date = ?, cria = ?, resolve = ?, idDepartment = ?
+            WHERE idTicket = ?
+          ');
+
+          $stmt->execute(array($this->title, $this->description, $this->priority, $this->createDate, $this->cria, NULL, $iddepartment , $this->idTicket));
+
+          $idstatus = 1;
+          $date = date('d-m-Y');
+          $stmt = $db->prepare('
+           INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
+          ');
+
+          $stmt->execute(array($this->idTicket, $idstatus,$iddepartment, NULL,$date));
+    }
+
+    public function getTicketHistory(PDO $db): array{
+        $stmt = $db->prepare('SELECT * FROM Ticket_Status WHERE idTicket = ? ORDER BY id_random DESC');
+        $stmt->execute(array($this->idTicket));
+        $changes = array();
+        while ($change= $stmt->fetch()) {
+            $changes[] = $change;
+        }
+        return $changes;
+    }
+
+    public function getLastReplyFromTicket(PDO $db, $idUser){
+        $stmt = $db->prepare('SELECT message FROM Reply WHERE idTicket = ? AND idUser = ? ORDER BY ROWID DESC LIMIT 1');
+        $stmt->execute(array($this->idTicket, $idUser));
+        $reply = $stmt->fetchColumn();
+        return $reply;
+    }
+
+    public function getTicketReceiver(PDO $db, int $idUser){
+        $stmt = $db->prepare('SELECT cria,resolve FROM Ticket WHERE idTicket = ? ');
+        $stmt->execute(array($this->idTicket));
+        $users = $stmt->fetch();
+        if (intval($users['cria']) === $idUser) return intval($users['resolve']);
+        else return intval($users['cria']);
+    }
+
+    public function getAllLastReplyFromTicket(PDO $db){
+        $stmt = $db->prepare('SELECT r.message, u.username, r.create_date, r.idTicket, r.idUser FROM Reply r JOIN User u ON r.idUser = u.idUser WHERE r.idTicket = ? ORDER BY r.ROWID DESC LIMIT 1');
+        $stmt->execute(array($this->idTicket));
+        $reply = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $reply;
+    }
+
 }
 ?>

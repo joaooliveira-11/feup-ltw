@@ -99,7 +99,7 @@ function drawEditProfileMain(){ ?>
 
 <?php function drawCreateNewTicket(array $departments) { ?>
     <main> 
-    <section id="createticket">
+    <section class="createticket">
         <form action="../actions/action_newticket.php" method="post">
             <div class="form-wrapper">
                 <div class="ticket-title">

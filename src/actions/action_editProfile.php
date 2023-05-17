@@ -17,12 +17,12 @@ if(!$currentUser){
     die(header('Location: ../pages/editProfile.php'));
 }
 
-$newName = (!empty($_POST['newName'])? $_POST['newName'] : $updateUser->getName());
-$newUsername = (!empty($_POST['newUsername'])? $_POST['newUsername'] : $updateUser->getUsername());
-$newEmail = (!empty($_POST['newEmail'])? $_POST['newEmail'] : $updateUser->getEmail());
+$newName = (!empty($_POST['newName'])? htmlentities($_POST['newName']) : $updateUser->getName());
+$newUsername = (!empty($_POST['newUsername'])? htmlentities($_POST['newUsername']) : $updateUser->getUsername());
+$newEmail = (!empty($_POST['newEmail'])? htmlentities($_POST['newEmail']) : $updateUser->getEmail());
 
-$newPassword = (!empty($_POST['newPassword'])? $_POST['newPassword']: null);
-$confirmPassword = (!empty($_POST['confirmPassword'])? $_POST['confirmPassword']: null);
+$newPassword = (!empty($_POST['newPassword'])? htmlentities($_POST['newPassword']): null);
+$confirmPassword = (!empty($_POST['confirmPassword'])? htmlentities($_POST['confirmPassword']): null);
 
 if($newPassword!==$confirmPassword){
     $session->addMessage('error', 'The new Password and the confirm Password did not match');
@@ -58,5 +58,5 @@ if($newPassword) {
 }
 
 $updateUser->save($db);
-$session->logout();
-header('Location: ../pages/login.php');
+$session->addMessage('success', 'Profile Updated successful!');
+header('Location: ../pages/editProfile.php');

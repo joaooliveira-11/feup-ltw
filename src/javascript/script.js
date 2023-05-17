@@ -1,12 +1,14 @@
+const manage_options_button = document.getElementById('ManageWebsite');
+const manageOptions = document.querySelector('#AsideAdmin ul');
+const arrowLeftImage = document.querySelector('#SetaParaDireita');
 
-const filter_department_button = document.getElementById('DepartmentFilterButton');
-
-filter_department_button.addEventListener('click', async function () {
-    const response = await fetch('../api/api_departments.php');
-    const departments = await response.json();
-    var filterDepartment = document.createElement('ul');
-    for (department of departments){
-        console.log(department);
-        filterDepartment.appendChild(department);
+manage_options_button.addEventListener('click', function (){
+    if(manageOptions.style.display==="none") {
+        manageOptions.style.display="block";
+        arrowLeftImage.style.display="block";
+    }
+    else {
+        manageOptions.style.display="none";
+        arrowLeftImage.style.display="none";
     }
 })
