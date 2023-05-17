@@ -35,7 +35,6 @@ function addHashtag(idTicket, autocompleteId) {
       xhr.onload = function() {
         if (xhr.status === 200) {
           const hashtags = JSON.parse(xhr.responseText);
-          console.log(hashtags)
           showAutocomplete(hashtags, input, idTicket, autocompleteId);          
         }
       };
@@ -80,7 +79,6 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
       input.value = hashtag;
       list.innerHTML = '';
 
-      // Make an AJAX request to insert the chosen hashtag into the database
       const xhr = new XMLHttpRequest();
       xhr.open('GET', `../javascript/hashtags.php?q=add:${hashtag}:${idTicket}`, true);
 
@@ -89,16 +87,16 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
         const updatedHashtags = response.hashtags;
 
         const hashtagButtonContainer = document.getElementById(`hashtag-button-container-${idTicket}`);
+
         if (hashtagButtonContainer) {
-          // Clear existing hashtag buttons
           hashtagButtonContainer.innerHTML = '';
         
-          // Create and append new hashtag buttons
           updatedHashtags.forEach((updatedHashtag) => {
             const hashtagButton = document.createElement('button');
             hashtagButton.classList.add('hashtag-button');
             hashtagButton.dataset.ticketId = idTicket;
-            hashtagButton.dataset.hashtagId = updatedHashtag.id;
+            hashtagButton.dataset.hashtagId = updatedHashtag.idHashtag;
+            hashtagButton.id = `hashtag-button-${idTicket}-${updatedHashtag.idHashtag}`;
 
             const hashtagText = document.createElement('a');
             hashtagText.text = `#${updatedHashtag.name}`;
@@ -110,6 +108,7 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
             hashtagButton.appendChild(hashtagText);
             hashtagButton.appendChild(removeIcon);
             hashtagButtonContainer.appendChild(hashtagButton);
+            hashtagButton.setAttribute('onclick', `removeHashtag(${idTicket}, ${updatedHashtag.idHashtag});`);
           });
         }
           input.parentNode.removeChild(input);
@@ -123,21 +122,18 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
 }
 
 function removeHashtag(ticketId, hashtagId) {
-
+ console.log('hereeee');
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `../javascript/hashtags.php?q=remove:${hashtagId}:${ticketId}`, true);
-  //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
-  // Define the AJAX response handler
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      // Handle the AJAX response here
-      console.log(xhr.responseText);
       
-      // Remove the hashtag button from the DOM
       var buttonId = "hashtag-button-" + ticketId + "-" + hashtagId;
       var button = document.getElementById(buttonId);
-      button.parentNode.removeChild(button);
+      if (button) {
+        button.parentNode.removeChild(button);
+      }
     }
   };
   
