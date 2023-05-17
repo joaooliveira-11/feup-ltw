@@ -138,7 +138,13 @@
             FROM User
             INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
             LEFT JOIN Ticket ON User.idUser = Ticket.resolve
-            WHERE User_Departments.idDepartment = ? AND User.idUser<>? AND User.idUser<>?
+            LEFT JOIN (
+                SELECT idTicket, max(id_random) as last_status
+                FROM Ticket_Status
+                GROUP BY idTicket
+            ) AS LastTicketStatus ON Ticket.idTicket = LastTicketStatus.idTicket
+            LEFT JOIN Ticket_Status ON Ticket.idTicket = Ticket_Status.idTicket AND Ticket_Status.id_random = LastTicketStatus.last_status
+            WHERE User_Departments.idDepartment = ? AND User.idUser <> ? AND User.idUser <> ? AND Ticket_Status.idStatus = 2
             GROUP BY User.idUser, User.name, User.username, User.email, User.password
             ORDER BY ticket_count
           ');
@@ -176,6 +182,23 @@
         }
         return $users;
     }
+      static function getAllUsers(PDO $db) : array {
+
+          $stmt = $db->prepare('SELECT * FROM User');
+          $stmt->execute();
+
+          $users = array();
+          while ($user = $stmt->fetch()) {
+              $users[] = new User(
+                  intval($user['idUser']),
+                  $user['name'],
+                  $user['username'],
+                  $user['email'],
+                  $user['password'],
+              );
+          }
+          return $users;
+      }
 
     function getPhoto() : string {
 

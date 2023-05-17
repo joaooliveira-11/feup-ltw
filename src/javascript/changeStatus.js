@@ -39,7 +39,6 @@ change_ticketstatus_buttons.forEach(function(change_ticketstatus_button) {
     }
 })
 
-
 const change_ticketdepartment_buttons = document.querySelectorAll('.change-department-btn');
 
 change_ticketdepartment_buttons.forEach(function(change_ticketdepartment_button) {

@@ -24,9 +24,6 @@ function drawWebsiteDepartments(array $departments) { ?>
                     <form method="post" action="../pages/editDepartment.php">
                         <button type="submit" name="department" value="<?php echo $department['idDepartment'] ?>"> Edit Department Information</button>
                     </form>
-                    <form method="post" action="../actions/action_deleteDepartment.php">
-                        <button type="submit" name="department" value="<?php echo $department['idDepartment'] ?>"> Delete Department</button>
-                    </form>
                 </article>
             </section>
         <?php } ?>
@@ -78,5 +75,46 @@ function drawCreateDepartment(){ ?>
                 <button class="btn-cancel" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
             </form>
         </section>
+    </main>
+<?php }
+
+function drawWebsiteUsers(PDO $db, array $users){ ?>
+    <main class="noPadding MainOverflow">
+        <table>
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($users as $user){?>
+                <tr class="availableAgents">
+                    <th><?php echo $user->getUsername() ?></th>
+                    <th><?php echo $user->getName() ?></th>
+                    <th><?php echo $user->getRoleName($db, $user->getUserRole($db)) ?></th>
+                    <th id="actionsManageUsers">
+                        <?php if($user->getUserRole($db) < 3){ ?>
+                        <form method="post" action="../actions/action_inquiry.php">
+                            <button type="submit">Upgrade to <?php echo $user->getRoleName($db, $user->getUserRole($db) + 1) ?></button>
+                        </form>
+                    <?php if($user->getUserRole($db) === 2){ ?>
+                            <form>
+                                <button type="submit">Downgrade to <?php echo $user->getRoleName($db, $user->getUserRole($db) - 1) ?></button>
+                            </form>
+                            <?php } ?>
+                            <form method="post" action="../actions/action_inquiry.php">
+                                <button type="submit">Ban User</button>
+                            </form>
+                    <?php } ?>
+                    </th>
+                </tr>
+            <?php }
+            ?>
+            </tbody>
+        </table>
     </main>
 <?php }

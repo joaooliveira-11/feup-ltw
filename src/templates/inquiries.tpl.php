@@ -24,6 +24,9 @@ function drawUserInquiries(PDO $db, array $inquiries){ ?>
                     drawTicketResponded($db, $inquiry, $dictionaryInquiriesResponses[$inquiry->getTicket()]);
                 }
             }
+            else if($inquiryType==="CHANGE_STATUS"){
+                drawTicketChangeStatus($db,$inquiry);
+            }
         }
         ?>
     </main>
@@ -93,4 +96,12 @@ function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber)
             </form>
         </section>
     </section>
+<?php }
+
+
+function drawTicketChangeStatus(PDO $db,Inquiry $inquiry){
+    $ticket = Ticket::getTicketFromId($db,$inquiry->getTicket());
+    $ticket->getLastTicketStatus($db); ?>
+    
+
 <?php }

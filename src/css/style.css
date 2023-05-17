@@ -14,6 +14,7 @@ body{
     color:#AFAFAF;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 #footerMain{
@@ -259,10 +260,10 @@ main{
 .retangulo {
     background-color: #AFAFAF;
     color:#224957;
-    width: 75vw;
     border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 0 1em;
     margin-top: 3em;
 }
 .retangulo > section:first-child{
@@ -281,7 +282,7 @@ main{
 }
 
 .retangulo > section:not(:first-child){
-    padding: 1em;
+    padding: 1em 0;
     border-top: #224957 1px solid;
     text-align: center;
 }
@@ -739,7 +740,7 @@ aside ul>button{
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom:-0.4em;
+    bottom:10px;
     padding-top: 5px;
     border-top: #224957 1px solid;
     width: 100%;
@@ -750,11 +751,11 @@ aside ul>button{
     margin: 0.2em 0.8em;
 }
 
-.ADepartmentMain article>form:nth-child(2) button{
+.ADepartmentMain article>form:nth-child(2) button, #actionsManageUsers form:nth-child(2) button  {
     background-color: yellow;
 }
 
-.ADepartmentMain article>form:nth-child(3) button{
+.ADepartmentMain article>form:nth-child(3) button, #actionsManageUsers form:nth-child(3) button{
     background-color: red;
 }
 
@@ -866,4 +867,10 @@ aside ul>button{
 
 #manageDepartmentsHeader button{
     margin: 0;
+}
+
+#actionsManageUsers {
+    display: flex;
+    margin: 0 1em 0 2em;
+    justify-content: space-between;
 }

@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS Ticket_Status;
 DROP TRIGGER IF EXISTS insert_user_roles;
 DROP TRIGGER IF EXISTS insert_ticket_status;
 DROP TRIGGER IF EXISTS update_ticket_resolve;
+DROP TRIGGER IF EXISTS delete_all_from_department;
+DROP TRIGGER IF EXISTS delete_all_from_ticket;
 
 CREATE TABLE User (
                       idUser INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -90,7 +92,6 @@ CREATE TABLE Status(
 );
 
 CREATE TABLE User_Roles(
-                           id_random INTEGER PRIMARY KEY AUTOINCREMENT,
                            idUser INTEGER REFERENCES User,
                            idRole INTEGER REFERENCES Role
 );
@@ -129,8 +130,9 @@ CREATE TABLE FAQ (
 CREATE TRIGGER insert_user_roles
 AFTER INSERT ON User
 FOR EACH ROW
+    WHEN(NEW.idUser<>1)
 BEGIN
-    INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 3); --quando se regista um user, ele é um cliente.
+        INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 2); --quando se regista um user, ele é um cliente.
 END;
 
 CREATE TRIGGER insert_ticket_status
@@ -150,7 +152,6 @@ BEGIN
     UPDATE Ticket SET resolve = NULL WHERE idTicket = NEW.idTicket;
 END;
 
-
 ------------------------------------------------------------------------------------------
 --------------------------------------Data Insertion--------------------------------------
 ------------------------------------------------------------------------------------------
@@ -160,6 +161,7 @@ INSERT INTO Role (name) VALUES ('AGENT');
 INSERT INTO Role (name) VALUES ('ADMIN');
 
 INSERT INTO User (name,username, email, password) VALUES ('Bernardo Pinto', 'berna', 'Berna@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
+INSERT INTO User_Roles(idUser, idRole) VALUES (1,3);
 INSERT INTO User (name,username, email, password) VALUES ('Francisca Guimaraes', 'kika', 'kika@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 INSERT INTO User (name,username, email, password) VALUES ('Jony Pierre', 'jonyp', 'jonyp@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
 INSERT INTO User (name,username, email, password) VALUES ('Fabiana Oliveira', 'fabiana', 'Fabiana@gmail.com', '$2y$12$33SGDgv2ZFZ5IB5nGDjoJexTscy362rdyF7XFo83toNekCOGFGc0.');
@@ -226,34 +228,9 @@ INSERT INTO FAQ (question, answer) VALUES
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
-
-INSERT INTO Ticket (title, description, priority, create_date, cria, resolve, idDepartment) VALUES
-    ('Title 1', 'Description 1', 1, '2023-05-11', 1, 2, 1),
-    ('Title 2', 'Description 2', 2, '2023-05-11', 2, 3, 2),
-    ('Title 3', 'Description 3', 3, '2023-05-11', 3, 1, 3),
-    ('Title 4', 'Description 4', 1, '2023-05-11', 1, 3, 2),
-    ('Title 5', 'Description 5', 2, '2023-05-11', 2, 3, 1);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,3);
+INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,4);
 
 
-INSERT INTO Reply (message, create_date, idTicket, idUser) VALUES
-                                                               ('First reply to ticket 3', '2023-01-03', 3, 1),
-                                                               ('Second reply to ticket 3', '2023-01-04', 3, 3),
-                                                               ('Third reply to ticket 3', '2023-01-05', 3, 1),
-                                                               ('Fourth reply to ticket 3', '2023-01-06', 3, 3),
-                                                               ('Fifth reply to ticket 3', '2023-01-07', 3, 1),
-                                                               ('Sixth reply to ticket 3', '2023-01-08', 3, 3),
-                                                               ('Seventh reply to ticket 3', '2023-01-09', 3, 1),
-                                                               ('Eighth reply to ticket 3', '2023-01-10', 3, 3),
-                                                               ('Ninth reply to ticket 3', '2023-01-11', 3, 1),
-                                                               ('Tenth reply to ticket 3', '2023-01-12', 3, 3),
-                                                               ('First reply to ticket 4', '2023-01-13', 4, 1),
-                                                               ('Second reply to ticket 4', '2023-01-14', 4, 3),
-                                                               ('Third reply to ticket 4', '2023-01-15', 4, 1),
-                                                               ('Fourth reply to ticket 4', '2023-01-16', 4, 3),
-                                                               ('Fifth reply to ticket 4', '2023-01-17', 4, 1),
-                                                               ('Sixth reply to ticket 4', '2023-01-18', 4, 3),
-                                                               ('Seventh reply to ticket 4', '2023-01-19', 4, 1),
-                                                               ('Eighth reply to ticket 4', '2023-01-20', 4, 3),
-                                                               ('Ninth reply to ticket 4', '2023-01-21', 4, 1),
-                                                               ('Tenth reply to ticket 4', '2023-01-22', 4, 3);
+
 
