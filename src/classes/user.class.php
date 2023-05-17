@@ -217,6 +217,13 @@
         return $role['name'];
     }
 
+    public function checkIfBanned($db){
+        $stmt = $db->prepare('Select * From User_Ban WHERE idUser = ?');
+        $stmt->execute(array($this->idUser));
+        $ban = $stmt->fetch();
+        return $ban;
+    }
+
   }
 
 ?>

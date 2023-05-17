@@ -13,15 +13,23 @@
 
   $user = User::getUserWithPassword($db, $_POST['username'], $_POST['password']);
 
+  $ban = $user->checkIfBanned($db);
+
   if($user) {
-    $session->setUsername($user->getUsername());
-    $session->setId($user->getId());
-    unset($_SESSION['input']['username login']);
-    unset($_SESSION['input']['password login']);
-    //$_SESSION['id'] = $user->idUser;
-    //$_SESSION['username'] = $user->getUsername();
-    $session->addMessage('success', 'Login successful!');
-    header('Location: ../pages/main.php');
+      if(empty($ban)) {
+          $session->setUsername($user->getUsername());
+          $session->setId($user->getId());
+          unset($_SESSION['input']['username login']);
+          unset($_SESSION['input']['password login']);
+          //$_SESSION['id'] = $user->idUser;
+          //$_SESSION['username'] = $user->getUsername();
+          $session->addMessage('success', 'Login successful!');
+          header('Location: ../pages/main.php');
+      }
+      else{
+          $session->addMessage('error', 'You were banned from the site. Reason: ' . $ban['reason'] .'; description: ' .$ban['description']);
+          die(header('Location: ../pages/login.php'));
+      }
   } else {
     $session->addMessage('error', 'Wrong username or password!');
     die(header('Location: ../pages/login.php'));

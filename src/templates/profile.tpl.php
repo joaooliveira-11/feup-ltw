@@ -141,7 +141,7 @@ function drawEditProfileMain(){ ?>
                 </div>
             </div>
             <button class="btn-submit" type="submit">Submit Ticket</button>
-            <button class="btn-cancel" onclick="window.location.href='../pages/newTicket.php'">Cancel</button>
+            <button class="btn-cancel" type="button" onclick="window.location.href='../pages/main.php'">Cancel</button>
         </form>
     </section>
     </main>

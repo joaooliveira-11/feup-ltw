@@ -49,7 +49,7 @@ function drawEditDepartment($department){ ?>
                 </div>
             </div>
                 <button class="btn-submit" type="submit" name="idDepartment" value="<?php echo $department['idDepartment'] ?>">Edit Department</button>
-                <button class="btn-cancel" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
             </form>
         </section>
     </main>
@@ -66,13 +66,13 @@ function drawCreateDepartment(){ ?>
                     </div>
 
                     <div class="ticket-desc">
-                        <label for="ticket_description">Description</label>
+                        <label for="ticket_description">Description: </label>
                         <br>
                         <textarea name="description" id="ticket_description" required="required" rows="4" cols="75" maxlength="300"></textarea>
                     </div>
                 </div>
                 <button class="btn-submit" type="submit">Create Department</button>
-                <button class="btn-cancel" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
             </form>
         </section>
     </main>
@@ -105,16 +105,44 @@ function drawWebsiteUsers(PDO $db, array $users){ ?>
                             <form>
                                 <button type="submit">Downgrade to <?php echo $user->getRoleName($db, $user->getUserRole($db) - 1) ?></button>
                             </form>
-                            <?php } ?>
-                            <form method="post" action="../actions/action_inquiry.php">
-                                <button type="submit">Ban User</button>
+                            <?php }
+                     if($user->getUserRole($db) === 1){ ?>
+                            <form method="post" action="../pages/banUser.php">
+                                <button type="submit" name="idUser" value="<?php echo $user->getId() ?>">Ban User</button>
                             </form>
-                    <?php } ?>
+                         <?php }
+                    } ?>
                     </th>
                 </tr>
             <?php }
             ?>
             </tbody>
         </table>
+    </main>
+<?php }
+
+
+function drawBanUser(int $idUser){ ?>
+    <main>
+        <section class="createticket">
+            <form action="../actions/action_banUser.php" method="post">
+                <div class="form-wrapper">
+                    <div class="ticket-title">
+                        <label for="ticket_title"> Reason: </label>
+                        <input type="text" name="title" id="ticket_title" required="required" maxlength="30">
+                    </div>
+
+                    <div class="ticket-desc">
+                        <label for="ticket_description">Description: </label>
+                        <br>
+                        <textarea name="description" id="ticket_description" rows="4" cols="75" maxlength="300"></textarea>
+                    </div>
+                </div>
+                <article>
+                <button class="btn-submit" type="submit" name="idUser" value="<?php echo $idUser ?>">Ban User</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageUsers.php'">Cancel</button>
+                </article>
+            </form>
+        </section>
     </main>
 <?php }

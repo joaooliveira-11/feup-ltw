@@ -470,10 +470,10 @@ label{
     color:#224957;
 }
 
-.createticket form {
+.createticket {
     margin: 0;
 }
-.createticket form div{
+.createticket div{
     padding: 0.5em 0;
 }
 .ticket-title {
@@ -545,7 +545,7 @@ label{
     border-radius: 10px;
 }
 
-form .btn-submit {
+.createticket .btn-submit {
     color: #224957;
     margin-top: 2.5em;
     margin-right: 1em;
@@ -556,7 +556,7 @@ form .btn-submit {
     font-weight: 600;
 }
 
-form .btn-cancel{
+.createticket .btn-cancel{
     color: #224957;
     margin-top: 2.5em;
     margin-left: 1em;
@@ -566,6 +566,15 @@ form .btn-cancel{
     font-size: 0.9em;
     font-weight: 600;
 }
+
+.btn-submit, .btn-cancel{
+
+}
+
+.createticket article{
+    display: flex;
+}
+
 .AssignTicket{
     display: flex;
 }

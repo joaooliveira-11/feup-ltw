@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS User_Departments;
 DROP TABLE IF EXISTS Ticket_Hashtags;
 DROP TABLE IF EXISTS Ticket_Status;
+DROP TABLE IF EXISTS User_Ban;
 
 DROP TRIGGER IF EXISTS insert_user_roles;
 DROP TRIGGER IF EXISTS insert_ticket_status;
@@ -123,6 +124,13 @@ CREATE TABLE FAQ (
                      question TEXT NOT NULL,
                      answer TEXT NOT NULL
 );
+
+CREATE TABLE User_Ban (
+                    idUser INTEGER PRIMARY KEY REFERENCES User,
+                    reason TEXT NOT NULL,
+                    description TEXT
+);
+
 ------------------------------------------------------------------------------------------
 --------------------------------------Triggers--------------------------------------
 ------------------------------------------------------------------------------------------
