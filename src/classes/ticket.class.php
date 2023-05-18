@@ -209,19 +209,7 @@
             return $result;
     }
 
-    public function existsDepartmentTicket(PDO $db):bool{
-        $stmt = $db->prepare('SELECT name FROM Department WHERE idDepartment = ? ');
-        $stmt->execute(array($this->idDepartment));
-        $result = $stmt->fetch();
-        return empty($result);
-    }
-
     public function change_ticket_status(PDO $db,string $status){
-        if($this->existsDepartmentTicket($db)){
-            $stmt = $db->prepare('DELETE FROM Ticket_Status WHERE idTicket = ?');
-            $stmt->execute(array($this->idTicket));
-        }
-        else {
             $idstatus = Ticket::get_status_id($db, $status);
             $date = date('d-m-Y');
             if ($status === 'OPEN') $idResolve = NULL;
@@ -230,7 +218,6 @@
             INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
                 ');
             $stmt->execute(array($this->idTicket, $idstatus, $this->idDepartment, $idResolve, $date));
-        }
     }
     
 
