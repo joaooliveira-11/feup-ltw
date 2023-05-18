@@ -134,7 +134,7 @@
 
     static function getUsersFromDepartment(PDO $db, $idDepartment,int $idCria, int $idUser){
         $stmt = $db->prepare('
-            SELECT User.idUser, User.name, User.username, User.email, User.password, COUNT(Ticket.idTicket) as ticket_count
+            SELECT User.idUser, User.name, User.username, User.email, User.password, COALESCE(SUM(Ticket_Status.idStatus = 2), 0) as ticket_count
             FROM User
             INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
             LEFT JOIN Ticket ON User.idUser = Ticket.resolve
@@ -144,7 +144,7 @@
                 GROUP BY idTicket
             ) AS LastTicketStatus ON Ticket.idTicket = LastTicketStatus.idTicket
             LEFT JOIN Ticket_Status ON Ticket.idTicket = Ticket_Status.idTicket AND Ticket_Status.id_random = LastTicketStatus.last_status
-            WHERE User_Departments.idDepartment = ? AND User.idUser <> ? AND User.idUser <> ? AND Ticket_Status.idStatus = 2
+            WHERE User_Departments.idDepartment = ? AND User.idUser <> ? AND User.idUser <> ?
             GROUP BY User.idUser, User.name, User.username, User.email, User.password
             ORDER BY ticket_count
           ');

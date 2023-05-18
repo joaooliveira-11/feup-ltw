@@ -14,3 +14,13 @@ if(manage_options_button) {
         }
     })
 }
+
+function createNotification(type, text) {
+    let notification = document.createElement('div');
+    notification.classList.add('notification', type);
+    notification.textContent = type + ' -> ' + text;
+    document.body.appendChild(notification);
+    /*setTimeout(function() {
+        notification.remove();
+    }, 5000);*/
+}

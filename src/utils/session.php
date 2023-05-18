@@ -44,8 +44,20 @@
     }
 
     public function addMessage(string $type, string $text) {
-        //$_SESSION['messages'][] = array('type' => $type, 'text' => $text);
-        //echo "<javascript>alert('" . $type . " -> " . $text . "');</javascript>";
+        $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
+        $notificationId = uniqid();
+        print_r(array('type' => $type, 'text' => $text));
+        echo "<script> let notification = document.createElement('div');
+        notification.id = '" . $notificationId . "';
+        notification.classList.add('notification', '" . $type . "');
+        notification.textContent = '" . $type . " -> " . $text . "';
+        document.body.appendChild(notification);
+        setTimeout(function() {
+            let element = document.getElementById('" . $notificationId . "');
+            if (element) {
+                element.remove();
+            }
+        }, 5000); </script>";
     }
 
     public function getMessages() {
