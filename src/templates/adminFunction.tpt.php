@@ -78,47 +78,21 @@ function drawCreateDepartment(){ ?>
     </main>
 <?php }
 
-function drawWebsiteUsers(PDO $db, array $users){ ?>
-    <main class="noPadding MainOverflow">
-        <table>
-            <thead>
+function drawWebsiteUsers(){ ?>
+<main class="noPadding MainOverflow">
+    <table id="usersTable">
+        <thead>
             <tr>
                 <th>Username</th>
                 <th>Name</th>
                 <th>Role</th>
                 <th></th>
             </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach ($users as $user){?>
-                <tr class="availableAgents">
-                    <th><?php echo $user->getUsername() ?></th>
-                    <th><?php echo $user->getName() ?></th>
-                    <th><?php echo $user->getRoleName($db, $user->getUserRole($db)) ?></th>
-                    <th id="actionsManageUsers">
-                        <?php if($user->getUserRole($db) < 3){ ?>
-                        <form method="post" action="../actions/action_inquiry.php">
-                            <button type="submit">Upgrade to <?php echo $user->getRoleName($db, $user->getUserRole($db) + 1) ?></button>
-                        </form>
-                    <?php if($user->getUserRole($db) === 2){ ?>
-                            <form>
-                                <button type="submit">Downgrade to <?php echo $user->getRoleName($db, $user->getUserRole($db) - 1) ?></button>
-                            </form>
-                            <?php }
-                     if($user->getUserRole($db) === 1){ ?>
-                            <form method="post" action="../pages/banUser.php">
-                                <button type="submit" name="idUser" value="<?php echo $user->getId() ?>">Ban User</button>
-                            </form>
-                         <?php }
-                    } ?>
-                    </th>
-                </tr>
-            <?php }
-            ?>
-            </tbody>
-        </table>
-    </main>
+        </thead>
+        <tbody id="usersBody">
+        </tbody>
+    </table>
+</main>
 <?php }
 
 

@@ -17,7 +17,7 @@ $ticket = Ticket::getTicketFromId($db, intval($ticket_id));
 $status = $_GET['Status'];
 
 $ticket->change_ticket_status($db,$status);
-$stmt = $db->prepare('INSERT INTO Inquiry (idUserReceiving,idUserGiving,idTicket,type,date) VALUES (?,?,?,?,?)');
-$stmt->execute(array($ticket->getCria(),$ticket->getResolve(),$ticket->getIdTicket(),"CHANGE_STATUS",date('d-m-Y')));
+//$stmt = $db->prepare('INSERT INTO Inquiry (idUserReceiving,idUserGiving,idTicket,type,date) VALUES (?,?,?,?,?)');
+//$stmt->execute(array($ticket->getCria(),$ticket->getResolve(),$ticket->getIdTicket(),"CHANGE_STATUS",date('d-m-Y')));
 
 echo json_encode("done");
