@@ -13,9 +13,8 @@
 
   $user = User::getUserWithPassword($db, $_POST['username'], $_POST['password']);
 
-  $ban = $user->checkIfBanned($db);
-
   if($user) {
+    $ban = $user->checkIfBanned($db);
       if(empty($ban)) {
           $session->setUsername($user->getUsername());
           $session->setId($user->getId());

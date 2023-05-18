@@ -23,8 +23,6 @@ DROP TABLE IF EXISTS User_Ban;
 DROP TRIGGER IF EXISTS insert_user_roles;
 DROP TRIGGER IF EXISTS insert_ticket_status;
 DROP TRIGGER IF EXISTS update_ticket_resolve;
-DROP TRIGGER IF EXISTS delete_all_from_department;
-DROP TRIGGER IF EXISTS delete_all_from_ticket;
 
 CREATE TABLE User (
                       idUser INTEGER PRIMARY KEY AUTOINCREMENT,
