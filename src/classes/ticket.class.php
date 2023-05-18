@@ -165,8 +165,8 @@
     }
 
     function searchIfRequestedToAssign(PDO $db){
-          $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ?');
-          $stmt->execute(array($this->idTicket));
+          $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ? AND type = ?');
+          $stmt->execute(array($this->idTicket, "ASSIGN_AGENT"));
           $result = $stmt->fetch();
           return intval($result['idUserReceiving']);
     }
