@@ -101,7 +101,28 @@ function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber)
 
 function drawTicketChangeStatus(PDO $db,Inquiry $inquiry){
     $ticket = Ticket::getTicketFromId($db,$inquiry->getTicket());
-    $ticket->getLastTicketStatus($db); ?>
-    
+    $agent = $ticket->getResolve();
+    $agentName="";
+    if($agent){
+        $agentName = User::getSingleUser($db,$agent)->getName();
+    }
+    $status = $ticket->getLastTicketStatus($db); ?>
+    <section class="retangulo">
+        <h4 id="ThisTicket"> This Ticket that you created:</h4>
+        <article id="TicketDescription">
+            <h2 class="ticketText"><?php echo $ticket->getTitle()?></h2>
+            <section>
+                <h3 class="ticketDescription"><?php echo $ticket->getDescription()?></h3>
+            </section>
+        </article>
+        <section>
+            <h4>
+                Now has the status <?php echo $status; if ($status!="OPEN") echo ", by agent " . $agentName?>
+            </h4>
+            <form method="post" action="../actions/action_deleteInquiryAssignAgent.php">
+                <button type="submit" name="idInquiry" value="<?php echo $inquiry->getIdInquiry() ?>"> Got It </button>
+            </form>
+        </section>
+    </section>
 
 <?php }

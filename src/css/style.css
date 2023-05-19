@@ -281,7 +281,7 @@ main{
     align-items: center;
 }
 
-.retangulo > section:not(:first-child){
+.retangulo section:not(:first-child){
     padding: 1em 0;
     border-top: #224957 1px solid;
     text-align: center;
@@ -292,6 +292,30 @@ main{
     align-items: center;
     justify-content: space-between;
 }
+
+.retangulo h4:first-child{
+    padding: 1em;
+}
+
+.retangulo h4{
+    margin: 0.2em 1em;
+}
+
+#TicketDescription{
+    border: #224957 4px solid;
+    border-radius: 10px;
+}
+
+#TicketDescription + section{
+    border:0;
+}
+
+#TicketDescription + section button{
+    background-color: mediumpurple;
+    padding: 1em;
+    margin-right: 1em;
+}
+
 .retangulo > section:last-child > article{
     display: flex;
     flex-direction: row;

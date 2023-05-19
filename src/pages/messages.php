@@ -9,6 +9,7 @@ if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 
 $idUser = $session->getId();
 $ticket_id = intval($_SESSION['Ticket']);
+unset($_SESSION['Ticket']);
 
 drawHeaderMain("messages.js");
 drawAside();
