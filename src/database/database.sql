@@ -138,7 +138,7 @@ AFTER INSERT ON User
 FOR EACH ROW
     WHEN(NEW.idUser<>1)
 BEGIN
-        INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 2); --quando se regista um user, ele é um cliente.
+        INSERT INTO User_Roles (idUser, idRole) VALUES (NEW.idUser, 1); --quando se regista um user, ele é um cliente.
 END;
 
 CREATE TRIGGER insert_ticket_status
@@ -231,15 +231,10 @@ INSERT INTO FAQ (question, answer) VALUES
 
 
 
-INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,1);
-INSERT INTO User_Departments(idUser, idDepartment) VALUES (2,2);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,3);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,4);
-
-INSERT INTO User_Roles(idUser, idRole) VALUES (4,1);
-INSERT INTO User_Roles(idUser, idRole) VALUES (5,1);
 
 
 
