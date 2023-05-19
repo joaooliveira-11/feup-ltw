@@ -37,7 +37,7 @@ body {
   border-bottom: 1px solid #224957;
 }
 
-.accordion button {
+.accordion button:not(#SelectFAQAnswer) {
   position: relative;
   display: block;
   text-align: left;
@@ -113,7 +113,9 @@ body {
   max-height: 9em;
   transition: all 200ms linear;
   will-change: opacity, max-height;
+  display: inline;
 }
+
 .accordion .accordion-content {
   opacity: 0;
   max-height: 0;
@@ -127,4 +129,9 @@ body {
   margin-left: 1em;
   margin-right: 1em;
   color: #000;
+}
+
+#SelectFAQAnswer{
+  padding: 1em;
+  background-color: mediumpurple;
 }
