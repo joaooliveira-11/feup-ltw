@@ -35,6 +35,8 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             }
         }
     ?>
+        <script src="../javascript/hashtags.js"></script>
+
     <div class="retangulo <?php echo $backgroundColor ?>" data-department = "<?php echo $ticket->getidDepartment()?>" data-status ="<?php echo $ticket->getLastTicketStatus($db)?>">
         <section class = "AssignTicket">
             <div>

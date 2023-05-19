@@ -1,7 +1,23 @@
-function addHashtag(idTicket, autocompleteId) {
-  const container = document.querySelector(`#ticket-${idTicket} .hashtags-container`);
-  const button = container.querySelector('#add-hashtags-button');
+console.log('hashtags.js loaded');
 
+function addHashtag(idTicket, autocompleteId) {
+  console.log('addHashtag() called');
+  
+  const container = document.querySelector(`.hashtags-container-${idTicket}`);
+
+  console.log(container);
+  if (!container) {
+    // Container element not found, do something (e.g., log an error message)
+    console.error(`Container element not found for ticket ${idTicket}`);
+    return;
+  }
+
+  const button = container.querySelector(`#add-hashtags-button-${idTicket}`);
+
+  if (!button) {
+    console.error(`Button element not found for ticket ${idTicket}`);
+    return;
+  }
   if (!container.querySelector('textarea')) {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', 'hashtags');
@@ -38,13 +54,13 @@ function addHashtag(idTicket, autocompleteId) {
           showAutocomplete(hashtags, input, idTicket, autocompleteId);          
         }
       };
-      document.querySelector(`#ticket-${idTicket} .hashtags-container`).classList.remove('active');
+      document.querySelector(`.hashtags-container-${idTicket}`).classList.remove('active');
       xhr.send();
     });
 
     input.addEventListener('blur', function() {
       // Delay hiding the autocomplete options to allow the user to click on an option
-      document.querySelector(`#ticket-${idTicket} .hashtags-container`).classList.remove('active');
+      document.querySelector(`.hashtags-container-${idTicket}`).classList.remove('active');
       setTimeout(() => {
         const list = document.getElementById(autocompleteId);
         list.innerHTML = '';
@@ -59,7 +75,7 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
   const list = document.getElementById(autocompleteId);
   const hashtagButtonContainer = document.getElementById(`hashtag-button-container-${idTicket}`);
 
-  document.querySelector(`#ticket-${idTicket} .hashtags-container`).classList.add('active');
+  document.querySelector(`.hashtags-container-${idTicket}`).classList.add('active');
 
   list.innerHTML = '';
 
@@ -114,7 +130,7 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
           input.parentNode.removeChild(input);
       }
       xhr.send();
-      document.querySelector(`#ticket-${idTicket} .hashtags-container`).classList.remove('active');
+      document.querySelector(`.hashtags-container-${idTicket}`).classList.remove('active');
     });
 
     list.appendChild(item);

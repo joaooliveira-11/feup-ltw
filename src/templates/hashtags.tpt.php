@@ -49,25 +49,23 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
 
-        <section class= hashtags>
-        <div class="hashtags-container">
-            <button id="add-hashtags-button" onclick="addHashtag(<?=$ticket->getIdTicket()?>, '<?=$autocompleteId?>')">Add Hashtag</button>
-                <ul id="<?=$autocompleteId?>"></ul>
-        </div>
-
-
-        <?php $hashtags = $ticket->getTicketHashtags($db); ?>
-
-        <div id="hashtag-button-container-<?php echo $ticket->getIdTicket(); ?>">
-            <?php foreach ($hashtags as $hashtag) : ?>
-                <button class="hashtag-button" onclick="removeHashtag(<?=$ticket->getIdTicket()?>, <?php echo $hashtag['id'] ?>)" id="hashtag-button-<?php echo $ticket->getIdTicket() ?>-<?php echo $hashtag['id'] ?>"
-                    data-ticket-id="<?php echo $ticket->getIdTicket() ?>" data-hashtag-id="<?php echo $hashtag['id'] ?>">
-                    <a>#<?php echo $hashtag['name'] ?></a>
-                    <img src="../docs/images/icons-multiply.png" alt="remove_hashtag">
+        <section class= "hashtags">
+            <div class="hashtags-container-<?=$ticket->getIdTicket()?>" id="hashtags-container-<?=$ticket->getIdTicket()?>">
+                <button class="add-hashtags-button" id="add-hashtags-button-<?=$ticket->getIdTicket()?>" onclick="addHashtag(<?=$ticket->getIdTicket()?>, '<?=$autocompleteId?>')">
+                Add Hashtag
                 </button>
-            <?php endforeach; ?>
-        </div>
-
+                <ul class="hashtags-list" id="<?=$autocompleteId?>">
+                </ul>
+            </div>
+            <div id="hashtag-button-container-<?php echo $ticket->getIdTicket(); ?>">
+                <?php foreach ($hashtags as $hashtag) : ?>
+                    <button class="hashtag-button" onclick="removeHashtag(<?=$ticket->getIdTicket()?>, <?php echo $hashtag['id'] ?>)" id="hashtag-button-<?php echo $ticket->getIdTicket() ?>-<?php echo $hashtag['id'] ?>"
+                        data-ticket-id="<?php echo $ticket->getIdTicket() ?>" data-hashtag-id="<?php echo $hashtag['id'] ?>">
+                        <a>#<?php echo $hashtag['name'] ?></a>
+                        <img src="../docs/images/icons-multiply.png" alt="remove_hashtag">
+                    </button>
+                <?php endforeach; ?>
+            </div>
         </section>
 
         <section>
