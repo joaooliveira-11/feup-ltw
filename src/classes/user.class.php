@@ -134,11 +134,17 @@
 
     static function getUsersFromDepartment(PDO $db, $idDepartment,int $idCria, int $idUser){
         $stmt = $db->prepare('
-            SELECT User.idUser, User.name, User.username, User.email, User.password, COUNT(Ticket.idTicket) as ticket_count
+            SELECT User.idUser, User.name, User.username, User.email, User.password, COALESCE(SUM(Ticket_Status.idStatus = 2), 0) as ticket_count
             FROM User
             INNER JOIN User_Departments ON User.idUser = User_Departments.idUser
             LEFT JOIN Ticket ON User.idUser = Ticket.resolve
-            WHERE User_Departments.idDepartment = ? AND User.idUser<>? AND User.idUser<>?
+            LEFT JOIN (
+                SELECT idTicket, max(id_random) as last_status
+                FROM Ticket_Status
+                GROUP BY idTicket
+            ) AS LastTicketStatus ON Ticket.idTicket = LastTicketStatus.idTicket
+            LEFT JOIN Ticket_Status ON Ticket.idTicket = Ticket_Status.idTicket AND Ticket_Status.id_random = LastTicketStatus.last_status
+            WHERE User_Departments.idDepartment = ? AND User.idUser <> ? AND User.idUser <> ?
             GROUP BY User.idUser, User.name, User.username, User.email, User.password
             ORDER BY ticket_count
           ');
@@ -244,6 +250,24 @@ static function countAgentTicket(PDO $db, int $idUser): int {
         }
         return $users;
     }
+    
+      static function getAllUsers(PDO $db) : array {
+
+          $stmt = $db->prepare('SELECT * FROM User WHERE idUser NOT IN (SELECT idUser FROM User_Ban)');
+          $stmt->execute();
+
+          $users = array();
+          while ($user = $stmt->fetch()) {
+              $users[] = new User(
+                  intval($user['idUser']),
+                  $user['name'],
+                  $user['username'],
+                  $user['email'],
+                  $user['password'],
+              );
+          }
+          return $users;
+      }
 
     function getPhoto() : string {
 
@@ -260,6 +284,13 @@ static function countAgentTicket(PDO $db, int $idUser): int {
         $stmt->execute(array($iduser));
         $role = $stmt->fetch();
         return $role['name'];
+    }
+
+    public function checkIfBanned($db){
+        $stmt = $db->prepare('Select * From User_Ban WHERE idUser = ?');
+        $stmt->execute(array($this->idUser));
+        $ban = $stmt->fetch();
+        return $ban;
     }
 
   }

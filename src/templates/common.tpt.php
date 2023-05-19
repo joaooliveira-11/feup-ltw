@@ -48,6 +48,7 @@ function drawFooterMain(){ ?>
             <a href="../pages/faq.php"> User Help </a>
         </section>
     </footer>
+    </body>
 <?php }
 
  function drawRegister()
@@ -88,12 +89,16 @@ function drawFooterMain(){ ?>
 <?php }
 
 function drawHeaderMain($scriptPage = null){?>
-    <link rel="stylesheet" href="../css/style.css">
-    <script defer src="../javascript/script.js"></script>
+    <!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css">
+        <script defer src="../javascript/script.js"></script>
     <?php if ($scriptPage!=null) { ?>
         <script defer src="../javascript/<?php echo $scriptPage?>"></script>
     <?php } ?>
+    </head>
 
+    <body>
     <header id ="HeaderMain">
         TicketEase
     </header>

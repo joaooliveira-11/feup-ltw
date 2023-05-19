@@ -8,12 +8,12 @@ require_once(dirname(__DIR__) . '/templates/adminFunction.tpt.php');
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 
-drawHeaderMain("adminFunct.js");
 $db = getDatabaseConnection();
 
 $idDepartment = intval($_POST['department']);
-$users = User::getAllUsersOutsideDepartment($db,$idDepartment);
+$idUser = intval($_POST['user']);
 
-drawAside();
-drawOutsideDepartmentAgents($users, $idDepartment, $db);
-drawFooterMain();
+$stmt = $db->prepare('INSERT INTO User_Departments(idUser, idDepartment) VALUES (?,?)');
+$stmt->execute(array($idUser, $idDepartment));
+
+echo json_encode("done");

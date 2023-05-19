@@ -165,8 +165,8 @@
     }
 
     function searchIfRequestedToAssign(PDO $db){
-          $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ?');
-          $stmt->execute(array($this->idTicket));
+          $stmt = $db->prepare('SELECT idUserReceiving FROM Inquiry WHERE idTicket = ? AND type = ?');
+          $stmt->execute(array($this->idTicket, "ASSIGN_AGENT"));
           $result = $stmt->fetch();
           return intval($result['idUserReceiving']);
       }
@@ -224,14 +224,14 @@
     }
 
     public function change_ticket_status(PDO $db,string $status){
-        $idstatus = Ticket::get_status_id($db, $status);
-        $date = date('d-m-Y');
-        if($status === 'OPEN') $idResolve = NULL;
-        else $idResolve = $this->resolve;
-        $stmt = $db->prepare('
-          INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
-        ');
-        $stmt->execute(array($this->idTicket, $idstatus, $this->idDepartment, $idResolve, $date));
+            $idstatus = Ticket::get_status_id($db, $status);
+            $date = date('d-m-Y');
+            if ($status === 'OPEN') $idResolve = NULL;
+            else $idResolve = $this->resolve;
+            $stmt = $db->prepare('
+            INSERT INTO Ticket_Status(idTicket, idStatus, idDepartment, agent, date) VALUES (?,?,?,?,?)
+                ');
+            $stmt->execute(array($this->idTicket, $idstatus, $this->idDepartment, $idResolve, $date));
     }
     
 

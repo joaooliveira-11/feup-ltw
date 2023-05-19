@@ -14,6 +14,7 @@ body{
     color:#AFAFAF;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 #footerMain{
@@ -258,10 +259,10 @@ main{
 .retangulo {
     background-color: #AFAFAF;
     color:#224957;
-    width: 75vw;
     border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 0 1em;
     margin-top: 3em;
 }
 .retangulo > section:first-child{
@@ -279,8 +280,8 @@ main{
     align-items: center;
 }
 
-.retangulo > section:not(:first-child){
-    padding: 1em;
+.retangulo section:not(:first-child){
+    padding: 1em 0;
     border-top: #224957 1px solid;
     text-align: center;
 }
@@ -290,6 +291,30 @@ main{
     align-items: center;
     justify-content: space-between;
 }
+
+.retangulo h4:first-child{
+    padding: 1em;
+}
+
+.retangulo h4{
+    margin: 0.2em 1em;
+}
+
+#TicketDescription{
+    border: #224957 4px solid;
+    border-radius: 10px;
+}
+
+#TicketDescription + section{
+    border:0;
+}
+
+#TicketDescription + section button{
+    background-color: mediumpurple;
+    padding: 1em;
+    margin-right: 1em;
+}
+
 .retangulo > section:last-child > article{
     display: flex;
     flex-direction: row;
@@ -468,10 +493,10 @@ label{
     color:#224957;
 }
 
-.createticket form {
+.createticket {
     margin: 0;
 }
-.createticket form div{
+.createticket div{
     padding: 0.5em 0;
 }
 .ticket-title {
@@ -543,7 +568,7 @@ label{
     border-radius: 10px;
 }
 
-form .btn-submit {
+.createticket .btn-submit {
     color: #224957;
     margin-top: 2.5em;
     margin-right: 1em;
@@ -554,7 +579,7 @@ form .btn-submit {
     font-weight: 600;
 }
 
-form .btn-cancel{
+.createticket .btn-cancel{
     color: #224957;
     margin-top: 2.5em;
     margin-left: 1em;
@@ -564,6 +589,15 @@ form .btn-cancel{
     font-size: 0.9em;
     font-weight: 600;
 }
+
+.btn-submit, .btn-cancel{
+
+}
+
+.createticket article{
+    display: flex;
+}
+
 .AssignTicket{
     display: flex;
 }
@@ -738,7 +772,7 @@ aside ul>button{
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom:-0.4em;
+    bottom:10px;
     padding-top: 5px;
     border-top: #224957 1px solid;
     width: 100%;
@@ -749,11 +783,11 @@ aside ul>button{
     margin: 0.2em 0.8em;
 }
 
-.ADepartmentMain article>form:nth-child(2) button{
+.ADepartmentMain article>form:nth-child(2) button, #actionsManageUsers form:nth-child(2) button  {
     background-color: yellow;
 }
 
-.ADepartmentMain article>form:nth-child(3) button{
+.ADepartmentMain article>form:nth-child(3) button, #actionsManageUsers form:nth-child(3) button{
     background-color: red;
 }
 
@@ -837,7 +871,7 @@ aside ul>button{
 }
 
 #send-message-form button {
-    width: 60px;
+    min-width: 60px;
     height: 40px;
     border-radius: 20px;
     border: none;
@@ -865,4 +899,10 @@ aside ul>button{
 
 #manageDepartmentsHeader button{
     margin: 0;
+}
+
+#actionsManageUsers {
+    display: flex;
+    margin: 0 1em 0 2em;
+    justify-content: space-between;
 }

@@ -24,9 +24,6 @@ function drawWebsiteDepartments(array $departments) { ?>
                     <form method="post" action="../pages/editDepartment.php">
                         <button type="submit" name="department" value="<?php echo $department['idDepartment'] ?>"> Edit Department Information</button>
                     </form>
-                    <form method="post" action="../actions/action_deleteDepartment.php">
-                        <button type="submit" name="department" value="<?php echo $department['idDepartment'] ?>"> Delete Department</button>
-                    </form>
                 </article>
             </section>
         <?php } ?>
@@ -52,7 +49,7 @@ function drawEditDepartment($department){ ?>
                 </div>
             </div>
                 <button class="btn-submit" type="submit" name="idDepartment" value="<?php echo $department['idDepartment'] ?>">Edit Department</button>
-                <button class="btn-cancel" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
             </form>
         </section>
     </main>
@@ -69,13 +66,56 @@ function drawCreateDepartment(){ ?>
                     </div>
 
                     <div class="ticket-desc">
-                        <label for="ticket_description">Description</label>
+                        <label for="ticket_description">Description: </label>
                         <br>
                         <textarea name="description" id="ticket_description" required="required" rows="4" cols="75" maxlength="300"></textarea>
                     </div>
                 </div>
                 <button class="btn-submit" type="submit">Create Department</button>
-                <button class="btn-cancel" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
+            </form>
+        </section>
+    </main>
+<?php }
+
+function drawWebsiteUsers(){ ?>
+<main class="noPadding MainOverflow">
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="usersBody">
+        </tbody>
+    </table>
+</main>
+<?php }
+
+
+function drawBanUser(int $idUser){ ?>
+    <main>
+        <section class="createticket">
+            <form action="../actions/action_banUser.php" method="post">
+                <div class="form-wrapper">
+                    <div class="ticket-title">
+                        <label for="ticket_title"> Reason: </label>
+                        <input type="text" name="title" id="ticket_title" required="required" maxlength="30">
+                    </div>
+
+                    <div class="ticket-desc">
+                        <label for="ticket_description">Description: </label>
+                        <br>
+                        <textarea name="description" id="ticket_description" rows="4" cols="75" maxlength="300"></textarea>
+                    </div>
+                </div>
+                <article>
+                <button class="btn-submit" type="submit" name="idUser" value="<?php echo $idUser ?>">Ban User</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageUsers.php'">Cancel</button>
+                </article>
             </form>
         </section>
     </main>
@@ -87,7 +127,6 @@ function drawDepartmentAgents(array $users, int $idDepartment, PDO $db){ ?>
             <thead>
             <tr>
                 <th>Agents</th>
-                <th>Number of tickets solving</th>
                 <th>Current Departments</th>
                 <th></th>
             </tr>
@@ -98,7 +137,6 @@ function drawDepartmentAgents(array $users, int $idDepartment, PDO $db){ ?>
             
                 <tr class="availableAgents">
                     <th><?php echo $user[0] ?></th>
-                    <th><?php echo $user[1] ?></th>
                     <th><?php echo User::countUserDepartments($db, intval($user[2]));?></th>
                 </tr>
         <?php }
@@ -117,29 +155,27 @@ function drawOutsideDepartmentAgents(array $users, int $idDepartment, PDO $db){ 
             <thead>
             <tr>
                 <th>Available Agents</th>
-                <th>Number of tickets solving</th>
                 <th>Current Departments</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <?php
-            foreach ($users as $user){ ?>
-                <tr class="availableAgents">
+            foreach ($users as $user){?>
+                <tr class="availableAgents" id ="<?= $user[1]?>">
                     <th><?php echo $user[0] ?></th>
-                    <th><?php echo User::countAgentTicket($db,intval($user[1])) ?></th>
-                    <th><?php echo User::countUserDepartments($db, intval($user[1]))?></th>
+                    <th><?php echo User::countUserDepartments($db, intval($user[1]));?></th>
                     <th>
-                        <form method="post" action="../actions/action_addDepartAgent.php">
-                            <input type="hidden" name="idUser" value="<?php echo $user[1]?>">
-                            <input type="hidden" name="idDepart" value="<?php echo $idDepartment?>">
-                            <button type="submit">Select</button>
+                        <form class="agentsOutside">
+                            <input type="hidden" id="userinput" name="idUser" value="<?php echo $user[1]?>">
+                            <input type="hidden" id="departinput" name="idDepart" value="<?= $idDepartment?>">
+                            <button type="submit" id="agentsOutside-button">Select</button>
                         </form>
                     </th>
                 </tr>
         <?php }
         ?>
             </tbody>
-        </table>
+        </table>        
     </main>
 <?php }

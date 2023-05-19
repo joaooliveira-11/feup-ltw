@@ -1,4 +1,4 @@
-<?php function drawFAQ(PDOStatement $faqs){ ?>
+<?php function drawFAQ(PDOStatement $faqs, $selectButton = false){ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,13 +23,22 @@
             <p>
                 <?php echo $faq['answer'] ?>
             </p>
+              <?php if($selectButton){ ?>
+                <form method="post" action="../pages/messages.php">
+                    <input type="hidden" name ="faqQuestion" value = "<?php echo $faq['question'] ?>">
+                    <input type="hidden" name ="faqAnswer" value = "<?php echo $faq['answer'] ?>">
+                    <button type="Submit" id="SelectFAQAnswer"> Select </button>
+                </form>
+              <?php } ?>
           </div>
         </div>
         
         <?php } ?>
       </div>
     </div>
+        <?php if (!$selectButton){ ?>
     <button id="CreateNewFAQ" onclick="window.location.href='../pages/newFAQ.php'"> <span>+</span> New FAQ</button>
+        <?php } ?>
     <script src="../javascript/faq.js"></script>
     </div>
   </body>
