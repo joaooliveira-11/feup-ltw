@@ -11,7 +11,7 @@ Clients should be able to:
 - Reply to inquiries (e.g., the agent asks for more details) about their tickets and add more information to already submitted tickets. (DONE)
 
 Agents should be able to (they are also clients):
-- List tickets from their departments (e.g., "Accounting"), and filter them in different ways (e.g., by date, by assigned agent, by status, by priority, by hashtag). (NOT DONE - BERNA)
+- List tickets from their departments (e.g., "Accounting"), and filter them in different ways (e.g., by date, by assigned agent, by status, by priority, by hashtag). (SEMI-DONE - BERNA)
 - Change the department of a ticket (e.g., the client chose the wrong department). (DONE - falta css)
 - Assign a ticket to themselves or someone else. (DONE)
 - Change the status of a ticket. Tickets can have many statuses (e.g., open, assigned, closed); some may change automatically (e.g., ticket changes to "assigned" - after being assigned to an agent). (DONE)
@@ -20,10 +20,15 @@ Agents should be able to (they are also clients):
 - Manage the FAQ and use an answer from the FAQ to answer a ticket. (NOT DONE)
 
 Admins should be able to (they are also agents):
-- Upgrade a client to an agent or an admin. (NOT DONE)
+- Upgrade a client to an agent or an admin. (DONE)
 - Add new departments, statuses, and other relevant entities. (SEMI DONE)
-- Assign agents to departments. (NOT DONE)
+- Assign agents to departments. (DONE)
 - Control the whole system. (NOT DONE)
+
+Extra features:
+- Agents can belong to more than one department. (DONE)
+- Notification system for messages, change ticket status. (DONE)
+- Agents can accept or decline a pending ticket assign request. (DONE)
 
 Some suggested additional requirements. These requirements are a way of making sure each project is unique. You do not have to implement all of these:
 - Tickets can have documents attached to them (both by clients and agents).
