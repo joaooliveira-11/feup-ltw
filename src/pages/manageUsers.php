@@ -10,9 +10,7 @@ require_once(dirname(__DIR__) . '/templates/adminFunction.tpt.php');
 
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-drawHeaderMain();
-$db = getDatabaseConnection();
-$users = User::getAllUsers($db);
+drawHeaderMain("adminFunct.js");
 drawAside();
-drawWebsiteUsers($db, $users);
+drawWebsiteUsers();
 drawFooterMain();

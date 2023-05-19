@@ -250,9 +250,10 @@ static function countAgentTicket(PDO $db, int $idUser): int {
         }
         return $users;
     }
+    
       static function getAllUsers(PDO $db) : array {
 
-          $stmt = $db->prepare('SELECT * FROM User');
+          $stmt = $db->prepare('SELECT * FROM User WHERE idUser NOT IN (SELECT idUser FROM User_Ban)');
           $stmt->execute();
 
           $users = array();
