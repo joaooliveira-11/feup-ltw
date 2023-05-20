@@ -6,6 +6,7 @@ require_once(dirname(__DIR__).'/classes/inquiry.class.php');
 $session = new Session();
 
 if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
+if (!($session->check_tokens($_POST['csrf']))) die(header('Location: ../pages/inquiries.php'));
 
 $db = getDatabaseConnection();
 $currentUser = User::getSingleUser($db,$session->getId());

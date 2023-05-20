@@ -63,5 +63,12 @@
     public function getMessages() {
       return $this->messages;
     }
+
+    public function check_tokens(String $tokens) : bool {
+      if ($_SESSION['csrf'] !== $tokens) {
+          return false;
+      }
+      return true;
+    }
   }
 ?>

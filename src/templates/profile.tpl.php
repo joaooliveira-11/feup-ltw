@@ -84,6 +84,7 @@ function drawEditProfileMain(){ ?>
                         <input type="password" placeholder="Confirm Password" name="confirmPassword">
                     </label>
                 </div>
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             </article>
             <div id="SubmitEditButtons">
                 <button formaction="../actions/action_editProfile.php" formmethod="post">
@@ -138,6 +139,7 @@ function drawEditProfileMain(){ ?>
                         <label for="ticket_createdate"><?php echo date('d-m-Y')?></label>
                         <input type="hidden" name="date" id="ticket_createdate" value="<?php echo date('d-m-Y')?>">
                     </div>
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 </div>
             </div>
             <button class="btn-submit" type="submit">Submit Ticket</button>

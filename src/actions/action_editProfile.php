@@ -7,6 +7,7 @@ require_once(dirname(__DIR__).'/classes/user.class.php');
 $session = new Session();
 
 if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
+if (!($session->check_tokens($_POST['csrf']))) die(header('Location: ../pages/editProfile.php'));
 
 $db = getDatabaseConnection();
 $updateUser = User::getSingleUser($db,$session->getId());
