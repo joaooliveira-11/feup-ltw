@@ -18,6 +18,7 @@
 <?php }
 
 function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é para saber o que desenhar em cada página. Se for na página my tickets, desenho o ticket de uma determinada maneira; Se for na página DepartmentTickets, desenho o ticket doutra maneira, com mais funcionalidades, se for na página myAssignedTickets, desenho o ticket de outra maneira?>
+
     <?php
         $status = $ticket->getLastTicketStatus($db);
         $backgroundColor="";
@@ -34,8 +35,11 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                     break;
             }
         }
+        $autocompleteId = "autocomplete-list-" . $ticket->getIdTicket();
+
     ?>
-        <script src="../javascript/hashtags.js"></script>
+
+<script src="../javascript/hashtags.js"></script>
 
     <div class="retangulo <?php echo $backgroundColor ?>" data-department = "<?php echo $ticket->getidDepartment()?>" data-status ="<?php echo $ticket->getLastTicketStatus($db)?>">
         <section class = "AssignTicket">
@@ -54,6 +58,32 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
         <section>
             <h3 class="ticketDescription"><?=$ticket->getDescription()?></h3>
         </section>
+
+        <?php if(($entity===3)) { //só aparece este botão no myAssignedTickets?>
+        <section class= "hashtags">
+            <div class="hashtags-container" id="hashtags-container-<?=$ticket->getIdTicket()?>">
+                <button class="add-hashtags-button" id="add-hashtags-button-<?=$ticket->getIdTicket()?>" onclick="addHashtag(<?=$ticket->getIdTicket()?>, '<?=$autocompleteId?>')">
+                Add Hashtag
+                </button>
+                <ul class="hashtags-list" id="<?=$autocompleteId?>">
+                </ul>
+            </div>
+            <?php $hashtags = $ticket->getTicketHashtags($db); ?>
+            <div id="hashtag-button-container-<?php echo $ticket->getIdTicket(); ?>">
+                <?php foreach ($hashtags as $hashtag) : ?>
+                    <button class="hashtag-button" onclick="removeHashtag(<?=$ticket->getIdTicket()?>, <?php echo $hashtag['id'] ?>)" id="hashtag-button-<?php echo $ticket->getIdTicket() ?>-<?php echo $hashtag['id'] ?>"
+                        data-ticket-id="<?php echo $ticket->getIdTicket() ?>" data-hashtag-id="<?php echo $hashtag['id'] ?>">
+                        <a>#<?php echo $hashtag['name'] ?></a>
+                        <img src="../docs/images/icons-multiply.png" alt="remove_hashtag">
+                    </button>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <?php } ?>
+
+
+
+
         <section>
             <article>
                 <h5>Departament: <?=$ticket->getTicketDepartmentName($db)?></h5>

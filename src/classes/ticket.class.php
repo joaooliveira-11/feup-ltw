@@ -169,21 +169,7 @@
           $stmt->execute(array($this->idTicket, "ASSIGN_AGENT"));
           $result = $stmt->fetch();
           return intval($result['idUserReceiving']);
-      }
-
-    function getTicketHashtags(PDO $db): array {
-        $stmt = $db->prepare('SELECT h.idHashtag, h.name FROM Ticket_Hashtags th JOIN Hashtag h ON th.idHashtag = h.idHashtag WHERE th.idTicket = ?');
-        $stmt->execute(array($this->idTicket));
-        $hashtags = array();
-        while ($hashtag = $stmt->fetch()) {
-            $hashtags[] = array(
-                'id' => intval($hashtag['idHashtag']),
-                'name' => $hashtag['name']
-            );
-        }
-        return $hashtags;
     }
-    
 
     public function get_status_id(PDO $db, string $status) : int{
         $stmt = $db->prepare('SELECT idStatus FROM Status WHERE stage = ? ');
@@ -302,6 +288,19 @@
         $stmt->execute(array($this->idTicket));
         $reply = $stmt->fetch(PDO::FETCH_ASSOC);
         return $reply;
+    }
+
+    function getTicketHashtags(PDO $db): array {
+        $stmt = $db->prepare('SELECT h.idHashtag, h.name FROM Ticket_Hashtags th JOIN Hashtag h ON th.idHashtag = h.idHashtag WHERE th.idTicket = ?');
+        $stmt->execute(array($this->idTicket));
+        $hashtags = array();
+        while ($hashtag = $stmt->fetch()) {
+            $hashtags[] = array(
+                'id' => intval($hashtag['idHashtag']),
+                'name' => $hashtag['name']
+            );
+        }
+        return $hashtags;
     }
 
 }

@@ -9,21 +9,21 @@
     <section>
         <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png">
         <article>
-            <div>
+            <a>
                 Name:  <span><?php echo $user->getName();  ?></span>
-            </div>
-            <div>
+            </a>
+            <a>
                 Username: <span><?php echo $user->getUsername();  ?></span>
-            </div>
-            <div>
+            </a>
+            <a>
                 E-mail: <span><?php echo $user->getEmail(); ?></span>
-            </div>
-            <div>
+            </a>
+            <a>
                 Role: <span><?php echo $user->getRoleName($db, $idRole); ?></span>
-            </div>
+            </a>
         </article>
     </section>
-    <button id="EditProfileButton" onclick="window.location.href='http://localhost:9000/pages/editProfile.php'">
+    <button id="EditProfileButton" onclick="window.location.href='../pages/editProfile.php'">
         Edit Profile
     </button>
 </main>
@@ -69,19 +69,19 @@ function drawEditProfileMain(){ ?>
                 <div>
                     Current Password:
                     <label>
-                        <input type="password" placeholder="Obrigatório preencher" name="currentPassword" required="required">
+                        <input type="password" placeholder="Current Password" name="currentPassword" required="required">
                     </label>
                 </div>
                 <div>
                     New Password:
                     <label>
-                        <input type="password" name="newPassword">
+                        <input type="password" placeholder="New Password" name="newPassword">
                     </label>
                 </div>
                 <div>
                     Confirm Password:
                     <label>
-                        <input type="password" name="confirmPassword">
+                        <input type="password" placeholder="Confirm Password" name="confirmPassword">
                     </label>
                 </div>
             </article>

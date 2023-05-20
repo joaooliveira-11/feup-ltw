@@ -34,6 +34,8 @@ if($assignAgent) {
                 $inquiry = Inquiry::getInquiryFromId($db,intval($_POST['Inquiry']));
                 $inquiry->deleteInquiry($db);
             }
+            $stmt_new2 = $db->prepare('INSERT INTO Inquiry (idUserReceiving,idUserGiving,idTicket,type,date) VALUES (?,?,?,?,?)');
+            $stmt_new2->execute(array($ticket->getCria(),$ticket->getResolve(),$ticket->getIdTicket(),"CHANGE_STATUS",date('d-m-Y')));
             $session->addMessage("Success", "Ticket Assigned successfully");
             header('Location: ../pages/myAssignedTickets.php');
         }

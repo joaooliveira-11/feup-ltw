@@ -158,6 +158,7 @@ section.hashtags  > .hashtags-container input[type=text] {
     border: 1px solid #224957;
     border-radius: 10px;
     resize: text;
+    display: flex;
 }
 
 section.hashtags  > .hashtags-container textarea {

@@ -3,7 +3,7 @@ console.log('hashtags.js loaded');
 function addHashtag(idTicket, autocompleteId) {
   console.log('addHashtag() called');
   
-  const container = document.querySelector(`.hashtags-container-${idTicket}`);
+  const container = document.querySelector(`#hashtags-container-${idTicket}`);
 
   console.log(container);
   if (!container) {
@@ -54,13 +54,13 @@ function addHashtag(idTicket, autocompleteId) {
           showAutocomplete(hashtags, input, idTicket, autocompleteId);          
         }
       };
-      document.querySelector(`.hashtags-container-${idTicket}`).classList.remove('active');
+      document.querySelector(`#hashtags-container-${idTicket}`).classList.remove('active');
       xhr.send();
     });
 
     input.addEventListener('blur', function() {
       // Delay hiding the autocomplete options to allow the user to click on an option
-      document.querySelector(`.hashtags-container-${idTicket}`).classList.remove('active');
+      document.querySelector(`#hashtags-container-${idTicket}`).classList.remove('active');
       setTimeout(() => {
         const list = document.getElementById(autocompleteId);
         list.innerHTML = '';
@@ -75,7 +75,7 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
   const list = document.getElementById(autocompleteId);
   const hashtagButtonContainer = document.getElementById(`hashtag-button-container-${idTicket}`);
 
-  document.querySelector(`.hashtags-container-${idTicket}`).classList.add('active');
+  document.querySelector(`#hashtags-container-${idTicket}`).classList.add('active');
 
   list.innerHTML = '';
 
@@ -130,7 +130,7 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
           input.parentNode.removeChild(input);
       }
       xhr.send();
-      document.querySelector(`.hashtags-container-${idTicket}`).classList.remove('active');
+      document.querySelector(`#hashtags-container-${idTicket}`).classList.remove('active');
     });
 
     list.appendChild(item);
