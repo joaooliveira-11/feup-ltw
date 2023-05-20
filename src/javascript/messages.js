@@ -2,6 +2,13 @@ const messageContainer = document.querySelector('#messages');
 const sendMessageForm = document.querySelector('#send-message-form');
 const messageInput = document.querySelector('#message-input');
 
+function scrollBar() {
+    const lastMessage = messageContainer.lastElementChild;
+    if (lastMessage) {
+      lastMessage.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
 function loadMessages() {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '../api/api_getMessages.php', true);
@@ -21,6 +28,7 @@ function loadMessages() {
         `;
         messageContainer.appendChild(messageElement);
       });
+      scrollBar();
     }
   };
   xhr.send(`Ticket=${encodeURIComponent(ticketId)}`);
@@ -45,6 +53,7 @@ function sendMessage(event) {
           <div class="message-timestamp">${lastReply.create_date}</div>
         `;
         messageContainer.appendChild(messageElement);
+        scrollBar();
       }
     };
     xhr.send(`Ticket=${encodeURIComponent(ticketId)}&content=${encodeURIComponent(content)}`);
