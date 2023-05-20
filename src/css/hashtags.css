@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Imperial+Script&family=Lexend+Deca:wght@300&family=Ruda&display=swap');
+
+html {
+    background-color: #E5E5E5;
+    font-family: 'Lexend Deca', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.ticketsPage {
+    color: #224957;
+    background-color: transparent;
+    margin: 0 2em 2em 2em;
+}
+.retangulo {
+    background-color: #AFAFAF;
+    color:#224957;
+    width: 75vw;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+}
+
+.retangulo > section{
+    padding: 1em;
+    border-top: #224957 1px solid;
+    text-align: center;
+}
+.retangulo > section:last-child{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.retangulo > section:last-child > article{
+    display: flex;
+    flex-direction: row;
+}
+.retangulo > section:last-child > article > h5{
+    margin: 0 2em;
+}
+
+.retangulo > section:last-child > article > form{
+    margin: 0 1.3em;
+}
+
+.retangulo > section > h3 {
+    display: inline;
+    margin: 10px;
+}
+
+.ticketText {
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.ticketDescription {
+    text-align: center;
+    height: 10%;
+}
+
+#TicketStatus {
+    display: inline;
+    margin-right: 120px;
+}
+
+.circuloRed::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: rgb(200, 238, 119);
+    margin-right: 0.5em;
+}
+
+.circuloYellow::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: yellow;
+    margin-right: 0.5em;
+}
+
+.circuloGreen::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: rgb(252, 149, 105);
+    margin-right: 0.5em;
+}
+
+.yourTickets {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 7em;
+    font-size: 18px;
+}
+
+.TicketStatusTitle {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.green{
+    background-color: rgb(252, 149, 105);
+}
+.orange{
+    background-color: yellow;
+}
+.red {
+    background-color: rgb(200, 238, 119);
+}
+
+/* ***************************** */
+section.hashtags {
+    display: flex;
+    border-top: none;
+    text-align: left;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: 20;    
+}
+
+.add-hashtags-button {
+    height: 1.75em;
+    background-color: #224957;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center; /* centers vertically */
+    margin-right: 5px;
+}
+  
+section.hashtags  > .hashtags-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    display: flex;
+}
+  
+section.hashtags  > .hashtags-container input[type=text] {
+    padding: 3px;
+    box-sizing: border-box;
+    border: 1px solid #224957;
+    border-radius: 10px;
+    resize: text;
+    display: flex;
+}
+
+section.hashtags  > .hashtags-container textarea {
+    width: 150px;
+    height: 1.75em; 
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #224957;
+    border-radius: 10px;
+    resize: none;
+    overflow-y: hidden; 
+}
+
+#autocompele-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#autocompele-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #224957;
+    z-index: 1;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.hashtags-container.active .hashtags-list  {
+    display: block;
+}
+
+.hashtag-button{
+    background-color: #68828c;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 0 5px 0 5px;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center; /* centers vertically */
+}
+
+.hashtag-button > a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+.hashtag-button > img {
+    width: 15px;
+    height: 15px;
+}

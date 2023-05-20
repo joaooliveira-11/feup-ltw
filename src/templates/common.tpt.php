@@ -99,8 +99,63 @@ function drawHeaderMain($scriptPage = null){?>
     </head>
 
     <body>
+    <?php 
+        $db=getDatabaseConnection();
+        $session = new Session();
+    
+        $user = User::getSingleUser($db, $session->getId());
+        $inquiries = Inquiry::getUserInquiries($db,$user->getId());
+        $count_inquiries = 0;
+        foreach ($inquiries as $inquiry){
+            $count_inquiries++;
+        }
+    
+        $role = $user->getUserRole($db);
+        
+    ?>
+
+    
+
     <header id ="HeaderMain">
         TicketEase
+        <div class ="headerResponsive">
+            <form action="../actions/action_logout.php" method="post" id="header-logout-form">
+                <button type="submit" id="logout-button">
+                    <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt=""> 
+                    Log Out
+                </button>
+            </form>
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <a href="../pages/main.php" id="HomeButton">
+                        <img src="../docs/images/kisspng-website-house-home-world-wide-web-computer-icons-house-clip-art-5ab036bbf19551.9166615015214977879895.png" alt="">
+                        Home
+                    </a>
+                    <a href="../pages/profile.php" id="ProfileButton">
+                        <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
+                        Profile
+                    </a>
+                    <a href="../pages/mytickets.php" id="MyTicketsButton">
+                        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
+                        My Tickets
+                    </a>
+                    <a href="../pages/inquiries.php" id="InquiriesButton">
+                        <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
+                        Inquiries
+                        <?php if($count_inquiries>0) { ?>
+                        <div>
+                            <?php echo $count_inquiries; ?>
+                        </div>
+                        <?php } ?>
+                    </a>
+                    <?php   
+                        if($role>1) drawAsideAgent();
+                        if($role>2) drawAsideAdmin();
+                    ?>
+                </div>
+            </div>
+        </div>               
     </header>
 
 <?php }

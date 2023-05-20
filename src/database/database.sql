@@ -70,7 +70,7 @@ CREATE TABLE Ticket(
 );
 
 CREATE TABLE Hashtag(
-                        idTicket INTEGER PRIMARY KEY,
+                        idHashtag INTEGER PRIMARY KEY,
                         name TEXT NOT NULL,
                         CONSTRAINT UNIQUE_Hashtag_name UNIQUE (name)
 );
@@ -235,6 +235,29 @@ INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,1);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,2);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,3);
 INSERT INTO User_Departments(idUser, idDepartment) VALUES (1,4);
+
+
+
+INSERT INTO Hashtag (name) VALUES ('hospital');
+INSERT INTO Hashtag (name) VALUES ('healthcare');
+INSERT INTO Hashtag (name) VALUES ('medicine');
+INSERT INTO Hashtag (name) VALUES ('doctor');
+INSERT INTO Hashtag (name) VALUES ('nurse');
+INSERT INTO Hashtag (name) VALUES ('patientcare');
+INSERT INTO Hashtag (name) VALUES ('emergency');
+INSERT INTO Hashtag (name) VALUES ('surgery');
+INSERT INTO Hashtag (name) VALUES ('ICU');
+INSERT INTO Hashtag (name) VALUES ('pediatrics');
+INSERT INTO Hashtag (name) VALUES ('oncology');
+INSERT INTO Hashtag (name) VALUES ('radiology');
+INSERT INTO Hashtag (name) VALUES ('pharmacy');
+INSERT INTO Hashtag (name) VALUES ('mentalhealth');
+INSERT INTO Hashtag (name) VALUES ('rehabilitation');
+INSERT INTO Hashtag (name) VALUES ('healthtech');
+INSERT INTO Hashtag (name) VALUES ('telemedicine');
+INSERT INTO Hashtag (name) VALUES ('publichealth');
+INSERT INTO Hashtag (name) VALUES ('wellness');
+INSERT INTO Hashtag (name) VALUES ('medicalresearch');
 
 
 
