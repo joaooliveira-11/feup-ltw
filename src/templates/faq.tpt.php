@@ -1,11 +1,7 @@
 <?php function drawFAQ(PDOStatement $faqs, int $role, $selectButton = false){ ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
     <link rel="stylesheet" href="../css/faq.css">
-  </head>
-  <body>
+
     <div class = "FAQ_Overflow">
 
     <div class="container">
@@ -13,7 +9,7 @@
       <div class="accordion">
       <?php foreach ($faqs as $faq) { ?>
         <div class="accordion-item">
-          <button id="accordion-button-1" aria-expanded="false">
+          <button aria-expanded="false">
             <span class="accordion-title">
                 <?php echo $faq['question'] ?>
             </span>
@@ -40,10 +36,8 @@
             <button id="CreateNewFAQ" onclick="window.location.href='../pages/newFAQ.php'"> <span>+</span> New FAQ</button>
         <?php } ?>
     <script src="../javascript/faq.js"></script>
+    
     </div>
-  </body>
-</html>
-
 <?php } ?>
 
 <?php function drawCreateNewFAQ(){ ?>

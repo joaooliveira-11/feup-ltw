@@ -10,7 +10,7 @@ function drawWebsiteDepartments(array $departments) { ?>
         </section>
         <section id="DepartmentsAdmin">
         <?php foreach ($departments as $department){ ?>
-            <section class="ADepartmentMain" id="DepartmentAdmin">
+            <section class="ADepartmentMain">
                 <h4>
                     <?php echo $department['name'] ?>
                 </h4>

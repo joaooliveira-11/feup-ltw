@@ -91,6 +91,8 @@ function drawFooterMain(){ ?>
 function drawHeaderMain($scriptPage = null){?>
     <!DOCTYPE html>
     <head>
+        <title>TicketEase</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="../css/style.css">
         <script defer src="../javascript/script.js"></script>
     <?php if ($scriptPage!=null) { ?>
@@ -120,7 +122,7 @@ function drawHeaderMain($scriptPage = null){?>
         TicketEase
         <div class ="headerResponsive">
             <form action="../actions/action_logout.php" method="post" id="header-logout-form">
-                <button type="submit" id="logout-button">
+                <button type="submit" id="dropLogout-button">
                     <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt="">
                     Log Out
                 </button>
@@ -128,19 +130,19 @@ function drawHeaderMain($scriptPage = null){?>
             <div class="dropdown">
                 <button class="dropbtn">Dropdown</button>
                 <div class="dropdown-content">
-                    <a href="../pages/main.php" id="HomeButton">
+                    <a href="../pages/main.php" id="dropHomeButton">
                         <img src="../docs/images/kisspng-website-house-home-world-wide-web-computer-icons-house-clip-art-5ab036bbf19551.9166615015214977879895.png" alt="">
                         Home
                     </a>
-                    <a href="../pages/profile.php" id="ProfileButton">
+                    <a href="../pages/profile.php" id="dropProfileButton">
                         <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
                         Profile
                     </a>
-                    <a href="../pages/mytickets.php" id="MyTicketsButton">
+                    <a href="../pages/mytickets.php" id="dropMyTicketsButton">
                         <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
                         My Tickets
                     </a>
-                    <a href="../pages/inquiries.php" id="InquiriesButton">
+                    <a href="../pages/inquiries.php" id="dropInquiriesButton">
                         <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="">
                         Inquiries
                         <?php if($count_inquiries>0) { ?>
@@ -212,43 +214,44 @@ function drawAside(){
 <?php }
 
 function drawAsideAgent(){ ?>
-    <a href="../pages/openTickets.php" id="TicketsOpenButton">
-        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
+    <a href="../pages/openTickets.php">
+        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="department-tickets">
         Tickets From My Department(s)
     </a>
-    <a href="../pages/myAssignedTickets.php" id="AssignedTicketsButton">
-        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png">
+    <a href="../pages/myAssignedTickets.php">
+        <img src="../docs/images/—Pngtree—vector%20files%20icon_3788102.png" alt="">
         Tickets Assigned to me
     </a>
+
 
 <?php }
 
 function drawAsideAdmin(){ ?>
     <div id="AsideAdmin">
         <a id="ManageWebsite">
-            <img src="../docs/images/definition.png">
+            <img src="../docs/images/definition.png" alt="manage-admin">
             Manage Website
         </a>
-        <img src="../docs/images/—Pngtree—vector%20right%20arrow%20icon_4184716.png" style="display: none" id="SetaParaDireita">
+        <img src="../docs/images/—Pngtree—vector%20right%20arrow%20icon_4184716.png" style="display: none" id="SetaParaDireita" alt="">
         <ul style="display: none">
-            <button onclick="window.location.href='../pages/manageDepartments.php'">Manage Departments</button>
-            <button onclick="window.location.href='../pages/manageUsers.php'">Manage Users</button>
-            <button onclick="window.location.href='../pages/manageOptions.php'">Other Options</button>
+        <li><button onclick="window.location.href='../pages/manageDepartments.php'">Manage Departments</button></li>
+            <li><button onclick="window.location.href='../pages/manageUsers.php'">Manage Users</button></li>
+            <li><button onclick="window.location.href='../pages/manageDepartments.php'">Other Options</button></li>
         </ul>
     </div>
 <?php }
 
 function drawAsideAdminResponsive(){ ?>
     <a href="../pages/manageDepartments.php">
-        <img src="../docs/images/definition.png">
+        <img src="../docs/images/definition.png" alt="manage-departments">
         Manage Departments
     </a>
     <a href="../pages/manageUsers.php">
-        <img src="../docs/images/definition.png">
+        <img src="../docs/images/definition.png" alt="manage-users">
         Manage Users
     </a>
     <a href="../pages/manageOptions.php">
-        <img src="../docs/images/definition.png">
+        <img src="../docs/images/definition.png" alt="manage-options">
         Other Options
     </a>
 <?php }
@@ -276,9 +279,7 @@ function drawMainPage(array $departments, PDO $db) { ?>
             </section>
         <?php } ?>
     </article>
-        <a href="../pages/newTicket.php">
-            <button class="CreateNewTicket"> <span>+</span> New Ticket</button>
-        </a>
+    <button class="CreateNewTicket" onclick="location.href='../pages/newTicket.php'"> <span>+</span> New Ticket</button>
 </main>
 
 <?php }

@@ -1,4 +1,3 @@
-console.log('hashtags.js loaded');
 
 function addHashtag(idTicket, autocompleteId) {
   console.log('addHashtag() called');
@@ -138,7 +137,6 @@ function showAutocomplete(hashtags, input, idTicket, autocompleteId) {
 }
 
 function removeHashtag(ticketId, hashtagId) {
- console.log('hereeee');
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `../api/api_hashtags.php?q=remove:${hashtagId}:${ticketId}`, true);
   
