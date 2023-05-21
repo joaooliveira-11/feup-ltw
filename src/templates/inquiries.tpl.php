@@ -50,7 +50,7 @@ function drawTicketAssignRequest(PDO $db, Inquiry $inquiry){
                 <h5>Date: <?=$ticket->getCreateDate()?></h5>
             </article>
             <article class="AssignTicket">
-                <form method="post" action="../actions/action_assign_to_agent.php">
+                <form method="post" action="../actions/action_assignToAgent.php">
                     <input type="hidden" name="Inquiry" value="<?php echo $inquiry->getIdInquiry() ?>">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <button id="AcceptTicketFromInquiry" type="submit" name="idTicket" value="<?php echo $ticket->getIdTicket() ?>">

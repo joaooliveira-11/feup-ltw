@@ -111,7 +111,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                     if(!$agentRequired){
                     ?>
                     <article class="AssignTicket">
-                        <form method="post" action="../actions/action_assign_to_agent.php">
+                        <form method="post" action="../actions/action_assignToAgent.php">
                             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
                                 Assign Ticket to me

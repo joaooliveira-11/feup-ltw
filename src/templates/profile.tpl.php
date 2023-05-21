@@ -105,7 +105,7 @@ function drawEditProfileMain(){ ?>
             <div class="form-wrapper">
                 <div class="ticket-title">
                     <label for="ticket_title">Title: </label>
-                    <input type="text" name="title" id="ticket_title" required="required" maxlength="40">
+                    <input type="text" name="title" id="ticket_title" required="required" maxlength="32">
                 </div>
 
                 <div class="ticket-desc">
