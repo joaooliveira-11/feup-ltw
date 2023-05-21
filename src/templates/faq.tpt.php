@@ -58,6 +58,7 @@
                     <label for="answer">Answer:</label>
                     <textarea name="answer" id="answer" rows="4" cols="50" required maxlength="300"></textarea>
                 </div>
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <div class="ticket-bottom form-buttons">
                     <button type="submit" class="btn-submit">Submit</button>
                     <button type="button" class="btn-cancel" onclick="window.location.href='../pages/faq.php'">Cancel</button>

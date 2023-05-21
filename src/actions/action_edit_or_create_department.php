@@ -11,6 +11,8 @@ require_once(dirname(__DIR__).'/classes/ticket.class.php');
 $session = new Session();
 
 if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
+if (!($session->check_tokens($_POST['csrf']))) die(header('Location: ../pages/createDepartment.php'));
+
 
 $db = getDatabaseConnection();
 

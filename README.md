@@ -15,9 +15,9 @@ Agents should be able to (they are also clients):
 - Change the department of a ticket (e.g., the client chose the wrong department). (DONE - falta css)
 - Assign a ticket to themselves or someone else. (DONE)
 - Change the status of a ticket. Tickets can have many statuses (e.g., open, assigned, closed); some may change automatically (e.g., ticket changes to "assigned" - after being assigned to an agent). (DONE)
-- Edit ticket hashtags easily (just type hashtag to add (with autocomplete), and click to remove). (NOT DONE - KIKA)
+- Edit ticket hashtags easily (just type hashtag to add (with autocomplete), and click to remove). (DONE)
 - List all changes done to a ticket (e.g., status changes, assignments, edits). (DONE)
-- Manage the FAQ and use an answer from the FAQ to answer a ticket. (NOT DONE)
+- Manage the FAQ and use an answer from the FAQ to answer a ticket. (DONE)
 
 Admins should be able to (they are also agents):
 - Upgrade a client to an agent or an admin. (DONE)

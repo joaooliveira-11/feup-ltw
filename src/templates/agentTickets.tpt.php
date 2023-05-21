@@ -76,6 +76,7 @@ function drawAgentsAvailableMain(int $idTicket, array $users){ ?>
                             <input type="hidden" name="idTicket" value="<?php echo $idTicket?>">
                             <input type="hidden" name="idUserReceiving" value="<?php echo $user[2]?>">
                             <input type="hidden" name="type" value="ASSIGN_AGENT">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <button type="submit">Select</button>
                         </form>
                     </th>

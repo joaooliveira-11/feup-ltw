@@ -52,11 +52,13 @@ function drawTicketAssignRequest(PDO $db, Inquiry $inquiry){
             <article class="AssignTicket">
                 <form method="post" action="../actions/action_assign_to_agent.php">
                     <input type="hidden" name="Inquiry" value="<?php echo $inquiry->getIdInquiry() ?>">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <button id="AcceptTicketFromInquiry" type="submit" name="idTicket" value="<?php echo $ticket->getIdTicket() ?>">
                         Accept
                     </button>
                 </form>
                 <form method="post" action="../actions/action_deleteInquiryAssignAgent.php">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <button id="RejectTicketFromInquiry" type="submit" name="idInquiry" value="<?php echo $inquiry->getIdInquiry() ?>">
                         Reject
                     </button>
@@ -92,6 +94,7 @@ function drawTicketResponded(PDO $db, Inquiry $inquiry, int $notificationNumber)
                 Last Message: <?php echo $ExibingText ?>
             </h5>
             <form method="post" action="../actions/action_deleteInquiriesTicketResponded.php">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket() ?>"> See more </button>
             </form>
         </section>
@@ -120,6 +123,7 @@ function drawTicketChangeStatus(PDO $db,Inquiry $inquiry){
                 Now has the status <?php echo $status; if ($status!="OPEN") echo ", by agent " . $agentName?>
             </h4>
             <form method="post" action="../actions/action_deleteInquiryAssignAgent.php">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <button type="submit" name="idInquiry" value="<?php echo $inquiry->getIdInquiry() ?>"> Got It </button>
             </form>
         </section>

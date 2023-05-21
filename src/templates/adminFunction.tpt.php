@@ -47,6 +47,7 @@ function drawEditDepartment($department){ ?>
                     <br>
                     <textarea name="description" id="ticket_description" required="required" rows="4" cols="75" maxlength="300"> <?php echo $department['description']?></textarea>
                 </div>
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             </div>
                 <button class="btn-submit" type="submit" name="idDepartment" value="<?php echo $department['idDepartment'] ?>">Edit Department</button>
                 <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
@@ -70,6 +71,7 @@ function drawCreateDepartment(){ ?>
                         <br>
                         <textarea name="description" id="ticket_description" required="required" rows="4" cols="75" maxlength="300"></textarea>
                     </div>
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 </div>
                 <button class="btn-submit" type="submit">Create Department</button>
                 <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageDepartments.php'">Cancel</button>
@@ -111,6 +113,7 @@ function drawBanUser(int $idUser){ ?>
                         <br>
                         <textarea name="description" id="ticket_description" rows="4" cols="75" maxlength="300"></textarea>
                     </div>
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 </div>
                 <article>
                 <button class="btn-submit" type="submit" name="idUser" value="<?php echo $idUser ?>">Ban User</button>
