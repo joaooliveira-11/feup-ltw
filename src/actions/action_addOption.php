@@ -13,8 +13,15 @@ if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 
 $db = getDatabaseConnection();
 
-$new_status = htmlentities($_POST['new_status']);
-$new_hashtag = htmlentities($_POST['new_hashtag']);
+if(isset($_POST['new_status'])) {
+    $new_status = htmlentities($_POST['new_status']);
+    $new_status = strtoupper($new_status);
+}
+if(isset($_POST['new_hashtag'])) {
+    $new_hashtag = htmlentities($_POST['new_hashtag']);
+    $new_hashtag = strtolower($new_hashtag);
+    $new_hashtag = str_replace("#", "",$new_hashtag);
+}
 $existing_hashtags = User::getAllHashtags($db);
 $existing_statuses = User::getAllStatus($db);
 
@@ -23,14 +30,24 @@ if (!empty($new_hashtag)) {
         $stmt = $db->prepare('INSERT INTO Hashtag (name) VALUES (?)');
         $stmt->execute(array($new_hashtag));
     }
+    else{
+        $_SESSION['errorAdding'] = "This hashtag already exists";
+        die(header('Location: ../pages/manageOptions.php'));
+    }
 }
 
-if (!empty($new_status)) {
+else if (!empty($new_status)) {
     if(!(in_array($new_status, $existing_statuses))){
         $stmt = $db->prepare('INSERT INTO Status (stage) VALUES (?)');
         $stmt->execute(array($new_status));
     }
+    else {
+        $_SESSION['errorAdding'] = "This status already exists";
+        die(header('Location: ../pages/manageOptions.php'));
+    }
+}
+else{
+    die(header('Location: ../pages/manageOptions.php'));
 }
 
-header('Location: ../pages/manageOptions.php');
 ?>

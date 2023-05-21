@@ -16,5 +16,11 @@ $db = getDatabaseConnection();
 $statuses = User::getAllStatus($db);
 $hashtags = User::getAllHashtags($db);
 drawAside();
-drawOtherOptions($statuses, $hashtags);
+if(isset($_SESSION['errorAdding'])){
+    drawOtherOptions($_SESSION['errorAdding']);
+    unset($_SESSION['errorAdding']);
+}
+else {
+    drawOtherOptions();
+}
 drawFooterMain();

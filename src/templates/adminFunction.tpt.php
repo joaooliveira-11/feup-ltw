@@ -183,3 +183,47 @@ function drawOutsideDepartmentAgents(array $users, int $idDepartment, PDO $db){ 
         </table>        
     </main>
 <?php }
+
+function drawOtherOptions($errorMessage = null){ ?>
+
+    <main>
+        <div id="informationAdding">
+            <p>
+                Write a new Status or a new Hashtag to add to the system.<br> Note that if you write on both, it will only add a hashtag, and not the status
+            </p>
+            <?php if(isset($errorMessage)){ ?>
+            <div class="errorMessage">
+                <p><?php echo $errorMessage ?></p>
+            </div>
+    <?php } ?>
+        </div>
+        <section class="createticket">
+            <form action="../actions/action_addOption.php" method="post" class="spaceBetween">
+                <div class="form-wrapper">
+                    <div class="ticket-title">
+                        <label for="ticket_title"> Add Hastag: </label>
+                        <input type="text" name="new_hashtag" id="ticket_title" maxlength="30">
+                    </div>
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                </div>
+                <article>
+                <button class="btn-submit" type="submit">Add</button>
+                <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageUsers.php'">Cancel</button>
+                </article>
+            </form>
+            <form action="../actions/action_addOption.php" method="post">
+                <div class="form-wrapper">
+                    <div class="ticket-title">
+                        <label for="ticket_title"> Add Status: </label>
+                        <input type="text" name="new_status" maxlength="24">
+                    </div>
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                </div>
+                <article>
+                    <button class="btn-submit" type="submit">Add</button>
+                    <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageUsers.php'">Cancel</button>
+                </article>
+            </form>
+        </section>
+    </main>
+<?php }

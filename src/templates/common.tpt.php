@@ -233,7 +233,7 @@ function drawAsideAdmin(){ ?>
         <ul style="display: none">
             <button onclick="window.location.href='../pages/manageDepartments.php'">Manage Departments</button>
             <button onclick="window.location.href='../pages/manageUsers.php'">Manage Users</button>
-            <button onclick="window.location.href='../pages/manageDepartments.php'">Other Options</button>
+            <button onclick="window.location.href='../pages/manageOptions.php'">Other Options</button>
         </ul>
     </div>
 <?php }
@@ -247,7 +247,7 @@ function drawAsideAdminResponsive(){ ?>
         <img src="../docs/images/definition.png">
         Manage Users
     </a>
-    <a href="../pages/manageDepartments.php">
+    <a href="../pages/manageOptions.php">
         <img src="../docs/images/definition.png">
         Other Options
     </a>
