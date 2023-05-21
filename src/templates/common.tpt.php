@@ -99,29 +99,29 @@ function drawHeaderMain($scriptPage = null){?>
     </head>
 
     <body>
-    <?php 
+    <?php
         $db=getDatabaseConnection();
         $session = new Session();
-    
+
         $user = User::getSingleUser($db, $session->getId());
         $inquiries = Inquiry::getUserInquiries($db,$user->getId());
         $count_inquiries = 0;
         foreach ($inquiries as $inquiry){
             $count_inquiries++;
         }
-    
+
         $role = $user->getUserRole($db);
-        
+
     ?>
 
-    
+
 
     <header id ="HeaderMain">
         TicketEase
         <div class ="headerResponsive">
             <form action="../actions/action_logout.php" method="post" id="header-logout-form">
                 <button type="submit" id="logout-button">
-                    <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt=""> 
+                    <img src="../docs/images/kisspng-computer-icons-login-download-logout-5b2a945b7528f7.8498128615295171474799.png" alt="">
                     Log Out
                 </button>
             </form>
@@ -149,13 +149,13 @@ function drawHeaderMain($scriptPage = null){?>
                         </div>
                         <?php } ?>
                     </a>
-                    <?php   
+                    <?php
                         if($role>1) drawAsideAgent();
-                        if($role>2) drawAsideAdmin();
+                        if($role>2) drawAsideAdminResponsive();
                     ?>
                 </div>
             </div>
-        </div>               
+        </div>
     </header>
 
 <?php }
@@ -236,6 +236,21 @@ function drawAsideAdmin(){ ?>
             <button onclick="window.location.href='../pages/manageDepartments.php'">Other Options</button>
         </ul>
     </div>
+<?php }
+
+function drawAsideAdminResponsive(){ ?>
+    <a href="../pages/manageDepartments.php">
+        <img src="../docs/images/definition.png">
+        Manage Departments
+    </a>
+    <a href="../pages/manageUsers.php">
+        <img src="../docs/images/definition.png">
+        Manage Users
+    </a>
+    <a href="../pages/manageDepartments.php">
+        <img src="../docs/images/definition.png">
+        Other Options
+    </a>
 <?php }
 
 

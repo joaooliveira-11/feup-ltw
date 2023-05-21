@@ -109,7 +109,7 @@ function drawTicketChangeStatus(PDO $db,Inquiry $inquiry){
     $status = $ticket->getLastTicketStatus($db); ?>
     <section class="retangulo">
         <h4 id="ThisTicket"> This Ticket that you created:</h4>
-        <article id="TicketDescription">
+        <article id="TicketInquiry">
             <h2 class="ticketText"><?php echo $ticket->getTitle()?></h2>
             <section>
                 <h3 class="ticketDescription"><?php echo $ticket->getDescription()?></h3>
