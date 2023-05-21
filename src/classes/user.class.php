@@ -180,7 +180,7 @@
     return $users;
 }
 
-public  function getOtherUserRole(PDO $db, int $idUser) : int{
+public static function getOtherUserRole(PDO $db, int $idUser) : int{
   $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ? ORDER BY ROWID DESC LIMIT 1');
   $stmt->execute(array($idUser));
   $role = $stmt->fetch();

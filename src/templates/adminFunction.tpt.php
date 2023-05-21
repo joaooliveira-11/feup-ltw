@@ -1,5 +1,7 @@
 <?php
 
+require_once(dirname(__DIR__) . '/templates/myTickets.tpl.php');
+
 function drawWebsiteDepartments(array $departments) { ?>
     <main>
         <section id="manageDepartmentsHeader">
@@ -211,7 +213,7 @@ function drawOtherOptions($errorMessage = null){ ?>
                 <button class="btn-cancel" type="button" onclick="window.location.href='../pages/manageUsers.php'">Cancel</button>
                 </article>
             </form>
-            <form action="../actions/action_addOption.php" method="post">
+            <form action="../actions/action_addOption.php" method="post" class="spaceBetween">
                 <div class="form-wrapper">
                     <div class="ticket-title">
                         <label for="ticket_title"> Add Status: </label>
@@ -225,5 +227,46 @@ function drawOtherOptions($errorMessage = null){ ?>
                 </article>
             </form>
         </section>
+        <div class="seeAllTickets">
+            <button onclick="window.location.href='../pages/adminTickets.php'" class="seeAllTicketsButton">
+                See all tickets from website
+            </button>
+        </div>
     </main>
+<?php }
+
+
+function drawAllTickets(array $tickets, PDO $db){ ?>
+    <section class = "ticketsPage">
+        <section id="Filter" class="yourTickets">
+            <article>
+                Filter By:
+                <div id="StatusFilter">
+                    <button id="StatusFilterButton">
+                        Ticket Status
+                    </button>
+                </div>
+            </article>
+            <article>
+                Order By:
+                <div id="PriorityFilter">
+                    <button id="PriorityFilterButton">
+                        Priority
+                        <img src="../docs/images/icon-minus.png">
+                    </button>
+                </div>
+                <div id="DateFilter">
+                    <button id="DateFilterButton">
+                        Date
+                        <img src="../docs/images/icon-minus.png">
+                    </button>
+                </div>
+            </article>
+        </section>
+        <section class="TicketOverflow">
+            <?php foreach ($tickets as $ticket){
+                drawSingleTicket($db, $ticket, 4);
+            } ?>
+        </section>
+    </section>
 <?php }

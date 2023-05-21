@@ -1102,6 +1102,16 @@
         background-color: #ff2222;
         padding: 12px;
     }
+    .seeAllTickets{
+        text-align: center;
+    }
+
+    .seeAllTicketsButton{
+        padding: 1em;
+        display: flex;
+        align-items: center;
+        background-color: #00BFA5;
+    }
 
 
 

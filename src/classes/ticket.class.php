@@ -156,6 +156,26 @@
         return $tickets;
     }
 
+    public static function getAllTicket($db){
+        $stmt = $db->prepare('SELECT * FROM Ticket');
+        $stmt->execute(array());
+
+        $tickets = array();
+        while ($ticket = $stmt->fetch()) {
+            $tickets[] = new Ticket(
+                intval($ticket['idTicket']),
+                $ticket['title'],
+                $ticket['description'],
+                intval($ticket['priority']),
+                $ticket['create_date'],
+                intval($ticket['cria']),
+                intval($ticket['resolve']),
+                intval($ticket['idDepartment']),
+            );
+        }
+        return $tickets;
+    }
+
     function insert_ticket($db){
         $stmt = $db->prepare('
           INSERT INTO Ticket(title, description, priority, create_date, cria, resolve, idDepartment) VALUES (?,?,?,?,?,?,?)

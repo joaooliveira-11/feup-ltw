@@ -105,18 +105,21 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
             </article>
             <?php
             $ticket_id = $ticket->getIdTicket();
-            if($entity==2){
+            if($entity==2 || $entity==4){
                 if($status==="OPEN"){
                     $agentRequired = $ticket->searchIfRequestedToAssign($db);
                     if(!$agentRequired){
                     ?>
                     <article class="AssignTicket">
+                        <?php
+                        if($entity==2){ ?>
                         <form method="post" action="../actions/action_assignToAgent.php">
                             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
                                 Assign Ticket to me
                             </button>
                         </form>
+                        <?php } ?>
                         <form method="post" action="../pages/agentsAvaiableToAssign.php">
                             <button type="submit" name="idTicket" value="<?php echo $ticket_id ?>">
                                 Assign Ticket to other agent
