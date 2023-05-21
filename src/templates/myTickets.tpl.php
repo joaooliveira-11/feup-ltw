@@ -49,6 +49,7 @@ function drawSingleTicket($db,Ticket $ticket, int $entity){ // esta entidade é 
                 </form>
                 <?php if(($entity===3 || $entity===1) && $ticket->getLastTicketStatus($db)!="OPEN") { //só aparece este botão no myTickets ou no myAssignedTickets?>
                 <form method="post" action="../actions/action_deleteInquiriesTicketResponded.php">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <button type="submit" name="Ticket" value="<?php echo $ticket->getIdTicket()?>"> Messages </button>
                 </form>
                 <?php } ?>

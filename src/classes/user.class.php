@@ -180,24 +180,34 @@
     return $users;
 }
 
-static function getAllUsersOutsideDepartment(PDO $db, $idDepartment){
+public  function getOtherUserRole(PDO $db, int $idUser) : int{
+  $stmt = $db->prepare('Select idRole From User_Roles WHERE idUser = ? ORDER BY ROWID DESC LIMIT 1');
+  $stmt->execute(array($idUser));
+  $role = $stmt->fetch();
+  return intval($role['idRole']);
+}
+
+static function getAllUsersOutsideDepartment(PDO $db, $idDepartment) {
   $stmt = $db->prepare('
-        SELECT User.idUser, User.username
-        FROM User
-        WHERE User.idUser NOT IN (
-            SELECT idUser
-            FROM User_Departments
-            WHERE idDepartment = ?
-        )
-    ');
+      SELECT User.idUser, User.username
+      FROM User
+      WHERE User.idUser NOT IN (
+          SELECT idUser
+          FROM User_Departments
+          WHERE idDepartment = ?
+      )
+  ');
   $stmt->execute(array($idDepartment));
 
   $users = array();
   while ($user = $stmt->fetch()) {
-      $users[] = array(
-          $user['username'],
-          $user['idUser'],
-      );
+      $userRole = User::getOtherUserRole($db, intval($user['idUser']));
+      if ($userRole > 1) {
+          $users[] = array(
+              $user['username'],
+              $user['idUser'],
+          );
+      }
   }
   return $users;
 }
