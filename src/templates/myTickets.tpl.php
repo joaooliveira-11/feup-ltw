@@ -1,10 +1,10 @@
 <?php function drawMyTicketPage(array $tickets, PDO $db) { ?>
     <section class ="ticketsPage">
-        <div class="yourTickets">
-            <p id="TicketStatus" class="TicketStatusTitle">Your tickets:</p>
-            <p id="TicketStatus" class= "circuloRed">Opened</p>
-            <p id="TicketStatus" class= "circuloYellow">Assigned</p>
-            <p id="TicketStatus" class= "circuloGreen">Closed</p>
+        <div class="yourTickets" id="TicketStatus">
+            <p class="TicketStatusTitle">Your tickets:</p>
+            <p class= "circuloRed">Opened</p>
+            <p class= "circuloYellow">Assigned</p>
+            <p class= "circuloGreen">Closed</p>
 
         </div>
         <section class="TicketOverflow">

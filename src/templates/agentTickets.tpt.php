@@ -27,13 +27,13 @@ function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>
                 <div id="PriorityFilter">
                     <button id="PriorityFilterButton">
                         Priority
-                        <img src="../docs/images/icon-minus.png">
+                        <img src="../docs/images/icon-minus.png" alt="icon-priority">
                     </button>
                 </div>
                 <div id="DateFilter">
                     <button id="DateFilterButton">
                         Date
-                        <img src="../docs/images/icon-minus.png">
+                        <img src="../docs/images/icon-minus.png" alt="icon-date">
                     </button>
                 </div>
             </article>

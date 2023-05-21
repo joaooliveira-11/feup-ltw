@@ -7,8 +7,7 @@
         Profile
     </div>
     <section>
-        <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png">
-        <article>
+    <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="profile-pic">        <article>
             <a>
                 Name:  <span><?php echo $user->getName();  ?></span>
             </a>
@@ -35,7 +34,7 @@ function drawEditProfileMain(){ ?>
             Edit Profile
         </header>
         <div id="ChangePhoto">
-            <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png">
+        <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="profile-pic">
             <button> Change Picture</button>
         </div>
         <form>
@@ -58,7 +57,7 @@ function drawEditProfileMain(){ ?>
                 <div>
                     E-mail:
                     <label>
-                        <input type="email" placeholder="New Email"name="newEmail">
+                    <input type="email" placeholder="New Email" name="newEmail">
                     </label>
                 </div>
             </article>
@@ -136,7 +135,7 @@ function drawEditProfileMain(){ ?>
                     </div>
                     
                     <div class="ticket-date">
-                        <label for="ticket_createdate"><?php echo date('d-m-Y')?></label>
+                        <label><?php echo date('d-m-Y')?></label>
                         <input type="hidden" name="date" id="ticket_createdate" value="<?php echo date('d-m-Y')?>">
                     </div>
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">

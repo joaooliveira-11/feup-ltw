@@ -3,6 +3,8 @@
 
 .FAQ_Overflow{
     overflow-y: auto;
+    font-family: 'Lexend Deca', sans-serif;
+    background: #f0efef;
 }
 
 
@@ -31,6 +33,10 @@ body {
 
 .accordion  {
     border-bottom: 1px solid #f0efef;
+}
+
+.accordion-item {
+  color: white ;
 }
 
 .accordion .accordion-item button[aria-expanded='true'] {
