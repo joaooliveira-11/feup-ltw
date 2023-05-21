@@ -23,3 +23,4 @@ foreach ($departments as $department){
 }
 
 echo json_encode($return_departments);
+?>

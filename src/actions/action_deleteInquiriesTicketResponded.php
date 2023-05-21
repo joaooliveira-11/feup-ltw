@@ -17,3 +17,4 @@ foreach ($inquiries as $inquiry){
 
 $_SESSION['Ticket'] = $_POST['Ticket'];
 header('Location: ../pages/messages.php');
+?>

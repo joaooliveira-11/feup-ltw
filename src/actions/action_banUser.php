@@ -21,3 +21,4 @@ $stmt1->execute(array(intval($_POST['idUser']),$reason,$description));
 $stmt2 = $db->prepare('DELETE FROM Ticket WHERE cria = ?');
 $stmt2->execute(array(intval($_POST['idUser'])));
 header('Location: ../pages/manageUsers.php');
+?>

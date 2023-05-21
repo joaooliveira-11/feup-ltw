@@ -4,6 +4,8 @@ function removeAgent(id) {
 
 function selectAgent(userId) {
   const idDepartment = document.querySelector('#departinput').value;
+  const csrfToken = document.querySelector('input[name="csrf"]').value;
+
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '../api/api_addDepartAgent.php', true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -12,7 +14,7 @@ function selectAgent(userId) {
       removeAgent(userId);
     }
   };
-  xhr.send(`user=${encodeURIComponent(userId)}&department=${encodeURIComponent(idDepartment)}`);
+  xhr.send(`user=${encodeURIComponent(userId)}&department=${encodeURIComponent(idDepartment)}&csrf=${encodeURIComponent(csrfToken)}`);
 }
 
 const agentsOutsideForms = document.querySelectorAll('.agentsOutside');
@@ -67,6 +69,12 @@ function drawUsers(users) {
       roleIdInput.value = user.role;
       upgradeForm.appendChild(roleIdInput);
 
+      const csrfTokens = document.createElement('input');
+      csrfTokens.type = 'hidden';
+      csrfTokens.name = 'csrf';
+      csrfTokens.value = user.tokens;
+      upgradeForm.appendChild(csrfTokens);
+
       const upgradeButton = document.createElement('button');
       upgradeButton.type = 'submit';
       upgradeButton.textContent = 'Upgrade to ' + (user.role < 2 ? 'Agent' : 'Admin');
@@ -77,15 +85,15 @@ function drawUsers(users) {
       upgradeForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '../actions/action_upgrade_user.php', true);
+        const xhr = new XMLHttpRequest(); 
+        xhr.open('POST', '../api/api_upgradeUser.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             loadUsers();
           }
         };
-        xhr.send(`user=${encodeURIComponent(user.userid)}&role=${encodeURIComponent(user.role + 1)}`);
+        xhr.send(`user=${encodeURIComponent(user.userid)}&role=${encodeURIComponent(user.role + 1)}&csrf=${encodeURIComponent(csrfTokens.value)}`);
       });
 
       if (user.role === 1) {

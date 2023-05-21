@@ -7,6 +7,7 @@ require_once(dirname(__DIR__).'/classes/ticket.class.php');
 $session = new Session();
 
 if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
+if (!($session->check_tokens($_POST['csrf']))) die(header('Location: ../pages/main.php'));
 
 $db = getDatabaseConnection();
 
@@ -25,3 +26,4 @@ $stmt2->execute(array($user_receiving,$user_id,$ticket_id,"TICKET_RESPONDED",$da
 $last_reply = $ticket->getAllLastReplyFromTicket($db);
 
 echo json_encode($last_reply);
+?>

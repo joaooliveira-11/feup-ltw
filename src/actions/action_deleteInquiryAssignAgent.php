@@ -13,4 +13,4 @@ $db = getDatabaseConnection();
 $inquiry = Inquiry::getInquiryFromId($db, intval($_POST['idInquiry']));
 $inquiry->deleteInquiry($db);
 header('Location: ../pages/inquiries.php');
-
+?>

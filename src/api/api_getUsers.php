@@ -19,7 +19,9 @@ foreach ($users as $user) {
         'name' => $user->getName(),
         'role' => $user->getUserRole($db),
         'roleName' => $user->getRoleName($db, $user->getUserRole($db)),
+        'tokens' => $_SESSION['csrf']
     );
 }
 
 echo json_encode($userData);
+?>

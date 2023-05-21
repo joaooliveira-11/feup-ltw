@@ -22,4 +22,5 @@ else{
     $session->addMessage("error", "Could not make an inquiry");
     die(header('Location: ../pages/openTickets.php'));
 }
+?>
 

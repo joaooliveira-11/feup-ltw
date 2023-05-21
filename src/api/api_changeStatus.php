@@ -21,3 +21,4 @@ $stmt = $db->prepare('INSERT INTO Inquiry (idUserReceiving,idUserGiving,idTicket
 $stmt->execute(array($ticket->getCria(),$ticket->getResolve(),$ticket->getIdTicket(),"CHANGE_STATUS",date('d-m-Y')));
 
 echo json_encode("done");
+?>

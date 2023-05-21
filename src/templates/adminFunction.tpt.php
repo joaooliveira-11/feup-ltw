@@ -172,6 +172,7 @@ function drawOutsideDepartmentAgents(array $users, int $idDepartment, PDO $db){ 
                         <form class="agentsOutside">
                             <input type="hidden" id="userinput" name="idUser" value="<?php echo $user[1]?>">
                             <input type="hidden" id="departinput" name="idDepart" value="<?= $idDepartment?>">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <button type="submit" id="agentsOutside-button">Select</button>
                         </form>
                     </th>

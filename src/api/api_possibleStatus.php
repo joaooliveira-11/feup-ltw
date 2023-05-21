@@ -18,3 +18,4 @@ $last_status = $ticket->getLastTicketStatus($db);
 $possiblestatus = $ticket->possibleChangingStatus($db, $last_status);
 
 echo json_encode($possiblestatus);
+?>

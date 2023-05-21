@@ -303,6 +303,20 @@ static function countAgentTicket(PDO $db, int $idUser): int {
         return $ban;
     }
 
+  public static function getAllHashtags(PDO $db): array {
+      $stmt = $db->prepare('SELECT name FROM Hashtag');
+      $stmt->execute();
+      $hashtags = $stmt->fetchAll(PDO::FETCH_COLUMN);
+      return $hashtags;
+  }
+
+  public static function getAllStatus(PDO $db): array {
+    $stmt = $db->prepare('SELECT stage FROM Status');
+    $stmt->execute();
+    $statuses = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $statuses;
+  }
+
   }
 
 ?>
