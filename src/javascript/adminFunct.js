@@ -69,7 +69,7 @@ function drawUsers(users) {
 
       const upgradeButton = document.createElement('button');
       upgradeButton.type = 'submit';
-      upgradeButton.textContent = 'Upgrade to ' + (user.role < 2 ? 'Client' : 'Admin');
+      upgradeButton.textContent = 'Upgrade to ' + (user.role < 2 ? 'Agent' : 'Admin');
 
       upgradeForm.appendChild(upgradeButton);
       actionsCell.appendChild(upgradeForm);

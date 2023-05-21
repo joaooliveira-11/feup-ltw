@@ -3,7 +3,7 @@
 require_once(dirname(__DIR__).'/database/connection.php');
 require_once(dirname(__DIR__).'/classes/user.class.php');
 require_once(dirname(__DIR__).'/utils/session.php');
-require_once(dirname(__DIR__).'/templates/mytickets.tpl.php');
+require_once(dirname(__DIR__) . '/templates/myTickets.tpl.php');
 require_once(dirname(__DIR__).'/classes/ticket.class.php');
 
 function drawDepartmentsTicketsMain(array $departmentTickets, PDO $db) { ?>

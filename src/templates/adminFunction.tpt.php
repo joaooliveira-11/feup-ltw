@@ -35,7 +35,7 @@ function drawWebsiteDepartments(array $departments) { ?>
 function drawEditDepartment($department){ ?>
     <main>
         <section class="createticket">
-            <form action="../actions/action_edit_or_create_department.php" method="post">
+            <form action="../actions/action_editOrCreateDepartment.php" method="post">
             <div class="form-wrapper">
                 <div class="ticket-title">
                     <label for="ticket_title"> Title: </label>
@@ -59,7 +59,7 @@ function drawEditDepartment($department){ ?>
 function drawCreateDepartment(){ ?>
     <main>
         <section class="createticket">
-            <form action="../actions/action_edit_or_create_department.php" method="post">
+            <form action="../actions/action_editOrCreateDepartment.php" method="post">
                 <div class="form-wrapper">
                     <div class="ticket-title">
                         <label for="ticket_title"> Title: </label>
@@ -81,7 +81,7 @@ function drawCreateDepartment(){ ?>
 <?php }
 
 function drawWebsiteUsers(){ ?>
-<main class="noPadding MainOverflow">
+<main class="noPadding TicketOverflow">
     <table id="usersTable">
         <thead>
             <tr>
