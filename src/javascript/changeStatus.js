@@ -68,9 +68,8 @@ change_ticketdepartment_buttons.forEach(function(change_ticketdepartment_button)
         for (Department of possibleDepartment){
             const li = document.createElement('li');
             //const item = document.createElement('button');
-            li.value = Department;
             li.innerText = Department;
-            li.addEventListener('click', () => updateTicketDepartment(li.value, ticket_id));
+            li.addEventListener('click', () => updateTicketDepartment(li.innerText, ticket_id));
             //li.appendChild(item);
             selectnewdepartment.appendChild(li);
         }
