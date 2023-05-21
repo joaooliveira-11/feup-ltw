@@ -1,7 +1,6 @@
 const manage_options_button = document.getElementById('ManageWebsite');
 
 if(manage_options_button) {
-    console.log(manage_options_button);
     const manageOptions = document.querySelector('#AsideAdmin ul');
     const arrowLeftImage = document.querySelector('#SetaParaDireita');
 

@@ -241,22 +241,27 @@ function drawAllTickets(array $tickets, PDO $db){ ?>
         <section id="Filter" class="yourTickets">
             <article>
                 Filter By:
-                <div id="StatusFilter">
-                    <button id="StatusFilterButton">
+                <div id="DepartmentFilterAdmin">
+                    <button id="DepartmentFilterButtonAdmin">
+                        Department
+                    </button>
+                </div>
+                <div id="StatusFilterAdmin">
+                    <button id="StatusFilterButtonAdmin">
                         Ticket Status
                     </button>
                 </div>
             </article>
             <article>
                 Order By:
-                <div id="PriorityFilter">
-                    <button id="PriorityFilterButton">
+                <div id="PriorityFilterAdmin">
+                    <button id="PriorityFilterButtonAdmin">
                         Priority
                         <img src="../docs/images/icon-minus.png">
                     </button>
                 </div>
-                <div id="DateFilter">
-                    <button id="DateFilterButton">
+                <div id="DateFilterAdmin">
+                    <button id="DateFilterButtonAdmin">
                         Date
                         <img src="../docs/images/icon-minus.png">
                     </button>

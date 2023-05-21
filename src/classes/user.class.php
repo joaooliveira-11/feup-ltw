@@ -86,6 +86,20 @@
 
       }
 
+      static function getAllIdsDepartments($db){
+          $stmt = $db->prepare('
+            Select idDepartment From Department
+          ');
+
+          $stmt->execute();
+          $result = array();
+
+          while ($idDepartment = $stmt->fetch()){
+              $result[] = $idDepartment['idDepartment'];
+          }
+          return $result;
+      }
+
       static function getWebsiteDepartments($db){
           $stmt = $db->prepare('Select * From Department');
           $stmt->execute();

@@ -236,7 +236,7 @@ function drawAsideAdmin(){ ?>
         <ul style="display: none">
         <li><button onclick="window.location.href='../pages/manageDepartments.php'">Manage Departments</button></li>
             <li><button onclick="window.location.href='../pages/manageUsers.php'">Manage Users</button></li>
-            <li><button onclick="window.location.href='../pages/manageDepartments.php'">Other Options</button></li>
+            <li><button onclick="window.location.href='../pages/manageOptions.php'">Other Options</button></li>
         </ul>
     </div>
 <?php }

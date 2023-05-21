@@ -724,7 +724,7 @@
         margin-right: 1em;
     }
 
-    #DateFilterButton img, #PriorityFilterButton img{
+    #DateFilterButton img, #PriorityFilterButton img, #DateFilterButtonAdmin img, #PriorityFilterButtonAdmin img {
         max-width: 13px;
     }
 
