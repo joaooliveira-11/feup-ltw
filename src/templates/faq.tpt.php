@@ -1,4 +1,4 @@
-<?php function drawFAQ(PDOStatement $faqs, $selectButton = false){ ?>
+<?php function drawFAQ(PDOStatement $faqs, int $role, $selectButton = false){ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +36,8 @@
         <?php } ?>
       </div>
     </div>
-        <?php if (!$selectButton){ ?>
-    <button id="CreateNewFAQ" onclick="window.location.href='../pages/newFAQ.php'"> <span>+</span> New FAQ</button>
+        <?php if (!$selectButton && $role > 1){ ?>
+            <button id="CreateNewFAQ" onclick="window.location.href='../pages/newFAQ.php'"> <span>+</span> New FAQ</button>
         <?php } ?>
     <script src="../javascript/faq.js"></script>
     </div>
@@ -48,7 +48,7 @@
 
 <?php function drawCreateNewFAQ(){ ?>
     <main> 
-        <section id="create-faq">
+        <section class="createticket">
             <form action="../actions/action_newFAQ.php" method="post" class="form-wrapper">
                 <div class="ticket-title form-field">
                     <label for="question">Question:</label>

@@ -10,7 +10,7 @@ $stmt->execute();
 
 drawHeaderMain();
 drawAside();
-drawFAQ($stmt, true);
+drawFAQ($stmt, 0,true);
 drawFooterMain();
 
 ?>
