@@ -6,9 +6,12 @@ require_once(dirname(__DIR__).'/database/connection.php');
 
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-if($role < 3) die(header('Location: ../pages/main.php'));
 
 $db = getDatabaseConnection();
+$user = User::getSingleUser($db,$session->getId());
+$role = $user->getUserRole($db);
+if($role < 2) die(header('Location: ../pages/main.php'));
+
 $stmt = $db->prepare("Select * From FAQ");
 $stmt->execute();
 
