@@ -11,8 +11,13 @@ require_once(dirname(__DIR__) . '/templates/adminFunction.tpt.php');
 
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-drawHeaderMain();
+
 $db = getDatabaseConnection();
+$user = User::getSingleUser($db,$session->getId());
+$role = $user->getUserRole($db);
+if($role < 3) die(header('Location: ../pages/main.php'));
+
+drawHeaderMain();
 $departments = User::getWebsiteDepartments($db);
 drawAside();
 drawWebsiteDepartments($departments);
