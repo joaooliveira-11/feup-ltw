@@ -35,7 +35,6 @@ function drawEditProfileMain(){ ?>
         </header>
         <div id="ChangePhoto">
         <img src="../docs/images/imagem-do-usuario-com-fundo-preto.png" alt="profile-pic">
-            <button> Change Picture</button>
         </div>
         <form>
             <article>
