@@ -22,3 +22,4 @@ $stmt->execute(array($ticket_id));
 $replies = $stmt->fetchAll();
 
 echo json_encode($replies);
+?>

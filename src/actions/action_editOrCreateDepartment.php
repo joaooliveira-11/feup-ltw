@@ -29,3 +29,4 @@ else{
 }
 
 header('Location: ../pages/manageDepartments.php');
+?>

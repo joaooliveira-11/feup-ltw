@@ -61,3 +61,4 @@ if($newPassword) {
 $updateUser->save($db);
 $session->addMessage('success', 'Profile Updated successful!');
 header('Location: ../pages/editProfile.php');
+?>

@@ -55,3 +55,4 @@ else{
     die(header('Location: ../pages/openTickets.php'));
 }
 
+?>

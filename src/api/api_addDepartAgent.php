@@ -18,3 +18,4 @@ $stmt = $db->prepare('INSERT INTO User_Departments(idUser, idDepartment) VALUES 
 $stmt->execute(array($idUser, $idDepartment));
 
 echo json_encode("done");
+?>

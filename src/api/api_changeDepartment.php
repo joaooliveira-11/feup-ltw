@@ -19,3 +19,4 @@ $department = $_GET['Department'];
 
 $ticket->change_ticket_department($db,$department);
 echo json_encode("done");
+?>

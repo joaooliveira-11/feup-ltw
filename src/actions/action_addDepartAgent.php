@@ -19,3 +19,4 @@ $stmt = $db->prepare('INSERT INTO User_Departments(idUser, idDepartment) VALUES 
 $stmt->execute(array($idUser, $idDepartment));
 
 header('Location: ../pages/manageDepartments.php');
+?>

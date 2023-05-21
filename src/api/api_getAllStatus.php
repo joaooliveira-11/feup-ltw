@@ -14,3 +14,4 @@ $stmt->execute();
 $result = $stmt->fetchAll();
 $stages = array_column($result,'stage');
 echo json_encode($stages);
+?>

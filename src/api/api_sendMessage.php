@@ -26,3 +26,4 @@ $stmt2->execute(array($user_receiving,$user_id,$ticket_id,"TICKET_RESPONDED",$da
 $last_reply = $ticket->getAllLastReplyFromTicket($db);
 
 echo json_encode($last_reply);
+?>

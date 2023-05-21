@@ -17,3 +17,4 @@ $currentDepart = $ticket->getTicketDepartmentName($db);
 $possibleDepartments = $ticket->possibleChangingDepartment($db, $currentDepart);
 
 echo json_encode($possibleDepartments);
+?>
