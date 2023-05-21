@@ -201,7 +201,7 @@ public static function getOtherUserRole(PDO $db, int $idUser) : int{
   return intval($role['idRole']);
 }
 
-static function getAllUsersOutsideDepartment(PDO $db, $idDepartment) {
+public static function getAllUsersOutsideDepartment(PDO $db, $idDepartment) {
   $stmt = $db->prepare('
       SELECT User.idUser, User.username
       FROM User

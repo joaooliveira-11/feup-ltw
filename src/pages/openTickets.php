@@ -9,9 +9,13 @@ require_once(dirname(__DIR__) . '/templates/agentTickets.tpt.php');
 
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-drawHeaderMain("FilterTickets.js");
+
 $db = getDatabaseConnection();
-$user= User::getSingleUser($db,$session->getId());
+$user = User::getSingleUser($db,$session->getId());
+$role = $user->getUserRole($db);
+if($role < 2) die(header('Location: ../pages/main.php'));
+
+drawHeaderMain("FilterTickets.js");
 $userDepartments = $user->getDepartments($db);
 $DepartmentTickets = Ticket::getDepartmentTickets($db,$userDepartments,$user->getId());
 drawAside();

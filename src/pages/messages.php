@@ -10,6 +10,9 @@ $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
 
 $db = getDatabaseConnection();
+$user = User::getSingleUser($db,$session->getId());
+$role = $user->getUserRole($db);
+if(!(isset($_SESSION['Ticket']))) die(header('Location: ../pages/main.php'));
 
 $idUser = $session->getId();
 $ticket_id = intval($_SESSION['Ticket']);

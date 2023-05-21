@@ -8,8 +8,13 @@ require_once(dirname(__DIR__).'/utils/session.php');
 require_once(dirname(__DIR__) . '/templates/agentTickets.tpt.php');
 $session = new Session();
 if(!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
-drawHeaderMain("changeStatus.js");
+
 $db = getDatabaseConnection();
+$user = User::getSingleUser($db,$session->getId());
+$role = $user->getUserRole($db);
+if($role < 2) die(header('Location: ../pages/main.php'));
+
+drawHeaderMain("changeStatus.js");
 $ticketsAssigned = Ticket::getAssignedTickets($db,$session->getId());
 drawAside();
 drawAssignedTicketsMain($ticketsAssigned, $db);
