@@ -127,9 +127,12 @@
         font-size: 1em;
     }
 
+
     #logout-button > img {
         width: 12%;
     }
+
+
 
     main{
         font-size: 1.3em;
@@ -158,7 +161,7 @@
 
     #Inquiries{
         /*height: 40vw;*/
-        /*overflow-y: auto;*/
+        overflow-y: auto;
     }
 
     .ADepartmentMain{
@@ -247,7 +250,7 @@
         padding: 8px 28px;
         font-size: 1.3em;
         text-align: center;
-        background-color: mediumpurple;
+        background-color: #87CBA9;
         color:whitesmoke;
     }
 
@@ -255,6 +258,7 @@
         color: #224957;
         background-color: transparent;
         margin: 0 2em 2em 2em;
+        overflow-y: auto;
     }
 
     .retangulo {
@@ -313,12 +317,14 @@
         display: inline;
         margin: 10px;
         overflow-wrap: break-word;
-    }
-
-    .ticketDescription {
         text-align: center;
         height: 10%;
     }
+
+    /*.ticketDescription {
+        text-align: center;
+        height: 10%;
+    }*/
 
 
     #TicketInquiry{
@@ -331,7 +337,7 @@
     }
 
     #TicketInquiry + section button{
-        background-color: mediumpurple;
+        background-color: #87CBA9;
         padding: 1em;
         margin-right: 1em;
     }
@@ -351,7 +357,7 @@
 
 
 
-    #TicketStatus {
+    #TicketStatus > p{
         display: inline;
         margin-right: 120px;
     }
@@ -589,9 +595,6 @@
         font-weight: 600;
     }
 
-    .btn-submit, .btn-cancel{
-
-    }
 
     .createticket article{
         display: flex;
@@ -684,6 +687,24 @@
         justify-content: space-between;
     }
 
+    .ChangeStatusButton > ul{
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        flex-direction: column ;
+        background-color:rgb(140, 152, 186);
+        color: white;
+    }
+
+    .ChangeStatusButton>ul>li{
+        display: block;
+        position: relative;
+        float: left;
+        box-shadow: none;
+        cursor: pointer;
+    }
+
     .ChangeStatusButton{
         position: relative;
     }
@@ -758,9 +779,10 @@
         padding: 0.6em 0;
         left: 18em;
         top:-8em;
+        list-style-type: none;
     }
 
-    aside ul>button{
+    aside ul>li>button{
         padding: 0.5em 0.6em;
         margin: 1.14em;
     }
@@ -799,7 +821,7 @@
         background-color: lawngreen;
     }
 
-    #DepartmentAdmin{
+    .ADepartmentMain{
         width: 550px;
         padding-bottom: 3em;
         position: relative;
@@ -917,17 +939,16 @@
         display: none;
     }
 
-    #header-logout-form #logout-button{
-        background-color: #04AA6D;
-        color: white;
+    #header-logout-form #dropLogout-button{
+        background-color:#87CBA9;
         padding: 16px;
         font-size: 12px;
         border: none;
         display: flex;
-
+        margin-right: 16px;
     }
 
-    #header-logout-form #logout-button img{
+    #header-logout-form #dropLogout-button img{
         width: 16px;
         margin-right: 2px;
     }
@@ -1040,8 +1061,7 @@
 
 
     .dropbtn {
-        background-color: #04AA6D;
-        color: white;
+        background-color: #87CBA9;
         padding: 16px;
         font-size: 16px;
         border: none;
@@ -1085,7 +1105,7 @@
 
     .dropdown:hover .dropdown-content {display: block;}
 
-    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+    .dropdown:hover .dropbtn {background-color: #04AA6D;}
 
     #informationAdding{
         display: flex;

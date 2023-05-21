@@ -12,7 +12,7 @@ function drawWebsiteDepartments(array $departments) { ?>
         </section>
         <section id="DepartmentsAdmin">
         <?php foreach ($departments as $department){ ?>
-            <section class="ADepartmentMain" id="DepartmentAdmin">
+            <section class="ADepartmentMain">
                 <h4>
                     <?php echo $department['name'] ?>
                 </h4>
@@ -191,7 +191,7 @@ function drawOtherOptions($errorMessage = null){ ?>
     <main>
         <div id="informationAdding">
             <p>
-                Write a new Status or a new Hashtag to add to the system.<br> Note that if you write on both, it will only add a hashtag, and not the status
+                Write a new Status or a new Hashtag to add to the system.<br> Note that if you write on both, it will only add one, the option linked to the add button
             </p>
             <?php if(isset($errorMessage)){ ?>
             <div class="errorMessage">

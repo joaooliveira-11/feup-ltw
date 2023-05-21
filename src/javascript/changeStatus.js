@@ -25,11 +25,13 @@ change_ticketstatus_buttons.forEach(function(change_ticketstatus_button) {
         }
         if(filter_search) filter_search.innerHTML = "";
         for (Status of possiblestatus){
-            const item = document.createElement('button');
-            item.value = Status;
-            item.innerText = Status;
-            item.addEventListener('click', () => updateTicketStatus(item.value, ticket_id));
-            selectnewstatus.appendChild(item);
+            const li = document.createElement('li');
+            //const item = document.createElement('button');
+            li.value = Department;
+            li.innerText = Department;
+            li.addEventListener('click', () => updateTicketDepartment(li.value, ticket_id));
+            //li.appendChild(item);
+            selectnewdepartment.appendChild(li);
         }
     })
     async function updateTicketStatus(Status, Ticket){

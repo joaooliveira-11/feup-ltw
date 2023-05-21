@@ -10,6 +10,7 @@ require_once(dirname(__DIR__).'/classes/ticket.class.php');
 
 $session = new Session();
 if (!$session->isLoggedIn()) die(header('Location: ../pages/login.php'));
+if (!($session->check_tokens($_POST['csrf']))) die(header('Location: ../pages/banUser.php'));
 
 $db = getDatabaseConnection();
 
@@ -46,8 +47,8 @@ else if (!empty($new_status)) {
         die(header('Location: ../pages/manageOptions.php'));
     }
 }
-else{
-    die(header('Location: ../pages/manageOptions.php'));
-}
+
+die(header('Location: ../pages/manageOptions.php'));
+
 
 ?>
