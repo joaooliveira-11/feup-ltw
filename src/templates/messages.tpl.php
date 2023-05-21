@@ -4,6 +4,7 @@ function drawMessages($ticket_id, $idUser, $resolve, $value){ ?>
         <div id="messages"></div>
         <form id="send-message-form">
             <input type="text" name="content" id="message-input" placeholder="Type your message" <?php if($value!=null) { ?> value= "<?php echo $value ?>" <?php } ?> >
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <?php if($resolve){ ?>
                 <button type="button" id="UseFaqs" onclick="window.location.href='../pages/useAnswerFromFAQ.php'"> use Answer from FAQ </button>
             <?php } ?>

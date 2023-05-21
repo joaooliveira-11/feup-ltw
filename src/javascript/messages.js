@@ -37,6 +37,7 @@ function loadMessages() {
 function sendMessage(event) {
     event.preventDefault();
     const content = messageInput.value.trim();
+    const csrfToken = document.querySelector('input[name="csrf"]').value;
   
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '../api/api_sendMessage.php', true);
@@ -56,7 +57,7 @@ function sendMessage(event) {
         scrollBar();
       }
     };
-    xhr.send(`Ticket=${encodeURIComponent(ticketId)}&content=${encodeURIComponent(content)}`);
+    xhr.send(`Ticket=${encodeURIComponent(ticketId)}&content=${encodeURIComponent(content)}&csrf=${encodeURIComponent(csrfToken)}`);
     messageInput.value = '';
 }
 

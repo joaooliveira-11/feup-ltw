@@ -67,9 +67,15 @@ function drawUsers(users) {
       roleIdInput.value = user.role;
       upgradeForm.appendChild(roleIdInput);
 
+      const csrfTokens = document.createElement('input');
+      csrfTokens.type = 'hidden';
+      csrfTokens.name = 'csrf';
+      csrfTokens.value = user.tokens;
+      upgradeForm.appendChild(csrfTokens);
+
       const upgradeButton = document.createElement('button');
       upgradeButton.type = 'submit';
-      upgradeButton.textContent = 'Upgrade to ' + (user.role < 2 ? 'Client' : 'Admin');
+      upgradeButton.textContent = 'Upgrade to ' + (user.role < 2 ? 'Agent' : 'Admin');
 
       upgradeForm.appendChild(upgradeButton);
       actionsCell.appendChild(upgradeForm);

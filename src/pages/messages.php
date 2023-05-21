@@ -20,7 +20,7 @@ if($_POST['faqQuestion'] && $_POST['faqAnswer']){
     $value = "From Question on FAQ: " . $_POST['faqQuestion'] . " \n\n Answer: " . $_POST['faqAnswer'];
 }
 
-drawHeaderMain("messages.js");
+drawHeaderMain();
 drawAside();
 drawMessages($ticket_id, $idUser, $resolve, $value);
 drawFooterMain(); 
