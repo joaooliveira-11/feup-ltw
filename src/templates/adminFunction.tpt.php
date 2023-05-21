@@ -189,7 +189,7 @@ function drawOtherOptions($errorMessage = null){ ?>
     <main>
         <div id="informationAdding">
             <p>
-                Write a new Status or a new Hashtag to add to the system.<br> Note that if you write on both, it will only add a hashtag, and not the status
+                Write a new Status or a new Hashtag to add to the system.<br> Note that if you write on both, it will only add one, the option linked to the add button
             </p>
             <?php if(isset($errorMessage)){ ?>
             <div class="errorMessage">
