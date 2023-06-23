@@ -1,5 +1,12 @@
 # "TicketEase"
 
+>**Project**
+>Curricular Unit: [Linguagens e Tecnologias Web](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501681), 2nd year
+
+## Objectives
+
+Develop a website to streamline and manage trouble tickets effectively. The system should enable users to submit, track, and resolve tickets promptly and efficiently.
+
 ## Features
 
 ### User
@@ -40,7 +47,7 @@
 | username: cguedes     | username: samu2k23  | username: berna     |
 | password: password     | password: password    | password: password     |
 
-## Team
+### Team
 
 - Bernardo Dinis Guimarães Pinto (202108842)
 - Francisca Horta Guimarães (202004229)
